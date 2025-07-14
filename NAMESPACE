@@ -1,0 +1,6 @@
+export(plot_elegante)
+export(plot_robotico)
+export(plot_comic)
+export(plot_guapo)
+export(plot_porcentaje)
+export(mapa_guapo)

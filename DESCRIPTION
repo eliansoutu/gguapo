@@ -1,0 +1,18 @@
+Package: gguapo
+Type: Package
+Title: Gráficos modernos y personalizados con ggplot2
+Version: 0.1.0
+Author: Tu Nombre
+Maintainer: Tu Nombre <tu.email@example.com>
+Description: Conjunto de funciones para crear gráficos de barra y línea con estilos visuales impactantes, incluyendo temas elegante, robótico, popart, y una visualización de porcentaje tipo barra de carga.
+Depends: R (>= 4.0.0)
+Imports:
+    ggplot2,
+    ggtext,
+    showtext,
+    sysfonts,
+    ggrounded
+Encoding: UTF-8
+License: MIT
+LazyData: true
+RoxygenNote: 7.3.1
