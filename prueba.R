@@ -1,5 +1,5 @@
 
-
+devtools::load_all()
 library(tidyverse)
 
 data <- comunicacion::toy_evyth
@@ -23,20 +23,21 @@ locs %>%
   #rowwise() %>%
   #mutate(categoria = sample(c("Hola","Chau"), 1)) %>%
   style_michelangelo(plot_type = "column", #fill_var = "turistas",
-               x = "localidad_destino", show_background = T,
+               x = "localidad_destino",
+               y = "turistas",
+               show_background = T,
                fill_var = "localidad_destino",
-               work_inspired_by = "pieta",
-               y = "turistas")
-
-
-
-anio %>%
-  style_banksy(plot_type = "line", "anio", "turistas",title = "Este es un graph copado", show_labels = T)
+               work_inspired_by = "pieta")
+locs %>%
+  plot_guapo("localidad_destino", "turistas",
+             plot_type = "column", palette_name = "neoflash", dark_mode = F,
+             highlight_values = "Pilar")
 
 anio %>%
-  plot_robotico(tipo = "linea", "anio", "turistas")
+  plot_guapo(plot_type = "line", "anio", "turistas",dark_mode = F, highlight_values = 2021,
+               title = "Este es un graph copado")
 
 data_geo %>%
-  mapa_guapo(fill = "cantidad")
-
+  plot_guapo(plot_type = "map", dark_mode = T, fill_var = "cantidad",show_labels =T,
+             label_var = "coddepto")
 

@@ -6,14 +6,15 @@
 \usage{
 style_andy_warhol(
   data,
-  x,
-  y,
+  x = NULL,
+  y = NULL,
   color_var = NULL,
   fill_var = NULL,
+  label_var = NULL,
   title = "Datos como Pop Art de Andy Warhol",
   subtitle = "La repetición se convierte en arte",
   caption = "Consumo de Datos",
-  plot_type = c("scatter", "line", "column"),
+  plot_type = c("scatter", "line", "column", "map"),
   work_inspired_by = c("soup_cans", "marilyn_monroe", "cow_wallpaper"),
   show_labels = FALSE,
   add_grid_lines = FALSE,
@@ -21,15 +22,17 @@ style_andy_warhol(
 )
 }
 \arguments{
-\item{data}{A data frame.}
+\item{data}{A data frame or an sf object.}
 
-\item{x}{A string specifying the column name for the x-axis.}
+\item{x}{A string specifying the column name for the x-axis (for scatter, line, column plots). Defaults to NULL.}
 
-\item{y}{A string specifying the column name for the y-axis.}
+\item{y}{A string specifying the column name for the y-axis (for scatter, line, column plots). Defaults to NULL.}
 
 \item{color_var}{An optional string specifying the column name for color mapping. Defaults to NULL.}
 
-\item{fill_var}{An optional string specifying the column name for fill mapping (for column charts). Defaults to NULL.}
+\item{fill_var}{An optional string specifying the column name for fill mapping (for column charts or map polygons). Defaults to NULL.}
+
+\item{label_var}{An optional string specifying the column name for text labels (for maps or other plots). Defaults to NULL.}
 
 \item{title}{The plot title.}
 
@@ -37,13 +40,13 @@ style_andy_warhol(
 
 \item{caption}{The plot caption.}
 
-\item{plot_type}{The type of plot: "scatter", "line", or "column".}
+\item{plot_type}{The type of plot: "scatter", "line", "column", or "map".}
 
 \item{work_inspired_by}{Specific work for aesthetic inspiration: "soup_cans", "marilyn_monroe", or "cow_wallpaper".}
 
 \item{show_labels}{Logical, whether to show data labels. Defaults to FALSE.}
 
-\item{add_grid_lines}{Logical, whether to show major grid lines. Defaults to FALSE.}
+\item{add_grid_lines}{Logical, whether to show major grid lines (only for non-map plots). Defaults to FALSE.}
 
 \item{show_background}{Logical, whether to show the panel background. Defaults to TRUE.}
 }
