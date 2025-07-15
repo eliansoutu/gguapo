@@ -18,8 +18,9 @@ style_da_vinci(
   work_inspired_by = c("mona_lisa", "last_supper", "vitruvian_man"),
   show_labels = FALSE,
   add_grid_lines = FALSE,
-  show_background = FALSE,
-  add_glow = FALSE
+  show_background = TRUE,
+  add_glow = FALSE,
+  coord_flip = FALSE
 )
 }
 \arguments{
@@ -49,9 +50,11 @@ style_da_vinci(
 
 \item{add_grid_lines}{Logical, whether to show major grid lines (only for non-map plots). Defaults to FALSE.}
 
-\item{show_background}{Logical, whether to show the panel background. Defaults to FALSE.}
+\item{show_background}{Logical, whether to show the panel background. Defaults to TRUE.}
 
 \item{add_glow}{Logical, whether to add a subtle shadow effect (sfumato) for maps. Defaults to FALSE.}
+
+\item{coord_flip}{Logical, whether to flip coords in column chart (and so labels). Defaults to FALSE.}
 }
 \value{
 A ggplot2 object.

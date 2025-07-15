@@ -1,19 +1,24 @@
 Package: gguapo
 Type: Package
-Title: Gráficos modernos y personalizados con ggplot2
+Title: Gráficos de ggplot2 con estilos artísticos y personalizados
 Version: 0.1.0
-Author: Tu Nombre
-Maintainer: Tu Nombre <tu.email@example.com>
-Description: Conjunto de funciones para crear gráficos de barra y línea con estilos visuales impactantes, incluyendo temas elegante, robótico, popart, y una visualización de porcentaje tipo barra de carga.
+Author: Elián Soutullo
+Maintainer: Elián Soutullo <eliansoutul@gmail.com>
+Description: Conjunto de funciones para crear gráficos básicos (columnas, líneas, puntos y mapas) basados en ggplot2 y con estilos únicos inspirados en artistas.
 Depends: R (>= 4.0.0)
 Imports:
     ggplot2,
     ggtext,
     showtext,
     sysfonts,
-    ggrounded
+    ggrounded,
+    dplyr,
+    ggfx,
+    ggrepel,
+    rlang,
+    sf
 Encoding: UTF-8
-License: MIT
+License: GPL
 LazyData: true
 RoxygenNote: 7.3.1
 Suggests: 

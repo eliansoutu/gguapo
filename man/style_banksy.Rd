@@ -18,7 +18,8 @@ style_banksy(
   work_inspired_by = c("girl_with_balloon", "flower_thrower", "rat_graffiti"),
   show_labels = FALSE,
   add_grid_lines = FALSE,
-  show_background = TRUE
+  show_background = TRUE,
+  coord_flip = FALSE
 )
 }
 \arguments{
@@ -49,6 +50,8 @@ style_banksy(
 \item{add_grid_lines}{Logical, whether to show major grid lines (only for non-map plots). Defaults to FALSE.}
 
 \item{show_background}{Logical, whether to show the panel background (for non-map plots). Defaults to TRUE.}
+
+\item{coord_flip}{Logical, whether to flip coords in column chart (and so labels). Defaults to FALSE.}
 }
 \value{
 A ggplot2 object.

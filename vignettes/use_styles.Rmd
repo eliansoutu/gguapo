@@ -1,0 +1,95 @@
+---
+title: "Uso de styles"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Uso de styles}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(fig.width = 10, fig.height = 7, fig.align = "center",
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(gguapo)
+```
+
+```{r}
+data <- structure(list(name = c("Vincent van Gogh", "Edgar Degas", "Pablo Picasso", 
+"Pierre-Auguste Renoir", "Albrecht Dürer", "Paul Gauguin", "Francisco Goya", 
+"Rembrandt", "Alfred Sisley", "Titian"), genre = c("Post-Impressionism", 
+"Impressionism", "Cubism", "Impressionism", "Northern Renaissance", 
+"Symbolism,Post-Impressionism", "Romanticism", "Baroque", "Impressionism", 
+"High Renaissance,Mannerism"), paintings = c(877L, 702L, 439L, 
+336L, 328L, 311L, 291L, 262L, 259L, 255L)), class = "data.frame", row.names = c(NA, 
+-10L))
+data <- dplyr::mutate(data, name = stringr::str_wrap(name, 10))
+
+load_all_fonts() #Esto puede demorar unos segundos
+```
+
+## Funciones de artistas
+
+**Las funciones están pensadas para ofrecer una visualización rápida que no requiera escribir muchas líneas de código. Esto puede traer problemas como superposición de elementos o tamaños inadecuados en determinados gráficos. Tener en cuenta que se pueden pisar algunas configuraciones agregando capas a continuación de la función como si fuera un ggplot común (ver ejemplo más abajo en show_labels).**
+
+Cada función de `style_()` posee parámetros para personalizar aún más el estilo del gráfico. Como mínimo debemos indicarle las variables de X e Y (excepto mapas). Tomemos como ejemplo la función de Da Vinci en versión columnas:
+
+```{r}
+style_da_vinci(data, "name", "paintings", plot_type = "column")
+```
+
+### work_inspired_by
+
+Podemos seleccionar alguna variante inspirada en sus obras. En el caso de Monet, las opciones de `work_inspired_by` son: **water_lilies**, **impression_sunrise** y **poppy_fields**
+
+```{r}
+
+style_da_vinci(data, "name", "paintings", plot_type = "column", work_inspired_by = "mona_lisa")
+style_da_vinci(data, "name", "paintings", plot_type = "column", work_inspired_by = "last_supper")
+style_da_vinci(data, "name", "paintings", plot_type = "column", work_inspired_by = "vitruvian_man")
+
+```
+
+### fill_var o color_var
+
+Podemos utilizar alguna variable de mapeo para jugar con los colores de la paleta y diferenciar categorías:
+
+```{r}
+style_da_vinci(data, "name", "paintings", plot_type = "column", fill_var = "genre")
+```
+
+### show_labels
+
+Agregar etiquetas sobre el eje Y (y expando eje Y):
+
+```{r}
+style_da_vinci(data, "name", "paintings", plot_type = "column", show_labels = T) +
+  ggplot2::scale_y_continuous(limits = c(0, 1000))
+```
+
+Incluso cambiar la orientación ajustando el parámetro coord_flip
+
+```{r}
+style_da_vinci(data, "name", "paintings", plot_type = "column", show_labels = T, coord_flip = T) +
+  ggplot2::coord_flip() +
+  ggplot2::scale_y_continuous(limits = c(0, 1000))
+```
+
+### labs
+
+```{r}
+style_da_vinci(data, "name", "paintings", plot_type = "column", title = "Título", subtitle = "Subtítulo", caption = "Leyenda")
+```
+
+### Otros
+
+Para aquellos artistas valientes que quieran retocar aún más el gráfico y desafiar los límites del arte, se pueden ajustar otros parámetros:
+
+```{r}
+style_da_vinci(data, "name", "paintings", plot_type = "column", add_glow = T, add_grid_lines = T)
+```
+

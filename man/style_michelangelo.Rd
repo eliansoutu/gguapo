@@ -19,7 +19,8 @@ style_michelangelo(
   show_labels = FALSE,
   add_glow = FALSE,
   add_grid_lines = FALSE,
-  show_background = FALSE
+  show_background = TRUE,
+  coord_flip = FALSE
 )
 }
 \arguments{
@@ -32,6 +33,8 @@ style_michelangelo(
 \item{color_var}{An optional string specifying the column name for color mapping. Defaults to NULL.}
 
 \item{fill_var}{An optional string specifying the column name for fill mapping (for column charts). Defaults to NULL.}
+
+\item{label_var}{An optional string specifying the column name for text labels (for maps or other plots). Defaults to NULL.}
 
 \item{title}{The plot title.}
 
@@ -49,7 +52,9 @@ style_michelangelo(
 
 \item{add_grid_lines}{Logical, whether to show major grid lines. Defaults to FALSE.}
 
-\item{show_background}{Logical, whether to show the panel background. Defaults to FALSE.}
+\item{show_background}{Logical, whether to show the panel background. Defaults to TRUE}
+
+\item{coord_flip}{Logical, whether to flip coords in column chart (and so labels). Defaults to FALSE.}
 }
 \value{
 A ggplot2 object.

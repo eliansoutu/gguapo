@@ -3,14 +3,14 @@
 #' @param style_name Un string opcional para previsualizar un estilo específico. Si es "all" (por defecto), se previsualizan todos los estilos. Otras opciones válidas son: "da vinci"
 #' @param display_plots Logical. Si es TRUE (por defecto), los gráficos se imprimen en el dispositivo actual uno por uno. Si es FALSE, se retorna una lista de objetos ggplot.
 #' @return Una lista de objetos ggplot si `display_plots` es FALSE. Si `display_plots` es TRUE, los gráficos se imprimen y la función retorna `NULL` de forma invisible.
-#' @importFrom ggplot2 ggplot aes reorder geom_col geom_line geom_point coord_flip labs theme_void theme element_text element_rect
+#' @importFrom ggplot2 ggplot aes geom_col geom_line geom_point coord_flip labs theme_void theme element_text element_rect
 #' @importFrom sysfonts font_add_google
 #' @importFrom showtext showtext_auto
 #' @importFrom ggtext geom_richtext element_markdown
 #' @importFrom grid unit
 #' @importFrom rlang .data
+#' @importFrom stats reorder
 #' @importFrom sf st_sf st_sfc st_polygon st_linestring st_point
-#' @importFrom methods exists is.function
 #' @export
 preview_styles <- function(style_name = "all", display_plots = TRUE) {
 
@@ -48,7 +48,7 @@ preview_styles <- function(style_name = "all", display_plots = TRUE) {
   }
 
   # 2. Estilo Miguel Ángel
-  if (style_name %in% c("all", "miguel angel")) {
+  if (style_name %in% c("all", "michelangelo")) {
     if (exists("style_michelangelo") && is.function(style_michelangelo)) {
 
       plots[["Miguel Ángel - Column - david"]] <- style_michelangelo(

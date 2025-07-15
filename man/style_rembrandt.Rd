@@ -19,7 +19,8 @@ style_rembrandt(
   show_labels = FALSE,
   add_glow = FALSE,
   add_grid_lines = FALSE,
-  show_background = FALSE
+  show_background = TRUE,
+  coord_flip = FALSE
 )
 }
 \arguments{
@@ -51,7 +52,9 @@ style_rembrandt(
 
 \item{add_grid_lines}{Logical, whether to show major grid lines (only for non-map plots). Defaults to FALSE.}
 
-\item{show_background}{Logical, whether to show the panel background (for non-map plots). Defaults to FALSE.}
+\item{show_background}{Logical, whether to show the panel background (for non-map plots). Defaults to TRUE}
+
+\item{coord_flip}{Logical, whether to flip coords in column chart (and so labels). Defaults to FALSE.}
 }
 \value{
 A ggplot2 object.

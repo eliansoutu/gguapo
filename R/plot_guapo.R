@@ -33,7 +33,7 @@
 #' @importFrom ggtext element_markdown
 #' @importFrom tools toTitleCase
 #' @importFrom dplyr filter
-#' @importFrom sf st_as_sf # Aunque no se usa directamente en la función, se importa para coherencia con sf objects
+#' @importFrom sf st_as_sf
 #' @export
 plot_guapo <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NULL, label_var = NULL, # x e y ahora son opcionales
                        title = "Visualización de Datos Impactante",
@@ -211,8 +211,7 @@ plot_guapo <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
 
     # Only proceed if there's at least one true in the filter_condition
     if (any(filter_condition)) {
-      highlight_data <- data %>%
-        dplyr::filter(filter_condition)
+      highlight_data <- dplyr::filter(data, filter_condition)
 
       if (nrow(highlight_data) > 0) {
         if (plot_type == "scatter" || plot_type == "line") {
