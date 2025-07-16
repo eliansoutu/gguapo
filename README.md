@@ -42,6 +42,8 @@ devtools::install_github("eliansoutu/gguapo", upgrade = F)
 
 Estos son ejemplos básicos sobre cómo utilizar las funciones de la librería:
 
+### style_()
+
 ``` r
 library(gguapo)
 
@@ -59,9 +61,17 @@ load_all_fonts()
 style_banksy(data, dplyr::mutate(name = stringr::str_wrap(name, 10)), "name", "paintings", plot_type = "column")
 
 ```
-Produce:
-
 ![](inst/resources/img/banksy.png)
+
+### plot_guapo
+
+Función propia para crear gráficos estilizados y hacer retoques estéticos, por ejemplo, resaltar un valor de manera sencilla:
+
+``` r
+plot_guapo(data, "name", "paintings", plot_type = "column", title = "Gráfico guapo", dark_mode = T, highlight_values = c("Vincent van Gogh"))
+
+```
+![](inst/resources/img/plot_guapo.png)
 
 *Datos de ejemplo en base a:* https://www.kaggle.com/datasets/ikarus777/best-artworks-of-all-time/data
 
