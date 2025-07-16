@@ -403,23 +403,40 @@ get_artist_settings <- function(artist = c("da_vinci", "michelangelo", "rembrand
 #' @param panel_background_map_specific Lógico, si el tema del panel tiene lógica especial para mapas.
 #' @return Objeto ggplot2 con el tema y las etiquetas aplicadas.
 apply_common_theme_and_labs <- function(p, settings, plot_type, add_grid_lines, show_background,
-                                        title, subtitle, caption, x_label, y_label, # Cambiado x e y a x_label, y_label
+                                        title, subtitle, caption, x_label, y_label,
                                         base_theme_fun, grid_linetype, grid_linewidth,
-                                        axis_line_linewidth, panel_background_map_specific = FALSE) {
+                                        axis_line_linewidth, panel_background_map_specific = FALSE,
+                                        text_size = 12) {
 
-  # Base theme (e.g., theme_void or theme_minimal)
+  # Escalado proporcional según text_size base
+  size_title <- text_size * 2.2
+  size_subtitle <- text_size * 1.5
+  size_caption <- text_size * 1.1
+  size_legend_title <- text_size * 1.2
+  size_legend_text <- text_size
+  size_axis_text <- text_size
+  size_axis_title <- text_size * 1.25
+
   current_theme <- base_theme_fun() +
     ggplot2::theme(
-      plot.title = ggtext::element_markdown(size = 28, face = "bold", hjust = 0.5, family = settings$font_title, color = settings$text_color, margin = ggplot2::margin(b = 15)),
-      plot.subtitle = ggtext::element_markdown(size = 18, hjust = 0.5, family = settings$font_body, color = settings$text_color, margin = ggplot2::margin(b = 25)),
-      plot.caption = ggtext::element_markdown(size = 12, hjust = 1, family = settings$font_body, color = settings$text_color, margin = ggplot2::margin(t = 15)),
+      plot.title = ggtext::element_markdown(size = size_title, face = "bold", hjust = 0.5,
+                                            family = settings$font_title, color = settings$text_color,
+                                            margin = ggplot2::margin(b = text_size * 1.2)),
+      plot.subtitle = ggtext::element_markdown(size = size_subtitle, hjust = 0.5,
+                                               family = settings$font_body, color = settings$text_color,
+                                               margin = ggplot2::margin(b = text_size * 1.8)),
+      plot.caption = ggtext::element_markdown(size = size_caption, hjust = 1,
+                                              family = settings$font_body, color = settings$text_color,
+                                              margin = ggplot2::margin(t = text_size * 1.2)),
       legend.position = "bottom",
-      legend.title = ggtext::element_markdown(size = 14, family = settings$font_body, color = settings$text_color),
-      legend.text = ggplot2::element_text(size = 12, family = settings$font_body, color = settings$text_color),
+      legend.title = ggtext::element_markdown(size = size_legend_title,
+                                              family = settings$font_body, color = settings$text_color),
+      legend.text = ggplot2::element_text(size = size_legend_text,
+                                          family = settings$font_body, color = settings$text_color),
       legend.background = ggplot2::element_rect(fill = "transparent", colour = NA),
-      plot.margin = ggplot2::unit(c(1.5, 1.5, 1.5, 1.5), "cm"),
+      plot.margin = ggplot2::unit(rep(1.5, 4), "cm"),
       plot.background = ggplot2::element_rect(fill = settings$background_fill, colour = NA),
-      # Conditional panel.background logic
+
       panel.background = if (panel_background_map_specific && plot_type == "map") {
         ggplot2::element_rect(fill = settings$background_fill, colour = NA)
       } else if (!show_background) {
@@ -427,33 +444,191 @@ apply_common_theme_and_labs <- function(p, settings, plot_type, add_grid_lines, 
       } else {
         ggplot2::element_rect(fill = settings$panel_fill, colour = NA)
       },
-      # Axis and grid adjustments based on plot_type
-      axis.text = if (plot_type != "map") ggplot2::element_text(size = 12, color = settings$text_color, family = settings$font_body) else ggplot2::element_blank(),
-      axis.title = if (plot_type != "map") ggtext::element_markdown(size = 15, color = settings$text_color, family = settings$font_body) else ggplot2::element_blank(),
-      panel.grid.major = if (add_grid_lines && plot_type != "map") ggplot2::element_line(color = settings$grid_color, linetype = grid_linetype, linewidth = grid_linewidth) else ggplot2::element_blank(),
+
+      axis.text = if (plot_type != "map") ggplot2::element_text(size = size_axis_text,
+                                                                color = settings$text_color,
+                                                                family = settings$font_body) else ggplot2::element_blank(),
+
+      axis.title = if (plot_type != "map") ggtext::element_markdown(size = size_axis_title,
+                                                                    color = settings$text_color,
+                                                                    family = settings$font_body) else ggplot2::element_blank(),
+
+      panel.grid.major = if (add_grid_lines && plot_type != "map") {
+        ggplot2::element_line(color = settings$grid_color, linetype = grid_linetype, linewidth = grid_linewidth)
+      } else {
+        ggplot2::element_blank()
+      },
       panel.grid.minor = ggplot2::element_blank(),
-      axis.line = if (plot_type != "map") ggplot2::element_line(color = settings$grid_color, linewidth = axis_line_linewidth) else ggplot2::element_blank()
+      axis.line = if (plot_type != "map") {
+        ggplot2::element_line(color = settings$grid_color, linewidth = axis_line_linewidth)
+      } else {
+        ggplot2::element_blank()
+      }
     )
 
-  # Construct the labs arguments dynamically
+  # Construcción dinámica de labels
   lab_args <- list(
     title = paste0("<span style='font-family:\"", settings$font_title, "\";'>", title, "</span>"),
     subtitle = paste0("<span style='font-family:\"", settings$font_body, "\";'>", subtitle, "</span>"),
     caption = paste0("<span style='font-family:\"", settings$font_body, "\";'>", caption, "</span>")
   )
 
-  # Only add x and y to labs if they are not NULL and plot_type is not "map"
   if (!is.null(x_label) && plot_type != "map") {
-    lab_args$x = paste0("<span style='font-family:\"", settings$font_body, "\";'>", tools::toTitleCase(gsub("_", " ", x_label)), "</span>")
-  } else {
-    lab_args$x = NULL # Explicitly set to NULL if not applicable
+    lab_args$x <- paste0("<span style='font-family:\"", settings$font_body, "\";'>", tools::toTitleCase(gsub("_", " ", x_label)), "</span>")
   }
 
   if (!is.null(y_label) && plot_type != "map") {
-    lab_args$y = paste0("<span style='font-family:\"", settings$font_body, "\";'>", tools::toTitleCase(gsub("_", " ", y_label)), "</span>")
-  } else {
-    lab_args$y = NULL # Explicitly set to NULL if not applicable
+    lab_args$y <- paste0("<span style='font-family:\"", settings$font_body, "\";'>", tools::toTitleCase(gsub("_", " ", y_label)), "</span>")
   }
 
   p + current_theme + do.call(ggplot2::labs, lab_args)
+}
+
+
+style_artist_common <- function(data, artist, obra_inspiracion,
+                                x = NULL, y = NULL,
+                                color_var = NULL, fill_var = NULL, label_var = NULL,
+                                plot_type = c("scatter", "line", "column", "map"),
+                                title, subtitle, caption,
+                                show_labels = FALSE, add_grid_lines = FALSE,
+                                show_background = TRUE, add_glow = FALSE,
+                                coord_flip = FALSE,
+                                theme_base = ggplot2::theme_void,
+                                grid_linetype = "dotted",
+                                grid_linewidth = 0.3,
+                                axis_line_linewidth = 0.8,
+                                panel_background_map_specific = FALSE,
+                                text_size = 12) {
+  plot_type <- match.arg(plot_type)
+  settings <- get_artist_settings(artist, obra_inspiracion)
+
+  # Captura de quosures
+  x_quo <- enquo(x)
+  y_quo <- enquo(y)
+  color_quo <- enquo(color_var)
+  fill_quo <- enquo(fill_var)
+  label_quo <- enquo(label_var)
+
+  # Labels como strings
+  x_label <- if (!quo_is_null(x_quo) && plot_type != "map") as_label(x_quo) else NULL
+  y_label <- if (!quo_is_null(y_quo) && plot_type != "map") as_label(y_quo) else NULL
+
+  # Construcción del gráfico
+  p <- if (plot_type == "map") {
+    if (!inherits(data, "sf")) stop("Para plot_type = 'map', 'data' debe ser un objeto 'sf'.")
+    fill_map <- if (!quo_is_null(fill_quo)) expr(fill = !!fill_quo) else NULL
+    color_map <- if (!quo_is_null(color_quo)) expr(color = !!color_quo) else NULL
+    aes_map_sf <- inject(aes(!!!c(fill_map, color_map)))
+
+    geom_sf_layer <- geom_sf(aes_map_sf, lwd = 0.6, colour = settings$grid_color)
+
+    base <- ggplot(data)
+    if (add_glow) {
+      base + with_outer_glow(geom_sf_layer, colour = settings$glow_color, sigma = 5, expand = 3)
+    } else {
+      base + geom_sf_layer
+    }
+  } else {
+    if (quo_is_null(x_quo) || quo_is_null(y_quo)) stop("Debe especificar x e y para este tipo de gráfico.")
+    ggplot(data, aes(x = !!x_quo, y = !!y_quo))
+  }
+
+  # Escalas de color
+  if (!quo_is_null(color_quo)) {
+    p <- p + generate_color_scale(data, as_label(color_quo), settings$colors, "color")
+  }
+  if (!quo_is_null(fill_quo)) {
+    p <- p + generate_color_scale(data, as_label(fill_quo), settings$colors, "fill")
+  }
+
+  # Geoms según tipo
+  if (plot_type %in% c("scatter", "line", "column")) {
+    if (plot_type == "scatter") {
+      geom_layer <- if (quo_is_null(color_quo)) {
+        geom_point(size = 4, alpha = settings$geom_alpha, color = settings$colors[1])
+      } else {
+        geom_point(aes(color = !!color_quo), size = 4, alpha = settings$geom_alpha)
+      }
+    } else if (plot_type == "line") {
+      geom_layer <- list(
+        if (quo_is_null(color_quo)) geom_line(size = 1.5, alpha = settings$geom_alpha, color = settings$colors[1]) else geom_line(aes(color = !!color_quo), size = 1.5, alpha = settings$geom_alpha),
+        if (quo_is_null(color_quo)) geom_point(size = 3, alpha = settings$geom_alpha, color = settings$colors[1]) else geom_point(aes(color = !!color_quo), size = 3, alpha = settings$geom_alpha)
+      )
+    } else if (plot_type == "column") {
+      if (!quo_is_null(x_quo)) {
+        x_var <- as_label(x_quo)
+        data[[x_var]] <- factor(data[[x_var]])
+      }
+      geom_layer <- if (quo_is_null(fill_quo)) {
+        geom_col(width = 0.7, alpha = settings$geom_alpha, fill = settings$colors[1])
+      } else {
+        geom_col(aes(fill = !!fill_quo), width = 0.7, alpha = settings$geom_alpha)
+      }
+      if (coord_flip) p <- p + coord_flip()
+    }
+
+    # Aplicar geoms
+    if (add_glow) {
+      p <- p + map(geom_layer, ~ with_outer_glow(.x, colour = settings$glow_color, sigma = 5, expand = 3))
+    } else {
+      p <- p + geom_layer
+    }
+  }
+
+  # Etiquetas
+  if (show_labels) {
+    label_quo_final <- if (!quo_is_null(label_quo)) label_quo else y_quo
+    label_size <- text_size * 0.28
+    if (plot_type == "map") {
+      p <- p + geom_sf_text(
+        aes(label = !!label_quo_final),
+        color = settings$text_color,
+        family = settings$font_body,
+        size = label_size,
+        bg.colour = "white", bg.r = 0.05
+      )
+    } else if (plot_type == "column" && coord_flip) {
+      p <- p + geom_text(
+        aes(label = !!label_quo_final, x = !!y_quo, y = !!x_quo),
+        hjust = -0.3,
+        size = label_size,
+        color = settings$text_color, family = settings$font_body
+      )
+    } else if (plot_type == "column") {
+      p <- p + geom_text(
+        aes(label = !!label_quo_final),
+        vjust = -0.5,
+        size = label_size,
+        color = settings$text_color, family = settings$font_body
+      )
+    } else {
+      p <- p + ggrepel::geom_text_repel(
+        aes(label = !!label_quo_final),
+        size = label_size,
+        box.padding = 0.5, segment.color = settings$grid_color,
+        segment.size = 0.3, max.overlaps = 50,
+        family = settings$font_body, color = settings$text_color
+      )
+    }
+  }
+
+  # Tema común final
+  apply_common_theme_and_labs(
+    p = p,
+    settings = settings,
+    plot_type = plot_type,
+    add_grid_lines = add_grid_lines,
+    show_background = show_background,
+    title = title,
+    subtitle = subtitle,
+    caption = caption,
+    x_label = x_label,
+    y_label = y_label,
+    base_theme_fun = theme_base,
+    grid_linetype = grid_linetype,
+    grid_linewidth = grid_linewidth,
+    axis_line_linewidth = axis_line_linewidth,
+    panel_background_map_specific = panel_background_map_specific,
+    text_size = text_size
+  )
 }

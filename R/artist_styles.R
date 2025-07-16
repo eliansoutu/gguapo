@@ -37,155 +37,24 @@ style_da_vinci <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var 
                            plot_type = c("scatter", "line", "column", "map"),
                            work_inspired_by = c("mona_lisa", "last_supper", "vitruvian_man"),
                            show_labels = FALSE, add_grid_lines = FALSE,
-                           show_background = TRUE,
-                           add_glow = FALSE,
-                           coord_flip = FALSE) {
-
-  # Capturar las expresiones de las variables para tidy evaluation
-  # Usamos `enquo()` para capturar la expresión pasada por el usuario
-  # Esto permite que el usuario pase `name` en lugar de `"name"`
-  x_quo <- rlang::enquo(x)
-  y_quo <- rlang::enquo(y)
-  color_var_quo <- rlang::enquo(color_var)
-  fill_var_quo <- rlang::enquo(fill_var)
-  label_var_quo <- rlang::enquo(label_var)
-
-  plot_type <- match.arg(plot_type)
-  work_inspired_by <- match.arg(work_inspired_by)
-  settings <- get_artist_settings("da_vinci", work_inspired_by)
-
-  # Para el título de los ejes en labs, necesitamos el nombre de la columna como string
-  # Solo lo obtenemos si la expresión no está vacía
-  x_label_str <- if (!rlang::quo_is_null(x_quo) && plot_type != "map") rlang::as_label(x_quo) else NULL
-  y_label_str <- if (!rlang::quo_is_null(y_quo) && plot_type != "map") rlang::as_label(y_quo) else NULL
-
-
-  # Inicializar el objeto ggplot
-  if (plot_type == "map") {
-    if (!inherits(data, "sf")) {
-      stop("Para plot_type = 'map', 'data' debe ser un objeto 'sf'.")
-    }
-
-    # Definir los mappings de fill y color para geom_sf si las variables existen
-    fill_map <- if (!rlang::quo_is_null(fill_var_quo)) rlang::expr(fill = {{fill_var}}) else NULL
-    color_map <- if (!rlang::quo_is_null(color_var_quo)) rlang::expr(color = {{color_var}}) else NULL
-
-    # Combinar los mappings de forma segura
-    aes_map_sf <- rlang::inject(ggplot2::aes(!!!c(fill_map, color_map)))
-
-    p <- ggplot2::ggplot(data = data) +
-      ggplot2::geom_sf(
-        lwd = 0.6,
-        colour = settings$grid_color, # Color de contorno predeterminado
-        aes_map_sf # Mapeo de relleno y color con tidy evaluation
-      )
-
-    # Aplicar escalas de color y relleno dinámicamente para mapas
-    if (!rlang::quo_is_null(fill_var_quo)) {
-      p <- p + generate_color_scale(data = data, var_name = rlang::as_label(fill_var_quo), current_colors = settings$colors, type = "fill")
-    }
-    if (!rlang::quo_is_null(color_var_quo)) {
-      p <- p + generate_color_scale(data = data, var_name = rlang::as_label(color_var_quo), current_colors = settings$colors, type = "color")
-    }
-
-    # Etiquetas para mapas
-    if (show_labels && !rlang::quo_is_null(label_var_quo)) {
-      p <- p + ggplot2::geom_sf_text(
-        ggplot2::aes(label = {{label_var}}), # Usar {{}} para label_var
-        color = settings$text_color,
-        family = settings$font_body,
-        size = 3,
-        bg.colour = "white",
-        bg.r = 0.05
-      )
-    }
-
-    # Efecto Sfumato (sombra sutil) para mapas
-    if (add_glow) {
-      p <- p + ggfx::with_shadow(
-        sigma = 3, x_offset = 2, y_offset = 2, colour = "grey30", alpha = 0.5
-      )
-    }
-
-  } else { # Lógica para gráficos de dispersión, línea y columna
-    if (rlang::quo_is_null(x_quo) || rlang::quo_is_null(y_quo)) {
-      stop("Para plot_type = 'scatter', 'line', o 'column', 'x' e 'y' deben ser especificados.")
-    }
-    # Inicializar ggplot con {{}} para x e y
-    p <- ggplot2::ggplot(data, ggplot2::aes(x = {{x}}, y = {{y}}))
-
-    # Aplicar escalas de color y relleno dinámicamente para no-mapas
-    if (!rlang::quo_is_null(color_var_quo)) {
-      p <- p + generate_color_scale(data, rlang::as_label(color_var_quo), settings$colors, "color")
-    }
-    if (!rlang::quo_is_null(fill_var_quo)) {
-      p <- p + generate_color_scale(data, rlang::as_label(fill_var_quo), settings$colors, "fill")
-    }
-
-    if (plot_type == "scatter") {
-      if (rlang::quo_is_null(color_var_quo)) {
-        p <- p + ggplot2::geom_point(size = 4, alpha = settings$geom_alpha, color = settings$colors[1])
-      } else {
-        p <- p + ggplot2::geom_point(ggplot2::aes(color = {{color_var}}), size = 4, alpha = settings$geom_alpha) # Usar {{}}
-      }
-    } else if (plot_type == "line") {
-      if (rlang::quo_is_null(color_var_quo)) {
-        p <- p + ggplot2::geom_line(size = 1.5, alpha = settings$geom_alpha, color = settings$colors[1]) +
-          ggplot2::geom_point(size = 3, alpha = settings$geom_alpha, color = settings$colors[1])
-      } else {
-        p <- p + ggplot2::geom_line(ggplot2::aes(color = {{color_var}}), size = 1.5, alpha = settings$geom_alpha) + # Usar {{}}
-          ggplot2::geom_point(ggplot2::aes(color = {{color_var}}), size = 3, alpha = settings$geom_alpha) # Usar {{}}
-      }
-    } else if (plot_type == "column") {
-      # data[[x]] <- factor(data[[x]]) # Esto podría ser necesario dependiendo del tipo de datos de x
-      if (rlang::quo_is_null(fill_var_quo)) {
-        p <- p + ggplot2::geom_col(width = 0.7, alpha = settings$geom_alpha, fill = settings$colors[1])
-      } else {
-        p <- p + ggplot2::geom_col(ggplot2::aes(fill = {{fill_var}}), width = 0.7, alpha = settings$geom_alpha) # Usar {{}}
-      }
-      if (coord_flip) {
-        p <- p + ggplot2::coord_flip()
-      }
-    }
-
-    if (show_labels) {
-      label_col_quo <- if (!rlang::quo_is_null(label_var_quo)) label_var_quo else y_quo # Usar el quosure de y
-      if (plot_type == "column") {
-        if (coord_flip) {
-          p <- p +
-            ggplot2::geom_text(ggplot2::aes(label = {{label_col_quo}}), # Usar {{}}
-                               hjust = -0.3, # hjust es para coord_flip, vjust para normal
-                               size = 3.5, color = settings$text_color, family = settings$font_body)
-        } else {
-          p <- p + ggplot2::geom_text(ggplot2::aes(label = {{label_col_quo}}), vjust = -0.5, # Usar {{}}
-                                      size = 3.5, color = settings$text_color, family = settings$font_body)
-        }
-
-      } else {
-        p <- p + ggrepel::geom_text_repel(ggplot2::aes(label = {{label_col_quo}}), size = 3.5, box.padding = 0.5, min.segment.length = 0.3, # Usar {{}}
-                                          segment.color = settings$grid_color, segment.size = 0.3, max.overlaps = 50, direction = "y",
-                                          family = settings$font_body, color = settings$text_color)
-      }
-    }
-  } # Fin del bloque de gráficos no-mapa
-
-  # Aplicar tema y etiquetas comunes usando la función auxiliar
-  apply_common_theme_and_labs(
-    p = p,
-    settings = settings,
-    plot_type = plot_type,
-    add_grid_lines = add_grid_lines,
-    show_background = show_background,
-    title = title,
-    subtitle = subtitle,
-    caption = caption,
-    x_label = x_label_str, # Pasar el string del nombre de la columna
-    y_label = y_label_str, # Pasar el string del nombre de la columna
-    base_theme_fun = ggplot2::theme_void, # Tema base para Da Vinci
+                           show_background = TRUE, add_glow = FALSE,
+                           coord_flip = FALSE, text_size = 12) {
+  style_artist_common(
+    data = data,
+    artist = "da_vinci",
+    obra_inspiracion = match.arg(work_inspired_by),
+    x = {{x}}, y = {{y}}, color_var = {{color_var}}, fill_var = {{fill_var}}, label_var = {{label_var}},
+    title = title, subtitle = subtitle, caption = caption,
+    plot_type = match.arg(plot_type),
+    show_labels = show_labels, add_grid_lines = add_grid_lines,
+    show_background = show_background, add_glow = add_glow,
+    coord_flip = coord_flip,
+    theme_base = ggplot2::theme_void,
     grid_linetype = "dotted",
     grid_linewidth = 0.3,
     axis_line_linewidth = 0.8,
-    panel_background_map_specific = FALSE # No tiene lógica especial de fondo para mapas
+    panel_background_map_specific = FALSE,
+    text_size = text_size
   )
 }
 
