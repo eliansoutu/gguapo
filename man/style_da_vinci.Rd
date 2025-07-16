@@ -26,15 +26,15 @@ style_da_vinci(
 \arguments{
 \item{data}{A data frame or an sf object.}
 
-\item{x}{A string specifying the column name for the x-axis (for scatter, line, column plots).}
+\item{x}{A tidy-evaluated expression specifying the column name for the x-axis (for scatter, line, column plots).}
 
-\item{y}{A string specifying the column name for the y-axis (for scatter, line, column plots).}
+\item{y}{A tidy-evaluated expression specifying the column name for the y-axis (for scatter, line, column plots).}
 
-\item{color_var}{An optional string specifying the column name for color mapping. Defaults to NULL.}
+\item{color_var}{An optional tidy-evaluated expression specifying the column name for color mapping. Defaults to NULL.}
 
-\item{fill_var}{An optional string specifying the column name for fill mapping (for column charts or map polygons). Defaults to NULL.}
+\item{fill_var}{An optional tidy-evaluated expression specifying the column name for fill mapping (for column charts or map polygons). Defaults to NULL.}
 
-\item{label_var}{An optional string specifying the column name for text labels (for maps or other plots). Defaults to NULL.}
+\item{label_var}{An optional tidy-evaluated expression specifying the column name for text labels (for maps or other plots). Defaults to NULL.}
 
 \item{title}{The plot title.}
 

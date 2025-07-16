@@ -2,11 +2,11 @@
 #' @description Genera gráficos ggplot2 con un alto impacto visual, utilizando paletas de colores
 #'   modernas, tipografías distintivas y efectos visuales avanzados de `ggfx`.
 #' @param data Un data frame (o un objeto `sf` para `plot_type = "map"`).
-#' @param x Una cadena de texto con el nombre de la columna para el eje x. **Ahora opcional, por defecto es NULL.**
-#' @param y Una cadena de texto con el nombre de la columna para el eje y. **Ahora opcional, por defecto es NULL.**
-#' @param color_var (Opcional) Una cadena de texto para mapear color. Por defecto es NULL.
-#' @param fill_var (Opcional) Una cadena de texto para mapear relleno (para gráficos de barras/áreas/mapas). Por defecto es NULL.
-#' @param label_var (Opcional) Una cadena de texto para etiquetas de datos. Por defecto es NULL.
+#' @param x (Opcional) Nombre de la columna para el eje x (puede ser sin comillas para tidy eval). Por defecto es NULL.
+#' @param y (Opcional) Nombre de la columna para el eje y (puede ser sin comillas para tidy eval). Por defecto es NULL.
+#' @param color_var (Opcional) Nombre de la columna para mapear color (puede ser sin comillas). Por defecto es NULL.
+#' @param fill_var (Opcional) Nombre de la columna para mapear relleno (puede ser sin comillas). Por defecto es NULL.
+#' @param label_var (Opcional) Nombre de la columna para etiquetas de datos (puede ser sin comillas). Por defecto es NULL.
 #' @param title El título del gráfico.
 #' @param subtitle El subtítulo del gráfico.
 #' @param caption La leyenda o fuente del gráfico.
@@ -18,7 +18,7 @@
 #' @param add_trend_line Lógico, si añadir una línea de tendencia (solo para scatter/line). Por defecto es FALSE.
 #' @param highlight_values Un vector de valores en `x`, `color_var` o `label_var` a resaltar. Por defecto es NULL.
 #' @param highlight_color El color para los valores resaltados. Por defecto es "cyan".
-#' @param facet_var (Opcional) Una cadena de texto para facetear el gráfico. Por defecto es NULL.
+#' @param facet_var (Opcional) Nombre de la columna para facetear el gráfico (puede ser sin comillas). Por defecto es NULL.
 #' @param dark_mode Lógico, si usar un esquema de colores oscuro. Por defecto es TRUE.
 #' @param apply_shadow Lógico, si aplicar una sombra a los elementos geométricos. Requiere `ggfx`. Por defecto es FALSE.
 #' @param apply_glow Lógico, si aplicar un efecto de brillo a los elementos geométricos. Requiere `ggfx`. Por defecto es FALSE.
@@ -28,14 +28,15 @@
 #' @param geom_size El tamaño base de los puntos o el grosor de las líneas. Por defecto es 3.
 #' @param geom_stroke El grosor del borde de los puntos. Por defecto es 0.5.
 #' @return Un objeto ggplot2.
-#' @importFrom ggplot2 ggplot aes_string geom_point geom_line geom_col geom_area geom_smooth theme_void theme element_text element_rect unit labs element_blank scale_color_manual scale_fill_manual scale_color_gradientn scale_fill_gradientn facet_wrap geom_sf geom_sf_text
+#' @importFrom ggplot2 ggplot aes geom_point geom_line geom_col geom_area geom_smooth theme_void theme element_text element_rect unit labs element_blank scale_color_manual scale_fill_manual scale_color_gradientn scale_fill_gradientn facet_wrap geom_sf geom_sf_text
 #' @importFrom ggrepel geom_text_repel
 #' @importFrom ggtext element_markdown
 #' @importFrom tools toTitleCase
 #' @importFrom dplyr filter
 #' @importFrom sf st_as_sf
+#' @importFrom rlang .data !! sym enexpr as_string
 #' @export
-plot_guapo <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NULL, label_var = NULL, # x e y ahora son opcionales
+plot_guapo <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NULL, label_var = NULL,
                        title = "Visualización de Datos Impactante",
                        subtitle = "Con Estilo y Diseño Avanzado",
                        caption = "Generado con plot_guapo",
@@ -45,7 +46,7 @@ plot_guapo <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
                        show_labels = FALSE, add_trend_line = FALSE,
                        highlight_values = NULL, highlight_color = "#FFD700", # Gold for highlighting
                        facet_var = NULL,
-                       dark_mode = TRUE,
+                       dark_mode = FALSE,
                        apply_shadow = FALSE, apply_glow = FALSE, apply_blur_background = FALSE,
                        gradient_fill = FALSE, base_alpha = 0.8, geom_size = 3, geom_stroke = 0.5) {
 
@@ -106,70 +107,160 @@ plot_guapo <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
 
   current_settings <- if (dark_mode) palettes[[palette_name]]$dark else palettes[[palette_name]]$light
 
+  # Capturar las expresiones de las variables
+  x_sym <- rlang::enexpr(x)
+  y_sym <- rlang::enexpr(y)
+  color_var_sym <- rlang::enexpr(color_var)
+  fill_var_sym <- rlang::enexpr(fill_var)
+  label_var_sym <- rlang::enexpr(label_var)
+  facet_var_sym <- rlang::enexpr(facet_var)
+
   # Base plot
   if (plot_type == "map") {
     p <- ggplot2::ggplot(data)
   } else {
-    # Only map x and y if they are provided and not for map type
-    aes_mapping <- list()
-    if (!is.null(x)) aes_mapping$x <- x
-    if (!is.null(y)) aes_mapping$y <- y
-    p <- ggplot2::ggplot(data, do.call(ggplot2::aes_string, aes_mapping))
+    aes_mapping_list <- list()
+    if (!is.null(x_sym)) aes_mapping_list$x <- x_sym
+    if (!is.null(y_sym)) aes_mapping_list$y <- y_sym
+    if (!is.null(color_var_sym)) aes_mapping_list$color <- color_var_sym
+    if (!is.null(fill_var_sym)) aes_mapping_list$fill <- fill_var_sym
+
+    p <- ggplot2::ggplot(data, ggplot2::aes(!!!aes_mapping_list))
   }
 
-  # Dynamic color/fill scales
-  if (!is.null(color_var)) {
-    if (gradient_fill && is.numeric(data[[color_var]])) {
+  # Dynamic color/fill scales (logic integrated from generate_color_scale)
+  # Color scale
+  if (!is.null(color_var_sym) && rlang::as_string(color_var_sym) %in% names(data)) {
+    var_name_str <- rlang::as_string(color_var_sym)
+    var_data <- data[[var_name_str]]
+    if (is.numeric(var_data)) {
       p <- p + ggplot2::scale_color_gradientn(colors = current_settings$colors)
     } else {
-      p <- p + generate_color_scale(data, color_var, current_settings$colors, "color")
+      unique_levels <- unique(var_data)
+      num_levels <- length(unique_levels)
+      if (num_levels <= length(current_settings$colors)) {
+        p <- p + ggplot2::scale_color_manual(values = current_settings$colors[1:num_levels])
+      } else {
+        extended_palette_fun <- grDevices::colorRampPalette(current_settings$colors)
+        extended_colors <- extended_palette_fun(num_levels)
+        p <- p + ggplot2::scale_color_manual(values = extended_colors)
+      }
     }
   }
-  if (!is.null(fill_var)) {
-    if (gradient_fill && is.numeric(data[[fill_var]])) {
+
+  # Fill scale
+  if (!is.null(fill_var_sym) && rlang::as_string(fill_var_sym) %in% names(data)) {
+    var_name_str <- rlang::as_string(fill_var_sym)
+    var_data <- data[[var_name_str]]
+    if (is.numeric(var_data)) {
       p <- p + ggplot2::scale_fill_gradientn(colors = current_settings$colors)
     } else {
-      p <- p + generate_color_scale(data, fill_var, current_settings$colors, "fill")
+      unique_levels <- unique(var_data)
+      num_levels <- length(unique_levels)
+      if (num_levels <= length(current_settings$colors)) {
+        p <- p + ggplot2::scale_fill_manual(values = current_settings$colors[1:num_levels])
+      } else {
+        extended_palette_fun <- grDevices::colorRampPalette(current_settings$colors)
+        extended_colors <- extended_palette_fun(num_levels)
+        p <- p + ggplot2::scale_fill_manual(values = extended_colors)
+      }
     }
   }
 
   # Geom layers with ggfx effects
   geom_layer_base <- NULL
+
   if (plot_type == "scatter") {
-    geom_layer_base <- ggplot2::geom_point(ggplot2::aes_string(color = color_var),
-                                           size = geom_size, alpha = base_alpha, stroke = geom_stroke,
-                                           color = if (is.null(color_var)) current_settings$colors[1] else NULL)
-  } else if (plot_type == "line") {
-    geom_layer_base <- list(
-      ggplot2::geom_line(ggplot2::aes_string(color = color_var),
-                         size = geom_size / 2, alpha = base_alpha,
-                         color = if (is.null(color_var)) current_settings$colors[1] else NULL),
-      ggplot2::geom_point(ggplot2::aes_string(color = color_var),
-                          size = geom_size, alpha = base_alpha, stroke = geom_stroke,
-                          color = if (is.null(color_var)) current_settings$colors[1] else NULL)
+    point_aes_list <- list()
+    if (!is.null(color_var_sym)) point_aes_list$color <- color_var_sym
+
+    point_args <- list(
+      mapping = ggplot2::aes(!!!point_aes_list),
+      size = geom_size,
+      alpha = base_alpha,
+      stroke = geom_stroke
     )
+    if (is.null(color_var_sym)) { # Only add 'color' arg if it's a fixed value
+      point_args$color <- current_settings$colors[4]
+    }
+    geom_layer_base <- do.call(ggplot2::geom_point, point_args)
+
+  } else if (plot_type == "line") {
+    line_point_aes_list <- list()
+    if (!is.null(color_var_sym)) line_point_aes_list$color <- color_var_sym
+
+    line_args <- list(
+      mapping = ggplot2::aes(!!!line_point_aes_list),
+      size = geom_size / 2,
+      alpha = base_alpha
+    )
+    point_args <- list(
+      mapping = ggplot2::aes(!!!line_point_aes_list),
+      size = geom_size,
+      alpha = base_alpha,
+      stroke = geom_stroke
+    )
+
+    if (is.null(color_var_sym)) { # Apply fixed color to both if not mapped
+      line_args$color <- current_settings$colors[1]
+      point_args$color <- current_settings$colors[1]
+    }
+
+    geom_layer_base <- list(
+      do.call(ggplot2::geom_line, line_args),
+      do.call(ggplot2::geom_point, point_args)
+    )
+
     if (add_trend_line) {
       geom_layer_base <- c(geom_layer_base, ggplot2::geom_smooth(method = "lm", se = FALSE, color = current_settings$text_color, linetype = "dashed", size = 0.5))
     }
+
   } else if (plot_type == "column") {
-    data[[x]] <- factor(data[[x]]) # Ensure x is discrete for columns
-    geom_layer_base <- ggplot2::geom_col(ggplot2::aes_string(fill = fill_var),
-                                         width = 0.7, alpha = base_alpha,
-                                         fill = if (is.null(fill_var)) current_settings$colors[1] else NULL)
+    # Ensure x is discrete for columns
+    if (!is.null(x_sym) && rlang::as_string(x_sym) %in% names(data)) {
+      data[[rlang::as_string(x_sym)]] <- factor(data[[rlang::as_string(x_sym)]])
+    }
+
+    column_aes_list <- list()
+    if (!is.null(fill_var_sym)) column_aes_list$fill <- fill_var_sym
+
+    col_args <- list(
+      mapping = ggplot2::aes(!!!column_aes_list),
+      width = 0.7,
+      alpha = base_alpha
+    )
+    if (is.null(fill_var_sym)) { # Only add 'fill' arg if it's a fixed value
+      col_args$fill <- current_settings$colors[1]
+    }
+    geom_layer_base <- do.call(ggplot2::geom_col, col_args)
+
   } else if (plot_type == "area") {
-    geom_layer_base <- ggplot2::geom_area(ggplot2::aes_string(fill = fill_var),
-                                          alpha = base_alpha,
-                                          fill = if (is.null(fill_var)) current_settings$colors[1] else NULL)
+    area_aes_list <- list()
+    if (!is.null(fill_var_sym)) area_aes_list$fill <- fill_var_sym
+
+    area_args <- list(
+      mapping = ggplot2::aes(!!!area_aes_list),
+      alpha = base_alpha
+    )
+    if (is.null(fill_var_sym)) { # Only add 'fill' arg if it's a fixed value
+      area_args$fill <- current_settings$colors[1]
+    }
+    geom_layer_base <- do.call(ggplot2::geom_area, area_args)
+
   } else if (plot_type == "map") {
-    # CORRECTED: Handle fill_var mapping for geom_sf to avoid aesthetic conflict
-    if (!is.null(fill_var)) {
-      geom_layer_base <- ggplot2::geom_sf(ggplot2::aes_string(fill = fill_var),
-                                          alpha = base_alpha,
-                                          color = current_settings$grid_color, linewidth = 0.1)
+    if (!is.null(fill_var_sym)) {
+      map_aes_list <- list(fill = fill_var_sym)
+      geom_layer_base <- ggplot2::geom_sf(
+        ggplot2::aes(!!!map_aes_list),
+        alpha = base_alpha,
+        color = current_settings$grid_color, linewidth = 0.1
+      )
     } else {
-      geom_layer_base <- ggplot2::geom_sf(fill = current_settings$colors[1], # Default static fill if no fill_var
-                                          alpha = base_alpha,
-                                          color = current_settings$grid_color, linewidth = 0.1)
+      geom_layer_base <- ggplot2::geom_sf(
+        fill = current_settings$colors[1], # Fixed fill
+        alpha = base_alpha,
+        color = current_settings$grid_color, linewidth = 0.1
+      )
     }
   }
 
@@ -195,18 +286,18 @@ plot_guapo <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
     filter_condition <- rep(FALSE, nrow(data))
 
     # Add condition for x-axis variable if x is not NULL and exists in data
-    if (!is.null(x) && x %in% names(data)) {
-      filter_condition <- filter_condition | (data[[x]] %in% highlight_values)
+    if (!is.null(x_sym) && rlang::as_string(x_sym) %in% names(data)) {
+      filter_condition <- filter_condition | (data[[rlang::as_string(x_sym)]] %in% highlight_values)
     }
 
     # Add condition for color_var if color_var is not NULL and exists in data
-    if (!is.null(color_var) && color_var %in% names(data)) {
-      filter_condition <- filter_condition | (data[[color_var]] %in% highlight_values)
+    if (!is.null(color_var_sym) && rlang::as_string(color_var_sym) %in% names(data)) {
+      filter_condition <- filter_condition | (data[[rlang::as_string(color_var_sym)]] %in% highlight_values)
     }
 
     # Add condition for label_var if label_var is not NULL and exists in data (useful for maps/categorical data)
-    if (!is.null(label_var) && label_var %in% names(data)) {
-      filter_condition <- filter_condition | (data[[label_var]] %in% highlight_values)
+    if (!is.null(label_var_sym) && rlang::as_string(label_var_sym) %in% names(data)) {
+      filter_condition <- filter_condition | (data[[rlang::as_string(label_var_sym)]] %in% highlight_values)
     }
 
     # Only proceed if there's at least one true in the filter_condition
@@ -232,25 +323,26 @@ plot_guapo <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
   }
 
   # Labels
-  if (show_labels && !is.null(label_var)) {
+  if (show_labels && !is.null(label_var_sym)) {
+    label_aes_list <- list(label = label_var_sym)
     if (plot_type == "column" || plot_type == "area") {
-      p <- p + ggplot2::geom_text(ggplot2::aes_string(label = label_var), vjust = -0.5, hjust = 0.5,
+      p <- p + ggplot2::geom_text(ggplot2::aes(!!!label_aes_list), vjust = -0.5, hjust = 0.5,
                                   size = 3.5, color = current_settings$text_color, family = font_body_name)
     } else if (plot_type == "scatter" || plot_type == "line") {
-      p <- p + ggrepel::geom_text_repel(ggplot2::aes_string(label = label_var), size = 3.5, box.padding = 0.5,
+      p <- p + ggrepel::geom_text_repel(ggplot2::aes(!!!label_aes_list), size = 3.5, box.padding = 0.5,
                                         min.segment.length = 0.3, segment.color = current_settings$grid_color,
                                         segment.size = 0.3, max.overlaps = 50, direction = "y",
                                         family = font_body_name, color = current_settings$text_color)
     } else if (plot_type == "map") {
-      p <- p + ggplot2::geom_sf_text(ggplot2::aes_string(label = label_var),
+      p <- p + ggplot2::geom_sf_text(ggplot2::aes(!!!label_aes_list),
                                      size = 3.5, color = current_settings$text_color, family = font_body_name,
                                      check_overlap = TRUE)
     }
   }
 
   # Faceting
-  if (!is.null(facet_var)) {
-    p <- p + ggplot2::facet_wrap(ggplot2::sym(facet_var))
+  if (!is.null(facet_var_sym)) {
+    p <- p + ggplot2::facet_wrap(facet_var_sym)
   }
 
   # Theme
@@ -303,13 +395,14 @@ plot_guapo <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
     caption = paste0("<span style='font-family:\"", font_body_name, "\";'>", caption, "</span>")
   )
 
-  if (!is.null(x) && plot_type != "map") { # x is relevant for non-map plots
-    lab_args$x = paste0("<span style='font-family:\"", font_body_name, "\";'>", tools::toTitleCase(gsub("_", " ", x)), "</span>")
+  if (!is.null(x_sym) && plot_type != "map") { # x is relevant for non-map plots
+    lab_args$x = paste0("<span style='font-family:\"", font_body_name, "\";'>", tools::toTitleCase(gsub("_", " ", rlang::as_string(x_sym))), "</span>")
   }
 
-  if (!is.null(y) && plot_type != "map") { # y is relevant for non-map plots
-    lab_args$y = paste0("<span style='font-family:\"", font_body_name, "\";'>", tools::toTitleCase(gsub("_", " ", y)), "</span>")
+  if (!is.null(y_sym) && plot_type != "map") { # y is relevant for non-map plots
+    lab_args$y = paste0("<span style='font-family:\"", font_body_name, "\";'>", tools::toTitleCase(gsub("_", " ", rlang::as_string(y_sym))), "</span>")
   }
 
   p + final_theme + do.call(ggplot2::labs, lab_args)
 }
+

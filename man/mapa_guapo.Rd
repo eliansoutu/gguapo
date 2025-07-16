@@ -11,9 +11,11 @@ mapa_guapo(
   color = NULL,
   size = 1,
   titulo = NULL,
+  subtitulo = NULL,
   etiqueta = NULL,
   palette = "Blues",
-  font = "Poppins"
+  font = "Poppins",
+  show_shadow_polygons = TRUE
 )
 }
 \arguments{
@@ -21,19 +23,23 @@ mapa_guapo(
 
 \item{tipo}{Un string que especifica el tipo de geometría a graficar. Puede ser "poligono", "linea" o "punto".}
 
-\item{fill}{Un string opcional que especifica el nombre de la columna para mapear el color de relleno de los polígonos. Solo aplica para `tipo = "poligono"`.}
+\item{fill}{(Tidy-evaluated) Nombre de la columna para mapear el color de relleno de los polígonos. Solo aplica para `tipo = "poligono"`.}
 
-\item{color}{Un string opcional que especifica el nombre de la columna para mapear el color de las líneas o puntos. Solo aplica para `tipo = "linea"` o `tipo = "punto"`.}
+\item{color}{(Tidy-evaluated) Nombre de la columna para mapear el color de las líneas o puntos. Solo aplica para `tipo = "linea"` o `tipo = "punto"`.}
 
 \item{size}{Un valor numérico que especifica el tamaño de las líneas o puntos. Por defecto es 1.}
 
 \item{titulo}{Un string opcional que especifica el título principal del mapa.}
 
-\item{etiqueta}{Un string opcional que especifica el nombre de la columna a usar para etiquetar las geometrías en el mapa.}
+\item{subtitulo}{Un string opcional que especifica el subtítulo del mapa.}
+
+\item{etiqueta}{(Tidy-evaluated) Nombre de la columna a usar para etiquetar las geometrías en el mapa.}
 
 \item{palette}{Un string que especifica la paleta de colores a usar para el relleno de polígonos (ej. "Blues", "Reds"). Compatible con `scale_fill_distiller`.}
 
 \item{font}{Un string que especifica la familia de fuente a usar para el texto del mapa (título, etiquetas). Por defecto es "Poppins". Asegúrate de que la fuente esté disponible.}
+
+\item{show_shadow_polygons}{Lógico. Si aplicar una sombra a los polígonos. Por defecto es TRUE.}
 }
 \value{
 Un objeto `ggplot2` que representa el mapa generado.

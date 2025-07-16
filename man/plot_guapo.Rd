@@ -23,7 +23,7 @@ plot_guapo(
   highlight_values = NULL,
   highlight_color = "#FFD700",
   facet_var = NULL,
-  dark_mode = TRUE,
+  dark_mode = FALSE,
   apply_shadow = FALSE,
   apply_glow = FALSE,
   apply_blur_background = FALSE,
@@ -36,15 +36,15 @@ plot_guapo(
 \arguments{
 \item{data}{Un data frame (o un objeto `sf` para `plot_type = "map"`).}
 
-\item{x}{Una cadena de texto con el nombre de la columna para el eje x. **Ahora opcional, por defecto es NULL.**}
+\item{x}{(Opcional) Nombre de la columna para el eje x (puede ser sin comillas para tidy eval). Por defecto es NULL.}
 
-\item{y}{Una cadena de texto con el nombre de la columna para el eje y. **Ahora opcional, por defecto es NULL.**}
+\item{y}{(Opcional) Nombre de la columna para el eje y (puede ser sin comillas para tidy eval). Por defecto es NULL.}
 
-\item{color_var}{(Opcional) Una cadena de texto para mapear color. Por defecto es NULL.}
+\item{color_var}{(Opcional) Nombre de la columna para mapear color (puede ser sin comillas). Por defecto es NULL.}
 
-\item{fill_var}{(Opcional) Una cadena de texto para mapear relleno (para gráficos de barras/áreas/mapas). Por defecto es NULL.}
+\item{fill_var}{(Opcional) Nombre de la columna para mapear relleno (puede ser sin comillas). Por defecto es NULL.}
 
-\item{label_var}{(Opcional) Una cadena de texto para etiquetas de datos. Por defecto es NULL.}
+\item{label_var}{(Opcional) Nombre de la columna para etiquetas de datos (puede ser sin comillas). Por defecto es NULL.}
 
 \item{title}{El título del gráfico.}
 
@@ -68,7 +68,7 @@ plot_guapo(
 
 \item{highlight_color}{El color para los valores resaltados. Por defecto es "cyan".}
 
-\item{facet_var}{(Opcional) Una cadena de texto para facetear el gráfico. Por defecto es NULL.}
+\item{facet_var}{(Opcional) Nombre de la columna para facetear el gráfico (puede ser sin comillas). Por defecto es NULL.}
 
 \item{dark_mode}{Lógico, si usar un esquema de colores oscuro. Por defecto es TRUE.}
 

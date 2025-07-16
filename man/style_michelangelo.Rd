@@ -26,15 +26,15 @@ style_michelangelo(
 \arguments{
 \item{data}{A data frame.}
 
-\item{x}{A string specifying the column name for the x-axis.}
+\item{x}{(Tidy-evaluated) Name of the column for the x-axis.}
 
-\item{y}{A string specifying the column name for the y-axis.}
+\item{y}{(Tidy-evaluated) Name of the column for the y-axis.}
 
-\item{color_var}{An optional string specifying the column name for color mapping. Defaults to NULL.}
+\item{color_var}{(Tidy-evaluated) Optional name of the column for color mapping. Defaults to NULL.}
 
-\item{fill_var}{An optional string specifying the column name for fill mapping (for column charts). Defaults to NULL.}
+\item{fill_var}{(Tidy-evaluated) Optional name of the column for fill mapping (for column charts). Defaults to NULL.}
 
-\item{label_var}{An optional string specifying the column name for text labels (for maps or other plots). Defaults to NULL.}
+\item{label_var}{(Tidy-evaluated) Optional name of the column for text labels (for maps or other plots). Defaults to NULL.}
 
 \item{title}{The plot title.}
 

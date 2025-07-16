@@ -25,3 +25,4 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+URL: https://eliansoutu.github.io/gguapo/

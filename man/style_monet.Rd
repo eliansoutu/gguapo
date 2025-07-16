@@ -27,15 +27,15 @@ style_monet(
 \arguments{
 \item{data}{A data frame or an sf object.}
 
-\item{x}{A string specifying the column name for the x-axis (for scatter, line, column plots).}
+\item{x}{A tidy-evaluated expression specifying the column name for the x-axis (for scatter, line, column plots).}
 
-\item{y}{A string specifying the column name for the y-axis (for scatter, line, column plots).}
+\item{y}{A tidy-evaluated expression specifying the column name for the y-axis (for scatter, line, column plots).}
 
-\item{color_var}{An optional string specifying the column name for color mapping. Defaults to NULL.}
+\item{color_var}{An optional tidy-evaluated expression specifying the column name for color mapping. Defaults to NULL.}
 
-\item{fill_var}{An optional string specifying the column name for fill mapping (for column charts or map polygons). Defaults to NULL.}
+\item{fill_var}{An optional tidy-evaluated expression specifying the column name for fill mapping (for column charts or map polygons). Defaults to NULL.}
 
-\item{label_var}{An optional string specifying the column name for text labels (for maps or other plots). Defaults to NULL.}
+\item{label_var}{An optional tidy-evaluated expression specifying the column name for text labels (for maps or other plots). Defaults to NULL.}
 
 \item{title}{The plot title.}
 
@@ -57,7 +57,7 @@ style_monet(
 
 \item{show_background}{Logical, whether to show the panel background (for non-map plots). Defaults to TRUE.}
 
-\item{coord_flip}{Logical, whether to flip coords in column chart (and so labels). Defaults to FALSE.}
+\item{coord_flip}{Logical, whether to flip labels coords in column chart. Defaults to FALSE.}
 }
 \value{
 A ggplot2 object.

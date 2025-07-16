@@ -13,8 +13,8 @@ apply_common_theme_and_labs(
   title,
   subtitle,
   caption,
-  x,
-  y,
+  x_label,
+  y_label,
   base_theme_fun,
   grid_linetype,
   grid_linewidth,
@@ -39,9 +39,9 @@ apply_common_theme_and_labs(
 
 \item{caption}{Leyenda del gráfico.}
 
-\item{x}{Nombre de la variable del eje x (para etiquetas).}
+\item{x_label}{Nombre de la variable del eje x (para etiquetas).}
 
-\item{y}{Nombre de la variable del eje y (para etiquetas).}
+\item{y_label}{Nombre de la variable del eje y (para etiquetas).}
 
 \item{base_theme_fun}{Función de tema base de ggplot2 (ej. `ggplot2::theme_void`).}
 

@@ -34,11 +34,11 @@ Fondo/Rejilla: Fondos en tonos beige/crema y rejillas discretas para mantener el
 
 Opciones de work_inspired_by:
 
-"mona_lisa": Tonos cálidos y marrones, con un foco en la sutiliza y el misterio.
+- "mona_lisa": Tonos cálidos y marrones, con un foco en la sutiliza y el misterio.
 
-"last_supper": Paleta más sombría con grises piedra y toques de color para reflejar la solemnidad.
+- "last_supper": Paleta más sombría con grises piedra y toques de color para reflejar la solemnidad.
 
-"vitruvian_man": Colores más limpios y un fondo más claro, con énfasis en las formas y la estructura.
+- "vitruvian_man": Colores más limpios y un fondo más claro, con énfasis en las formas y la estructura.
 
 ## style_michelangelo() - Miguel Ángel
 
@@ -60,11 +60,11 @@ Fondo/Rejilla: Fondos claros y rejillas sólidas, casi escultóricas, para enmar
 
 Opciones de work_inspired_by:
 
-"david": Predominio de blancos, grises y azules fríos, reflejando la pureza del mármol.
+- "david": Predominio de blancos, grises y azules fríos, reflejando la pureza del mármol.
 
-"sistine_chapel": Tonos más intensos con rojos, dorados y azules profundos, inspirados en los frescos.
+- "sistine_chapel": Tonos más intensos con rojos, dorados y azules profundos, inspirados en los frescos.
 
-"pieta": Enfocado en grises y platas con toques de azul-verde para la solemnidad y el dolor.
+- "pieta": Enfocado en grises y platas con toques de azul-verde para la solemnidad y el dolor.
 
 ## style_rembrandt() - Rembrandt
 
@@ -86,11 +86,11 @@ Fondo/Rejilla: Fondos muy oscuros y rejillas discretas o punteadas que sugieren 
 
 Opciones de work_inspired_by:
 
-"night_watch": Marrones oscuros, dorados y toques de crema para la teatralidad y el movimiento.
+- "night_watch": Marrones oscuros, dorados y toques de crema para la teatralidad y el movimiento.
 
-"self_portrait": Tonos sepia y marrones cálidos para la intimidad y el estudio de carácter.
+- "self_portrait": Tonos sepia y marrones cálidos para la intimidad y el estudio de carácter.
 
-"storm_sea": Azules grises oscuros y blancos tormentosos para la dramaticidad y el movimiento.
+- "storm_sea": Azules grises oscuros y blancos tormentosos para la dramaticidad y el movimiento.
 
 
 ## style_van_gogh() - Vincent van Gogh
@@ -115,11 +115,11 @@ Fondo/Rejilla: Fondos que se integran con la paleta de colores dominante y rejil
 
 Opciones de work_inspired_by:
 
-"starry_night": Azules oscuros, amarillos brillantes, para una atmósfera nocturna y misteriosa.
+- "starry_night": Azules oscuros, amarillos brillantes, para una atmósfera nocturna y misteriosa.
 
-"sunflowers": Amarillos, naranjas y marrones intensos, transmitiendo calor y vitalidad.
+- "sunflowers": Amarillos, naranjas y marrones intensos, transmitiendo calor y vitalidad.
 
-"irises": Morados, azules y verdes suaves, evocando la tranquilidad y la naturaleza.
+- "irises": Morados, azules y verdes suaves, evocando la tranquilidad y la naturaleza.
 
 ## style_monet() - Claude Monet
 
@@ -143,11 +143,11 @@ Fondo/Rejilla: Fondos muy claros y rejillas punteadas o mínimas para una sensac
 
 Opciones de work_inspired_by:
 
-"water_lilies": Tonos acuáticos, verdes y azules suaves.
+- "water_lilies": Tonos acuáticos, verdes y azules suaves.
 
-"impression_sunrise": Naranjas, rosas y azules claros, para un efecto de amanecer.
+- "impression_sunrise": Naranjas, rosas y azules claros, para un efecto de amanecer.
 
-"poppy_fields": Rojos vibrantes (amapolas), azules cielo y verdes pradera.
+- "poppy_fields": Rojos vibrantes (amapolas), azules cielo y verdes pradera.
 
 
 ## style_banksy() - Banksy
@@ -170,11 +170,11 @@ Fondo/Rejilla: Fondos en tonos de gris o azul cemento, y ausencia total de rejil
 
 Opciones de work_inspired_by:
 
-"girl_with_balloon": Blanco, negro y el icónico rojo del globo.
+- "girl_with_balloon": Blanco, negro y el icónico rojo del globo.
 
-"flower_thrower": Negro y blanco con el toque de colores primarios en las flores.
+- "flower_thrower": Negro y blanco con el toque de colores primarios en las flores.
 
-"rat_graffiti": Predominio de blanco y negro, con acentos de naranja o rojo fuerte.
+- "rat_graffiti": Predominio de blanco y negro, con acentos de naranja o rojo fuerte.
 
 
 ## style_salvador_dali() - Salvador Dalí
@@ -201,11 +201,11 @@ Fondo/Rejilla: Fondos con transiciones de color o tonos que evocan paisajes dali
 
 Opciones de work_inspired_by:
 
-"persistence_memory": Marrones, ocres y azules desérticos.
+- "persistence_memory": Marrones, ocres y azules desérticos.
 
-"elephants": Morados profundos, rojos, y grises para una atmósfera dramática.
+- "elephants": Morados profundos, rojos, y grises para una atmósfera dramática.
 
-"swans_reflecting_elephants": Verdes, azules y dorados, explorando la dualidad y los reflejos.
+- "swans_reflecting_elephants": Verdes, azules y dorados, explorando la dualidad y los reflejos.
 
 
 ## style_miro() - Joan Miró
@@ -230,11 +230,11 @@ Fondo/Rejilla: Fondos limpios y claros, con rejillas sólidas y fuertes que act�
 
 Opciones de work_inspired_by:
 
-"the_farm": Tonos tierra con estallidos de colores primarios para un ambiente rústico y simbólico.
+- "the_farm": Tonos tierra con estallidos de colores primarios para un ambiente rústico y simbólico.
 
-"constellations": Negro profundo para el fondo con puntos y líneas brillantes en colores primarios sobre él.
+- "constellations": Negro profundo para el fondo con puntos y líneas brillantes en colores primarios sobre él.
 
-"blue_series": Predominio de azules, con elementos negros para el contraste y la estructura.
+- "blue_series": Predominio de azules, con elementos negros para el contraste y la estructura.
 
 
 ## style_artemisia_gentileschi() - Artemisia Gentileschi
@@ -257,11 +257,11 @@ Fondo/Rejilla: Fondos muy oscuros y rejillas sólidas que desaparecen en las som
 
 Opciones de work_inspired_by:
 
-"judith_beheading_holofernes": Rojos sangre, marrones oscuros y negros para una atmósfera intensa y violenta.
+- "judith_beheading_holofernes": Rojos sangre, marrones oscuros y negros para una atmósfera intensa y violenta.
 
-"mary_magdalene": Morados profundos, grises y tonos piel para una representación introspectiva.
+- "mary_magdalene": Morados profundos, grises y tonos piel para una representación introspectiva.
 
-"self_portrait_lute_player": Marrones cálidos, ocres y cremas, con un enfoque en la expresión y la luz sobre la piel.
+- "self_portrait_lute_player": Marrones cálidos, ocres y cremas, con un enfoque en la expresión y la luz sobre la piel.
 
 
 ## style_kandinsky() - Wassily Kandinsky
@@ -286,11 +286,11 @@ Fondo/Rejilla: Fondos limpios y claros, con rejillas mínimas pero firmes que su
 
 Opciones de work_inspired_by:
 
-"composition_viii": Predominio de formas geométricas con colores primarios y negros.
+- "composition_viii": Predominio de formas geométricas con colores primarios y negros.
 
-"yellow_red_blue": Un enfoque directo en los tres colores fundamentales, con líneas negras marcadas.
+- "yellow_red_blue": Un enfoque directo en los tres colores fundamentales, con líneas negras marcadas.
 
-"on_white_ii": Mayor uso del blanco y tonos claros, con formas de colores más sutiles que flotan en el espacio.
+- "on_white_ii": Mayor uso del blanco y tonos claros, con formas de colores más sutiles que flotan en el espacio.
 
 
 ## style_andy_warhol() - Andy Warhol
@@ -315,8 +315,8 @@ Fondo/Rejilla: Fondos en tonos grises o colores pastel suaves que no compiten co
 
 Opciones de work_inspired_by:
 
-"soup_cans": Rojo, blanco y negro, con toques de amarillo.
+- "soup_cans": Rojo, blanco y negro, con toques de amarillo.
 
-"marilyn_monroe": Tonos de fucsia, cian, amarillo, con fuerte contraste.
+- "marilyn_monroe": Tonos de fucsia, cian, amarillo, con fuerte contraste.
 
-"cow_wallpaper": Verdes ácidos y negros, evocando la repetición de patrones.
+- "cow_wallpaper": Verdes ácidos y negros, evocando la repetición de patrones.

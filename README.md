@@ -5,7 +5,7 @@
 
 **Disclaimers varios**
 
-1. Este paquete surge con la intención estilizar gráficos de manera rápida y diferente a los típicos parámetros estéticos que vienen predefinidos. Se busca aprovechar la infinidad de atributos que ggplot2 permite modificar, sin dejar de lado la sobriedad y el estilo formal.
+1. Este paquete surge con la intención estilizar gráficos de manera rápida y diferente a los típicos parámetros estéticos que vienen predefinidos. Se busca aprovechar la infinidad de atributos que ggplot2 permite modificar, sin dejar de lado la sobriedad y un estilo formal para la presentación de datos.
 
 2. Es un paquete en desarrollo, seguramente habrá cambios y agregados a futuro.
 
@@ -47,31 +47,31 @@ Estos son ejemplos básicos sobre cómo utilizar las funciones de la librería:
 ``` r
 library(gguapo)
 
-data <- structure(list(name = c("Vincent van Gogh", "Edgar Degas", "Pablo Picasso", 
-"Pierre-Auguste Renoir", "Albrecht Dürer", "Paul Gauguin", "Francisco Goya", 
-"Rembrandt", "Alfred Sisley", "Titian"), genre = c("Post-Impressionism", 
+data <- structure(list(name = c("Van Gogh", "Degas", "Picasso", 
+" Renoir", "Dürer", "Gauguin", "Goya", 
+"Rembrandt", "Sisley", "Titian"), genre = c("Post-Impressionism", 
 "Impressionism", "Cubism", "Impressionism", "Northern Renaissance", 
 "Symbolism,Post-Impressionism", "Romanticism", "Baroque", "Impressionism", 
 "High Renaissance,Mannerism"), paintings = c(877L, 702L, 439L, 
 336L, 328L, 311L, 291L, 262L, 259L, 255L)), class = "data.frame", row.names = c(NA, 
 -10L))
 
-load_all_fonts()
+load_all_fonts() # Carga fuentes del paquete
 
-style_banksy(data, dplyr::mutate(name = stringr::str_wrap(name, 10)), "name", "paintings", plot_type = "column")
+style_banksy(data, name, paintings, plot_type = "column")
 
 ```
-![](inst/resources/img/banksy.png)
+![](man/figures/banksy.png)
 
 ### plot_guapo
 
 Función propia para crear gráficos estilizados y hacer retoques estéticos, por ejemplo, resaltar un valor de manera sencilla:
 
 ``` r
-plot_guapo(data, "name", "paintings", plot_type = "column", title = "Gráfico guapo", dark_mode = T, highlight_values = c("Vincent van Gogh"))
+plot_guapo(data, name, paintings, plot_type = "column", title = "Gráfico guapo", dark_mode = T, highlight_values = c("Vincent van Gogh"))
 
 ```
-![](inst/resources/img/plot_guapo.png)
+![](man/figures/plot_guapo.png)
 
 *Datos de ejemplo en base a:* https://www.kaggle.com/datasets/ikarus777/best-artworks-of-all-time/data
 

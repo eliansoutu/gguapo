@@ -394,8 +394,8 @@ get_artist_settings <- function(artist = c("da_vinci", "michelangelo", "rembrand
 #' @param title Título del gráfico.
 #' @param subtitle Subtítulo del gráfico.
 #' @param caption Leyenda del gráfico.
-#' @param x Nombre de la variable del eje x (para etiquetas).
-#' @param y Nombre de la variable del eje y (para etiquetas).
+#' @param x_label Nombre de la variable del eje x (para etiquetas).
+#' @param y_label Nombre de la variable del eje y (para etiquetas).
 #' @param base_theme_fun Función de tema base de ggplot2 (ej. `ggplot2::theme_void`).
 #' @param grid_linetype Tipo de línea para la cuadrícula principal.
 #' @param grid_linewidth Ancho de línea para la cuadrícula principal.
@@ -403,7 +403,7 @@ get_artist_settings <- function(artist = c("da_vinci", "michelangelo", "rembrand
 #' @param panel_background_map_specific Lógico, si el tema del panel tiene lógica especial para mapas.
 #' @return Objeto ggplot2 con el tema y las etiquetas aplicadas.
 apply_common_theme_and_labs <- function(p, settings, plot_type, add_grid_lines, show_background,
-                                        title, subtitle, caption, x, y,
+                                        title, subtitle, caption, x_label, y_label, # Cambiado x e y a x_label, y_label
                                         base_theme_fun, grid_linetype, grid_linewidth,
                                         axis_line_linewidth, panel_background_map_specific = FALSE) {
 
@@ -443,14 +443,14 @@ apply_common_theme_and_labs <- function(p, settings, plot_type, add_grid_lines, 
   )
 
   # Only add x and y to labs if they are not NULL and plot_type is not "map"
-  if (!is.null(x) && plot_type != "map") {
-    lab_args$x = paste0("<span style='font-family:\"", settings$font_body, "\";'>", tools::toTitleCase(gsub("_", " ", x)), "</span>")
+  if (!is.null(x_label) && plot_type != "map") {
+    lab_args$x = paste0("<span style='font-family:\"", settings$font_body, "\";'>", tools::toTitleCase(gsub("_", " ", x_label)), "</span>")
   } else {
     lab_args$x = NULL # Explicitly set to NULL if not applicable
   }
 
-  if (!is.null(y) && plot_type != "map") {
-    lab_args$y = paste0("<span style='font-family:\"", settings$font_body, "\";'>", tools::toTitleCase(gsub("_", " ", y)), "</span>")
+  if (!is.null(y_label) && plot_type != "map") {
+    lab_args$y = paste0("<span style='font-family:\"", settings$font_body, "\";'>", tools::toTitleCase(gsub("_", " ", y_label)), "</span>")
   } else {
     lab_args$y = NULL # Explicitly set to NULL if not applicable
   }
