@@ -19,7 +19,8 @@ apply_common_theme_and_labs(
   grid_linetype,
   grid_linewidth,
   axis_line_linewidth,
-  panel_background_map_specific = FALSE
+  panel_background_map_specific = FALSE,
+  text_size = 12
 )
 }
 \arguments{

@@ -18,10 +18,10 @@ style_monet(
   work_inspired_by = c("water_lilies", "impression_sunrise", "poppy_fields"),
   show_labels = FALSE,
   add_glow = FALSE,
-  add_texture = FALSE,
   add_grid_lines = FALSE,
   show_background = TRUE,
-  coord_flip = FALSE
+  coord_flip = FALSE,
+  text_size = 12
 )
 }
 \arguments{
@@ -35,7 +35,7 @@ style_monet(
 
 \item{fill_var}{An optional tidy-evaluated expression specifying the column name for fill mapping (for column charts or map polygons). Defaults to NULL.}
 
-\item{label_var}{An optional tidy-evaluated expression specifying the column name for text labels (for maps or other plots). Defaults to NULL.}
+\item{label_var}{An optional tidy-evaluated expression specifying the column name for text labels. Defaults to NULL.}
 
 \item{title}{The plot title.}
 
@@ -51,13 +51,13 @@ style_monet(
 
 \item{add_glow}{Logical, whether to add an outer glow effect. Defaults to FALSE.}
 
-\item{add_texture}{Logical, whether to add texture (density contours) to scatter plots (only for scatter plots). Defaults to FALSE.}
-
 \item{add_grid_lines}{Logical, whether to show major grid lines (only for non-map plots). Defaults to FALSE.}
 
 \item{show_background}{Logical, whether to show the panel background (for non-map plots). Defaults to TRUE.}
 
-\item{coord_flip}{Logical, whether to flip labels coords in column chart. Defaults to FALSE.}
+\item{coord_flip}{Logical, whether to flip coordinates in column charts. Defaults to FALSE.}
+
+\item{text_size}{Numeric, base text size in the plot. Defaults to 12.}
 }
 \value{
 A ggplot2 object.

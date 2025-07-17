@@ -19,7 +19,8 @@ style_banksy(
   show_labels = FALSE,
   add_grid_lines = FALSE,
   show_background = TRUE,
-  coord_flip = FALSE
+  coord_flip = FALSE,
+  text_size = 12
 )
 }
 \arguments{
@@ -51,7 +52,11 @@ style_banksy(
 
 \item{show_background}{Logical, whether to show the panel background (for non-map plots). Defaults to TRUE.}
 
-\item{coord_flip}{Logical, whether to flip coords in column chart (and so labels). Defaults to FALSE.}
+\item{coord_flip}{Logical, whether to flip coordinates in column charts. Defaults to FALSE.}
+
+\item{text_size}{Numeric, base text size in the plot. Defaults to 12.}
+
+\item{add_glow}{Logical, whether to add an outer glow effect. Defaults to FALSE.}
 }
 \value{
 A ggplot2 object.

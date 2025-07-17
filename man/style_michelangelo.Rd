@@ -20,21 +20,22 @@ style_michelangelo(
   add_glow = FALSE,
   add_grid_lines = FALSE,
   show_background = TRUE,
-  coord_flip = FALSE
+  coord_flip = FALSE,
+  text_size = 12
 )
 }
 \arguments{
-\item{data}{A data frame.}
+\item{data}{A data frame (or sf object if `plot_type = "map"`).}
 
-\item{x}{(Tidy-evaluated) Name of the column for the x-axis.}
+\item{x}{Tidy-evaluated expression specifying the variable for the x-axis.}
 
-\item{y}{(Tidy-evaluated) Name of the column for the y-axis.}
+\item{y}{Tidy-evaluated expression specifying the variable for the y-axis.}
 
-\item{color_var}{(Tidy-evaluated) Optional name of the column for color mapping. Defaults to NULL.}
+\item{color_var}{Optional tidy-evaluated expression for color mapping. Defaults to NULL.}
 
-\item{fill_var}{(Tidy-evaluated) Optional name of the column for fill mapping (for column charts). Defaults to NULL.}
+\item{fill_var}{Optional tidy-evaluated expression for fill mapping (used in column or map plots). Defaults to NULL.}
 
-\item{label_var}{(Tidy-evaluated) Optional name of the column for text labels (for maps or other plots). Defaults to NULL.}
+\item{label_var}{Optional tidy-evaluated expression for data labels (used in column or map plots). Defaults to NULL.}
 
 \item{title}{The plot title.}
 
@@ -42,23 +43,25 @@ style_michelangelo(
 
 \item{caption}{The plot caption.}
 
-\item{plot_type}{The type of plot: "scatter", "line", or "column".}
+\item{plot_type}{Type of plot to produce: "scatter", "line", "column", or "map".}
 
 \item{work_inspired_by}{Specific work for aesthetic inspiration: "david", "sistine_chapel", or "pieta".}
 
-\item{show_labels}{Logical, whether to show data labels. Defaults to FALSE.}
+\item{show_labels}{Logical. Whether to display text labels on the plot. Defaults to FALSE.}
 
-\item{add_glow}{Logical, whether to add an outer glow effect. Defaults to FALSE.}
+\item{add_glow}{Logical. Whether to apply an outer glow effect (for maps or specific geoms). Defaults to FALSE.}
 
-\item{add_grid_lines}{Logical, whether to show major grid lines. Defaults to FALSE.}
+\item{add_grid_lines}{Logical. Whether to display major grid lines (non-map plots only). Defaults to FALSE.}
 
-\item{show_background}{Logical, whether to show the panel background. Defaults to TRUE}
+\item{show_background}{Logical. Whether to show the panel background. Defaults to TRUE.}
 
-\item{coord_flip}{Logical, whether to flip coords in column chart (and so labels). Defaults to FALSE.}
+\item{coord_flip}{Logical. If TRUE and plot_type is "column", flips axes and label positions. Defaults to FALSE.}
+
+\item{text_size}{Numeric. Base size for titles, subtitles, labels, and annotations. Defaults to 12.}
 }
 \value{
-A ggplot2 object.
+A ggplot2 object styled with Michelangelo-inspired aesthetics.
 }
 \description{
-Generates ggplot2 plots with aesthetic elements inspired by Michelangelo's works.
+Generates ggplot2 plots with aesthetic elements inspired by Michelangelo's works, such as David, the Sistine Chapel, and the Pietà. Supports scatter, line, column, and map visualizations with customizable theming and effects.
 }

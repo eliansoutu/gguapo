@@ -20,44 +20,47 @@ style_da_vinci(
   add_grid_lines = FALSE,
   show_background = TRUE,
   add_glow = FALSE,
-  coord_flip = FALSE
+  coord_flip = FALSE,
+  text_size = 12
 )
 }
 \arguments{
-\item{data}{A data frame or an sf object.}
+\item{data}{A data frame or an sf object containing the data to be visualized.}
 
-\item{x}{A tidy-evaluated expression specifying the column name for the x-axis (for scatter, line, column plots).}
+\item{x}{A tidy-evaluated expression specifying the column name for the x-axis (for scatter, line, or column plots).}
 
-\item{y}{A tidy-evaluated expression specifying the column name for the y-axis (for scatter, line, column plots).}
+\item{y}{A tidy-evaluated expression specifying the column name for the y-axis (for scatter, line, or column plots).}
 
-\item{color_var}{An optional tidy-evaluated expression specifying the column name for color mapping. Defaults to NULL.}
+\item{color_var}{Optional. A tidy-evaluated expression specifying the column name used for color mapping. Defaults to NULL.}
 
-\item{fill_var}{An optional tidy-evaluated expression specifying the column name for fill mapping (for column charts or map polygons). Defaults to NULL.}
+\item{fill_var}{Optional. A tidy-evaluated expression specifying the column name used for fill mapping (used in column or map plots). Defaults to NULL.}
 
-\item{label_var}{An optional tidy-evaluated expression specifying the column name for text labels (for maps or other plots). Defaults to NULL.}
+\item{label_var}{Optional. A tidy-evaluated expression specifying the column name used for text labels. Defaults to NULL.}
 
-\item{title}{The plot title.}
+\item{title}{The plot title as a string.}
 
-\item{subtitle}{The plot subtitle.}
+\item{subtitle}{The plot subtitle as a string.}
 
-\item{caption}{The plot caption.}
+\item{caption}{The plot caption as a string.}
 
-\item{plot_type}{The type of plot: "scatter", "line", "column", or "map".}
+\item{plot_type}{The type of plot to create: one of `"scatter"`, `"line"`, `"column"`, or `"map"`.}
 
-\item{work_inspired_by}{Specific work for aesthetic inspiration: "mona_lisa", "last_supper", or "vitruvian_man".}
+\item{work_inspired_by}{A specific Da Vinci work to guide aesthetic inspiration: `"mona_lisa"`, `"last_supper"`, or `"vitruvian_man"`.}
 
-\item{show_labels}{Logical, whether to show data labels. Defaults to FALSE.}
+\item{show_labels}{Logical. If TRUE, data labels are displayed. Defaults to FALSE.}
 
-\item{add_grid_lines}{Logical, whether to show major grid lines (only for non-map plots). Defaults to FALSE.}
+\item{add_grid_lines}{Logical. If TRUE, major grid lines are shown (only for non-map plots). Defaults to FALSE.}
 
-\item{show_background}{Logical, whether to show the panel background. Defaults to TRUE.}
+\item{show_background}{Logical. If TRUE, shows the plot panel background. Defaults to TRUE.}
 
-\item{add_glow}{Logical, whether to add a subtle shadow effect (sfumato) for maps. Defaults to FALSE.}
+\item{add_glow}{Logical. If TRUE, adds a soft glow effect to map geometries. Defaults to FALSE.}
 
-\item{coord_flip}{Logical, whether to flip coords in column chart (and so labels). Defaults to FALSE.}
+\item{coord_flip}{Logical. If TRUE, flips coordinates (e.g., for horizontal column charts with matching label orientation). Defaults to FALSE.}
+
+\item{text_size}{Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 12.}
 }
 \value{
-A ggplot2 object.
+A ggplot2 object styled with Da Vinci-inspired visual elements.
 }
 \description{
 Generates ggplot2 plots with aesthetic elements inspired by Leonardo da Vinci's works.

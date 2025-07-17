@@ -16,7 +16,8 @@ Imports:
     ggfx,
     ggrepel,
     rlang,
-    sf
+    sf,
+    purrr
 Encoding: UTF-8
 License: GPL
 LazyData: true

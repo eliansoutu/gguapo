@@ -485,6 +485,43 @@ apply_common_theme_and_labs <- function(p, settings, plot_type, add_grid_lines, 
 }
 
 
+#' @title Common core function for artist-inspired ggplot2 styles
+#' @description This function applies a visual style to ggplot2 charts inspired by a specific artist and artwork. It supports scatter, line, column, and map plots, and integrates theming, labeling, color scaling, and optional visual effects.
+#'
+#' @param data A data frame (for scatter, line, column plots) or an sf object (for map plots).
+#' @param artist The name of the artist (e.g., `"da_vinci"`, `"van_gogh"`). Used to retrieve style settings.
+#' @param obra_inspiracion A specific work of the artist to define the palette and theme.
+#' @param x,y Tidy-evaluated expressions specifying the variables for the x and y axes (not used in maps).
+#' @param color_var Optional. Tidy-evaluated expression for the variable mapped to color. Defaults to NULL.
+#' @param fill_var Optional. Tidy-evaluated expression for the variable mapped to fill (used in column or map plots). Defaults to NULL.
+#' @param label_var Optional. Tidy-evaluated expression for the variable used in text labels (e.g., geom_text or geom_sf_text).
+#' @param plot_type The type of plot to produce: `"scatter"`, `"line"`, `"column"`, or `"map"`.
+#' @param title,subtitle,caption Strings for the plot's main title, subtitle, and caption.
+#' @param show_labels Logical. Whether to add text labels to points or bars. Defaults to FALSE.
+#' @param add_grid_lines Logical. Whether to show major grid lines (only for non-map plots). Defaults to FALSE.
+#' @param show_background Logical. Whether to display the panel background. Defaults to TRUE.
+#' @param add_glow Logical. Whether to apply a glow effect to geoms (used in maps or other plots). Defaults to FALSE.
+#' @param coord_flip Logical. If TRUE and plot_type is `"column"`, the plot orientation is flipped and labels are rotated accordingly. Defaults to FALSE.
+#' @param theme_base Base ggplot2 theme function to apply (e.g., `theme_void`, `theme_minimal`). Defaults to `theme_void`.
+#' @param grid_linetype Type of line for major grid (e.g., `"dotted"`). Used only when `add_grid_lines = TRUE`. Defaults to `"dotted"`.
+#' @param grid_linewidth Width of grid lines. Defaults to 0.3.
+#' @param axis_line_linewidth Width of axis lines (when shown). Defaults to 0.8.
+#' @param panel_background_map_specific Logical. If TRUE and plot is a map, applies a special background fill. Defaults to FALSE.
+#' @param text_size Numeric. Controls base size of all text elements (titles, subtitles, legend, labels). Labels are scaled proportionally. Defaults to 12.
+#'
+#' @return A ggplot2 object styled according to the specified artist and visual configuration.
+#'
+#' @importFrom ggplot2 ggplot aes geom_point geom_line geom_col theme_void theme element_text element_rect unit labs element_blank
+#' @importFrom ggplot2 scale_color_manual scale_fill_manual scale_color_gradientn scale_fill_gradientn coord_flip
+#' @importFrom ggplot2 geom_sf geom_sf_text geom_text
+#' @importFrom ggrepel geom_text_repel
+#' @importFrom ggtext element_markdown
+#' @importFrom tools toTitleCase
+#' @importFrom sf st_bbox
+#' @importFrom ggfx with_shadow with_outer_glow
+#' @importFrom rlang sym enquo as_label quo_is_null inject
+#' @importFrom purrr map
+#' @export
 style_artist_common <- function(data, artist, obra_inspiracion,
                                 x = NULL, y = NULL,
                                 color_var = NULL, fill_var = NULL, label_var = NULL,
@@ -564,7 +601,9 @@ style_artist_common <- function(data, artist, obra_inspiracion,
       } else {
         geom_col(aes(fill = !!fill_quo), width = 0.7, alpha = settings$geom_alpha)
       }
+
       if (coord_flip) p <- p + coord_flip()
+
     }
 
     # Aplicar geoms
@@ -589,7 +628,7 @@ style_artist_common <- function(data, artist, obra_inspiracion,
       )
     } else if (plot_type == "column" && coord_flip) {
       p <- p + geom_text(
-        aes(label = !!label_quo_final, x = !!y_quo, y = !!x_quo),
+        aes(label = !!label_quo_final),
         hjust = -0.3,
         size = label_size,
         color = settings$text_color, family = settings$font_body

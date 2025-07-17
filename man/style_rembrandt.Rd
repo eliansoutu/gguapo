@@ -20,21 +20,22 @@ style_rembrandt(
   add_glow = FALSE,
   add_grid_lines = FALSE,
   show_background = TRUE,
-  coord_flip = FALSE
+  coord_flip = FALSE,
+  text_size = 12
 )
 }
 \arguments{
-\item{data}{A data frame or an sf object.}
+\item{data}{A data frame (or an sf object if `plot_type = "map"`).}
 
-\item{x}{A tidy-evaluated expression specifying the column name for the x-axis (for scatter, line, column plots).}
+\item{x}{Tidy-evaluated expression specifying the variable for the x-axis.}
 
-\item{y}{A tidy-evaluated expression specifying the column name for the y-axis (for scatter, line, column plots).}
+\item{y}{Tidy-evaluated expression specifying the variable for the y-axis.}
 
-\item{color_var}{An optional tidy-evaluated expression specifying the column name for color mapping. Defaults to NULL.}
+\item{color_var}{Optional tidy-evaluated expression for color mapping. Defaults to NULL.}
 
-\item{fill_var}{An optional tidy-evaluated expression specifying the column name for fill mapping (for column charts or map polygons). Defaults to NULL.}
+\item{fill_var}{Optional tidy-evaluated expression for fill mapping (used in column or map plots). Defaults to NULL.}
 
-\item{label_var}{An optional tidy-evaluated expression specifying the column name for text labels (for maps or other plots). Defaults to NULL.}
+\item{label_var}{Optional tidy-evaluated expression for data labels (used in column or map plots). Defaults to NULL.}
 
 \item{title}{The plot title.}
 
@@ -42,23 +43,25 @@ style_rembrandt(
 
 \item{caption}{The plot caption.}
 
-\item{plot_type}{The type of plot: "scatter", "line", "column", or "map".}
+\item{plot_type}{Type of plot to produce: "scatter", "line", "column", or "map".}
 
 \item{work_inspired_by}{Specific work for aesthetic inspiration: "night_watch", "self_portrait", or "storm_sea".}
 
-\item{show_labels}{Logical, whether to show data labels. Defaults to FALSE.}
+\item{show_labels}{Logical. Whether to display text labels on the plot. Defaults to FALSE.}
 
-\item{add_glow}{Logical, whether to add an outer glow effect. Defaults to FALSE.}
+\item{add_glow}{Logical. Whether to apply an outer glow effect to geoms. Defaults to FALSE.}
 
-\item{add_grid_lines}{Logical, whether to show major grid lines (only for non-map plots). Defaults to FALSE.}
+\item{add_grid_lines}{Logical. Whether to show major grid lines (non-map plots only). Defaults to FALSE.}
 
-\item{show_background}{Logical, whether to show the panel background (for non-map plots). Defaults to TRUE}
+\item{show_background}{Logical. Whether to show the panel background. Defaults to TRUE.}
 
-\item{coord_flip}{Logical, whether to flip coords in column chart (and so labels). Defaults to FALSE.}
+\item{coord_flip}{Logical. If TRUE and `plot_type` is "column", flips axes and label positions. Defaults to FALSE.}
+
+\item{text_size}{Numeric. Base size for titles, subtitles, labels, and annotations. Defaults to 12.}
 }
 \value{
-A ggplot2 object.
+A ggplot2 object styled with Rembrandt-inspired aesthetics.
 }
 \description{
-Generates ggplot2 plots with aesthetic elements inspired by Rembrandt's works.
+Generates ggplot2 plots with aesthetic elements inspired by Rembrandt's works, such as *The Night Watch*, *Self-Portrait*, and *The Storm on the Sea of Galilee*. Supports scatter, line, column, and map visualizations with rich contrast and depth, reminiscent of chiaroscuro.
 }

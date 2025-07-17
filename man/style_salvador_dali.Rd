@@ -21,7 +21,8 @@ style_salvador_dali(
   add_jitter = FALSE,
   add_grid_lines = FALSE,
   show_background = TRUE,
-  coord_flip = FALSE
+  coord_flip = FALSE,
+  text_size = 12
 )
 }
 \arguments{
@@ -57,7 +58,9 @@ style_salvador_dali(
 
 \item{show_background}{Logical, whether to show the panel background (for non-map plots). Defaults to TRUE.}
 
-\item{coord_flip}{Logical, whether to flip coords in column chart (and so labels). Defaults to FALSE.}
+\item{coord_flip}{Logical, whether to flip coordinates in column charts. Defaults to FALSE.}
+
+\item{text_size}{Numeric, base text size in the plot. Defaults to 12.}
 }
 \value{
 A ggplot2 object.
