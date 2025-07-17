@@ -106,5 +106,5 @@ mapa_guapo(data = sf_prueba_cuadrados, fill = valor)
 
 Aplicado a un objeto geográfico real se vería:
 
-![](mapa_guapo.png){width=50%}
+![](mapa_guapo.png)
 

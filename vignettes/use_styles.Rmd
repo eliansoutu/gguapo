@@ -43,7 +43,7 @@ style_da_vinci(data, name, paintings, plot_type = "column")
 
 ### work_inspired_by
 
-Podemos seleccionar alguna variante inspirada en sus obras. En el caso de Monet, las opciones de `work_inspired_by` son: **water_lilies**, **impression_sunrise** y **poppy_fields**
+Podemos seleccionar alguna variante inspirada en sus obras. En el caso de Da Vinci, las opciones de `work_inspired_by` son: **mona_lisa**, **last_supper** y **vitruvian_man**
 
 ```{r}
 
@@ -58,7 +58,7 @@ style_da_vinci(data, name, paintings, plot_type = "column", work_inspired_by = "
 Podemos utilizar alguna variable de mapeo para jugar con los colores de la paleta y diferenciar categorías:
 
 ```{r}
-style_da_vinci(data, name, paintings, plot_type = "column", fill_var = "genre")
+style_da_vinci(data, name, paintings, plot_type = "column", fill_var = genre)
 ```
 
 ### show_labels
