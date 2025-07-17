@@ -40,7 +40,7 @@ style_da_vinci <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var 
                            work_inspired_by = c("mona_lisa", "last_supper", "vitruvian_man"),
                            show_labels = FALSE, add_grid_lines = FALSE,
                            show_background = TRUE, add_glow = FALSE,
-                           coord_flip = FALSE, text_size = 12) {
+                           coord_flip = FALSE, text_size = 12, add_texture = FALSE) {
   style_artist_common(
     data = data,
     artist = "da_vinci",
@@ -56,7 +56,8 @@ style_da_vinci <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var 
     grid_linewidth = 0.3,
     axis_line_linewidth = 0.8,
     panel_background_map_specific = FALSE,
-    text_size = text_size
+    text_size = text_size,
+    add_texture = add_texture
   )
 }
 
@@ -657,9 +658,4 @@ style_andy_warhol <- function(data, x = NULL, y = NULL, color_var = NULL, fill_v
   )
 }
 
-
-# Helper function for `|||` operator (from rlang, but not exporting rlang just for this)
-`%||%` <- function(a, b) {
-  if (!is.null(a)) a else b
-}
 

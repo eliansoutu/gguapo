@@ -89,6 +89,7 @@ style_da_vinci(data, name, paintings, plot_type = "column", title = "Título", s
 Para aquellos artistas valientes que quieran retocar aún más el gráfico y desafiar los límites del arte, se pueden ajustar otros parámetros:
 
 ```{r}
-style_da_vinci(data, name, paintings, plot_type = "column", add_glow = T, add_grid_lines = T)
+style_da_vinci(data, name, paintings, plot_type = "column",
+               add_texture = T)
 ```
 

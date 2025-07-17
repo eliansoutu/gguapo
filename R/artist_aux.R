@@ -535,7 +535,8 @@ style_artist_common <- function(data, artist, obra_inspiracion,
                                 grid_linewidth = 0.3,
                                 axis_line_linewidth = 0.8,
                                 panel_background_map_specific = FALSE,
-                                text_size = 12) {
+                                text_size = 12,
+                                add_texture = F) {
   plot_type <- match.arg(plot_type)
   settings <- get_artist_settings(artist, obra_inspiracion)
 
@@ -578,6 +579,33 @@ style_artist_common <- function(data, artist, obra_inspiracion,
     p <- p + generate_color_scale(data, as_label(fill_quo), settings$colors, "fill")
   }
 
+  if (add_texture) {
+    # # 1. Aplicar blur a las capas geométricas
+    # if (plot_type %in% c("scatter", "column", "line")) {
+    #   p <- ggfx::with_blur(p, sigma = .2)
+    # }
+
+    # 2. Agregar fondo con textura raster
+    textura <- png::readPNG(here::here("man","figures","dotted.png")) # asegurate de tener una textura artística
+    raster <- grid::rasterGrob(textura, width = unit(1, "npc"), height = unit(1, "npc"))
+    p <- p + ggplot2::annotation_custom(raster, xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf)
+
+    if (plot_type == "column" && add_texture) {
+      if (requireNamespace("ggpattern", quietly = TRUE)) {
+        p <- p + ggpattern::geom_col_pattern(
+          #aes(pattern = !!fill_quo),
+          pattern = "stripe",
+          #pattern_fill = settings$colors[1],
+          pattern_density = 0.2,
+          pattern_spacing = 0.02,
+          fill = settings$colors[2],
+          colour = settings$colors[1]
+        )
+      }
+    }
+  }
+
+
   # Geoms según tipo
   if (plot_type %in% c("scatter", "line", "column")) {
     if (plot_type == "scatter") {
@@ -588,8 +616,16 @@ style_artist_common <- function(data, artist, obra_inspiracion,
       }
     } else if (plot_type == "line") {
       geom_layer <- list(
-        if (quo_is_null(color_quo)) geom_line(size = 1.5, alpha = settings$geom_alpha, color = settings$colors[1]) else geom_line(aes(color = !!color_quo), size = 1.5, alpha = settings$geom_alpha),
-        if (quo_is_null(color_quo)) geom_point(size = 3, alpha = settings$geom_alpha, color = settings$colors[1]) else geom_point(aes(color = !!color_quo), size = 3, alpha = settings$geom_alpha)
+        if (quo_is_null(color_quo)) {
+          geom_line(aes(group = 1), size = 1.5, alpha = settings$geom_alpha, color = settings$colors[1])
+        } else {
+          geom_line(aes(color = !!color_quo, group = !!color_quo), size = 1.5, alpha = settings$geom_alpha)
+        },
+        if (quo_is_null(color_quo)) {
+          geom_point(size = 3, alpha = settings$geom_alpha, color = settings$colors[1])
+        } else {
+          geom_point(aes(color = !!color_quo), size = 3, alpha = settings$geom_alpha)
+        }
       )
     } else if (plot_type == "column") {
       if (!quo_is_null(x_quo)) {
@@ -606,12 +642,25 @@ style_artist_common <- function(data, artist, obra_inspiracion,
 
     }
 
-    # Aplicar geoms
+    # Aplicar glow
     if (add_glow) {
-      p <- p + map(geom_layer, ~ with_outer_glow(.x, colour = settings$glow_color, sigma = 5, expand = 3))
+      if (is.list(geom_layer)) {
+        for (layer in geom_layer) {
+          p <- p + ggfx::with_outer_glow(layer, colour = settings$colors[1], sigma = 5, expand = 3)
+        }
+      } else {
+        p <- p + ggfx::with_outer_glow(geom_layer, colour = settings$colors[1], sigma = 5, expand = 3)
+      }
     } else {
-      p <- p + geom_layer
+      if (is.list(geom_layer)) {
+        for (layer in geom_layer) {
+          p <- p + layer
+        }
+      } else {
+        p <- p + geom_layer
+      }
     }
+
   }
 
   # Etiquetas
