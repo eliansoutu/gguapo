@@ -94,15 +94,15 @@ personalizar aún más el estilo del gráfico. Como mínimo debemos
 indicarle las variables de X e Y (excepto mapas). Tomemos como ejemplo
 la función de Da Vinci en versión columnas:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/style_da_vinci.html">style_da_vinci</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">name</span>, <span class="va">paintings</span>, plot_type <span class="op">=</span> <span class="st">"column"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/style_da_vinci.html">style_da_vinci</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">name</span>, <span class="va">paintings</span>, plot_type <span class="op">=</span> <span class="st">"column"</span>, canvas <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="use_styles_files/figure-html/unnamed-chunk-3-1.png" width="960" style="display: block; margin: auto;"></p>
 <div class="section level3">
 <h3 id="work_inspired_by">work_inspired_by<a class="anchor" aria-label="anchor" href="#work_inspired_by"></a>
 </h3>
 <p>Podemos seleccionar alguna variante inspirada en sus obras. En el
-caso de Monet, las opciones de <code>work_inspired_by</code> son:
-<strong>water_lilies</strong>, <strong>impression_sunrise</strong> y
-<strong>poppy_fields</strong></p>
+caso de Da Vinci, las opciones de <code>work_inspired_by</code> son:
+<strong>mona_lisa</strong>, <strong>last_supper</strong> y
+<strong>vitruvian_man</strong></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="fu"><a href="../reference/style_da_vinci.html">style_da_vinci</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">name</span>, <span class="va">paintings</span>, plot_type <span class="op">=</span> <span class="st">"column"</span>, work_inspired_by <span class="op">=</span> <span class="st">"mona_lisa"</span><span class="op">)</span></span></code></pre></div>
@@ -120,9 +120,7 @@ caso de Monet, las opciones de <code>work_inspired_by</code> son:
 <p>Podemos utilizar alguna variable de mapeo para jugar con los colores
 de la paleta y diferenciar categorías:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/style_da_vinci.html">style_da_vinci</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">name</span>, <span class="va">paintings</span>, plot_type <span class="op">=</span> <span class="st">"column"</span>, fill_var <span class="op">=</span> <span class="st">"genre"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in generate_color_scale(data, rlang::as_label(fill_var_quo),</span></span>
-<span><span class="co">#&gt; settings$colors, : Variable '"genre"' not found in data. Using default colors.</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/style_da_vinci.html">style_da_vinci</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">name</span>, <span class="va">paintings</span>, plot_type <span class="op">=</span> <span class="st">"column"</span>, fill_var <span class="op">=</span> <span class="va">genre</span><span class="op">)</span></span></code></pre></div>
 <p><img src="use_styles_files/figure-html/unnamed-chunk-5-1.png" width="960" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
@@ -154,10 +152,38 @@ de la paleta y diferenciar categorías:</p>
 </h3>
 <p>Para aquellos artistas valientes que quieran retocar aún más el
 gráfico y desafiar los límites del arte, se pueden ajustar otros
-parámetros:</p>
+parámetros como <code>add_glow</code>, <code>canvas</code> y
+<code>add_texture.</code></p>
+<ul>
+<li><p><code>add_grid_lines</code> incorpora las líneas de la grilla del
+gráfico.</p></li>
+<li><p><code>show_background</code> agrega color al panel del gráfico
+para mayor contraste.</p></li>
+<li><p><code>add_texture</code> es aún muy experimental, no funciona con
+el fill_var y puede demorar unos segundos en cargar. Aplica un filtro
+estilo pintura al gráfico entero, generando márgenes indeseados. También
+le agrega textura a los gráficos de columnas. Se sugiere aumentar el
+<code>text_size</code> para mejorar la visual de los textos.</p></li>
+<li><p><code>canvas</code> ofrece la posibilidad de agregar un fondo
+estilo lienzo al panel del gráfico, lo cual no es compatible con el uso
+de <code>add_grid_lines</code> o <code>show_background</code>, y se
+puede optar por distintos lienzos (del 1 al 6).</p></li>
+<li><p><code>add_glow</code> agrega brillo a las geom
+principales.</p></li>
+</ul>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/style_da_vinci.html">style_da_vinci</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">name</span>, <span class="va">paintings</span>, plot_type <span class="op">=</span> <span class="st">"column"</span>, add_glow <span class="op">=</span> <span class="cn">T</span>, add_grid_lines <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/style_da_vinci.html">style_da_vinci</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">name</span>, <span class="va">paintings</span>, plot_type <span class="op">=</span> <span class="st">"column"</span>,</span>
+<span>               work_inspired_by <span class="op">=</span> <span class="st">"last_supper"</span>, </span>
+<span>               canvas <span class="op">=</span> <span class="fl">6</span>, </span>
+<span>               add_glow <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
 <p><img src="use_styles_files/figure-html/unnamed-chunk-9-1.png" width="960" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/style_da_vinci.html">style_da_vinci</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">name</span>, <span class="va">paintings</span>, plot_type <span class="op">=</span> <span class="st">"column"</span>,</span>
+<span>               work_inspired_by <span class="op">=</span> <span class="st">"mona_lisa"</span>, </span>
+<span>               canvas <span class="op">=</span> <span class="fl">5</span>, </span>
+<span>               add_texture <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>               text_size <span class="op">=</span> <span class="fl">32</span><span class="op">)</span></span></code></pre></div>
+<p><img src="use_styles_files/figure-html/unnamed-chunk-10-1.png" width="960" style="display: block; margin: auto;"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

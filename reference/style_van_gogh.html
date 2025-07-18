@@ -57,10 +57,12 @@
 <span>  work_inspired_by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"starry_night"</span>, <span class="st">"sunflowers"</span>, <span class="st">"irises"</span><span class="op">)</span>,</span>
 <span>  show_labels <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  add_glow <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  add_texture <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  add_grid_lines <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show_background <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  coord_flip <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  coord_flip <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  text_size <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>  add_texture <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  canvas <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -120,20 +122,20 @@
 <dd><p>Logical, whether to add an outer glow effect. Defaults to FALSE.</p></dd>
 
 
-<dt id="arg-add-texture">add_texture<a class="anchor" aria-label="anchor" href="#arg-add-texture"></a></dt>
-<dd><p>Logical, whether to add texture (density contours) to scatter plots (only for scatter plots). Defaults to FALSE.</p></dd>
-
-
 <dt id="arg-add-grid-lines">add_grid_lines<a class="anchor" aria-label="anchor" href="#arg-add-grid-lines"></a></dt>
 <dd><p>Logical, whether to show major grid lines (only for non-map plots). Defaults to FALSE.</p></dd>
 
 
 <dt id="arg-show-background">show_background<a class="anchor" aria-label="anchor" href="#arg-show-background"></a></dt>
-<dd><p>Logical, whether to show the panel background (for non-map plots). Defaults to TRUE</p></dd>
+<dd><p>Logical, whether to show the panel background (for non-map plots). Defaults to TRUE.</p></dd>
 
 
 <dt id="arg-coord-flip">coord_flip<a class="anchor" aria-label="anchor" href="#arg-coord-flip"></a></dt>
 <dd><p>Logical, whether to flip coords in column chart (and so labels). Defaults to FALSE.</p></dd>
+
+
+<dt id="arg-text-size">text_size<a class="anchor" aria-label="anchor" href="#arg-text-size"></a></dt>
+<dd><p>Numeric, base size for all text elements in the plot. Defaults to 12.</p></dd>
 
 </dl></div>
     <div class="section level2">
