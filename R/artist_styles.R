@@ -20,6 +20,8 @@
 #' @param add_glow Logical. If TRUE, adds a soft glow effect to map geometries. Defaults to FALSE.
 #' @param coord_flip Logical. If TRUE, flips coordinates (e.g., for horizontal column charts with matching label orientation). Defaults to FALSE.
 #' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 12.
+#' @param add_texture Logical. Applies visual texture effects (blur, oil paint, canvas pattern). Default: `FALSE`.
+#' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
 #'
 #' @return A ggplot2 object styled with Da Vinci-inspired visual elements.
 #'
@@ -40,7 +42,8 @@ style_da_vinci <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var 
                            work_inspired_by = c("mona_lisa", "last_supper", "vitruvian_man"),
                            show_labels = FALSE, add_grid_lines = FALSE,
                            show_background = TRUE, add_glow = FALSE,
-                           coord_flip = FALSE, text_size = 12, add_texture = FALSE) {
+                           coord_flip = FALSE, text_size = 12,
+                           add_texture = FALSE, canvas = NULL) {
   style_artist_common(
     data = data,
     artist = "da_vinci",
@@ -57,7 +60,8 @@ style_da_vinci <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var 
     axis_line_linewidth = 0.8,
     panel_background_map_specific = FALSE,
     text_size = text_size,
-    add_texture = add_texture
+    add_texture = add_texture,
+    canvas = canvas
   )
 }
 
@@ -101,7 +105,8 @@ style_michelangelo <- function(data, x, y, color_var = NULL, fill_var = NULL, la
                                work_inspired_by = c("david", "sistine_chapel", "pieta"),
                                show_labels = FALSE, add_glow = FALSE, add_grid_lines = FALSE,
                                show_background = TRUE,
-                               coord_flip = FALSE, text_size = 12) {
+                               coord_flip = FALSE, text_size = 12,
+                               add_texture = FALSE, canvas = NULL) {
 
   style_artist_common(
     data = data,
@@ -118,7 +123,9 @@ style_michelangelo <- function(data, x, y, color_var = NULL, fill_var = NULL, la
     grid_linewidth = 0.3,
     axis_line_linewidth = 0.8,
     panel_background_map_specific = FALSE,
-    text_size = text_size
+    text_size = text_size,
+    add_texture = add_texture,
+    canvas = canvas
   )
 
 }
@@ -163,7 +170,7 @@ style_rembrandt <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var
                             work_inspired_by = c("night_watch", "self_portrait", "storm_sea"),
                             show_labels = FALSE, add_glow = FALSE, add_grid_lines = FALSE,
                             show_background = TRUE, coord_flip = FALSE,
-                            text_size = 12) {
+                            text_size = 12,   add_texture = FALSE, canvas = NULL) {
 
   style_artist_common(
     data = data,
@@ -180,7 +187,7 @@ style_rembrandt <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var
     grid_linewidth = 0.3,
     axis_line_linewidth = 0.8,
     panel_background_map_specific = FALSE,
-    text_size = text_size
+     text_size = text_size,     add_texture = add_texture,     canvas = canvas
   )
 
 
@@ -223,7 +230,7 @@ style_van_gogh <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var 
                            work_inspired_by = c("starry_night", "sunflowers", "irises"),
                            show_labels = FALSE, add_glow = FALSE,
                            add_grid_lines = FALSE, show_background = TRUE,
-                           coord_flip = FALSE, text_size = 12) {
+                           coord_flip = FALSE, text_size = 12,   add_texture = FALSE, canvas = NULL) {
 
   style_artist_common(
     data = data,
@@ -240,7 +247,7 @@ style_van_gogh <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var 
     grid_linewidth = 0.4,
     axis_line_linewidth = 1,
     panel_background_map_specific = TRUE,
-    text_size = text_size
+     text_size = text_size,     add_texture = add_texture,     canvas = canvas
   )
 
 }
@@ -283,7 +290,7 @@ style_monet <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = N
                         work_inspired_by = c("water_lilies", "impression_sunrise", "poppy_fields"),
                         show_labels = FALSE, add_glow = FALSE,
                         add_grid_lines = FALSE, show_background = TRUE,
-                        coord_flip = FALSE, text_size = 12) {
+                        coord_flip = FALSE, text_size = 12,   add_texture = FALSE, canvas = NULL) {
 
   style_artist_common(
     data = data,
@@ -300,7 +307,7 @@ style_monet <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = N
     grid_linewidth = 0.3,
     axis_line_linewidth = 0.8,
     panel_background_map_specific = FALSE,
-    text_size = text_size
+     text_size = text_size,     add_texture = add_texture,     canvas = canvas
   )
 }
 
@@ -341,7 +348,7 @@ style_banksy <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = 
                          plot_type = c("scatter", "line", "column", "map"),
                          work_inspired_by = c("girl_with_balloon", "flower_thrower", "rat_graffiti"),
                          show_labels = FALSE, add_grid_lines = FALSE, show_background = TRUE,
-                         coord_flip = FALSE, text_size = 12) {
+                         coord_flip = FALSE, text_size = 12,   add_texture = FALSE, canvas = NULL) {
 
   style_artist_common(
     data = data,
@@ -358,7 +365,7 @@ style_banksy <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = 
     grid_linewidth = 0.3,
     axis_line_linewidth = 0.8,
     panel_background_map_specific = FALSE,
-    text_size = text_size
+     text_size = text_size,     add_texture = add_texture,     canvas = canvas
   )
 }
 
@@ -400,7 +407,7 @@ style_salvador_dali <- function(data, x = NULL, y = NULL, color_var = NULL, fill
                                 plot_type = c("scatter", "line", "column", "map"),
                                 work_inspired_by = c("persistence_memory", "elephants", "swans_reflecting_elephants"),
                                 show_labels = FALSE, add_glow = FALSE, add_jitter = FALSE, add_grid_lines = FALSE, show_background = TRUE,
-                                coord_flip = FALSE, text_size = 12) {
+                                coord_flip = FALSE, text_size = 12,   add_texture = FALSE, canvas = NULL) {
 
 
    style_artist_common(
@@ -418,7 +425,7 @@ style_salvador_dali <- function(data, x = NULL, y = NULL, color_var = NULL, fill
     grid_linewidth = 0.3,
     axis_line_linewidth = 0.8,
     panel_background_map_specific = FALSE,
-    text_size = text_size
+     text_size = text_size,     add_texture = add_texture,     canvas = canvas
   )
 
   #if (add_jitter) p <- p + ggplot2::geom_jitter(width = 0.1, height = 0.1, alpha = 0.4)
@@ -462,7 +469,7 @@ style_miro <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
                        plot_type = c("scatter", "line", "column", "map"),
                        work_inspired_by = c("the_farm", "constellations", "blue_series"),
                        show_labels = FALSE, add_shapes = FALSE, add_grid_lines = FALSE, show_background = TRUE,
-                       coord_flip = FALSE, text_size = 12) {
+                       coord_flip = FALSE, text_size = 12,   add_texture = FALSE, canvas = NULL) {
 
   style_artist_common(
     data = data,
@@ -479,7 +486,7 @@ style_miro <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
     grid_linewidth = 0.3,
     axis_line_linewidth = 0.8,
     panel_background_map_specific = FALSE,
-    text_size = text_size
+     text_size = text_size,     add_texture = add_texture,     canvas = canvas
   )
 
 }
@@ -520,7 +527,7 @@ style_artemisia_gentileschi <- function(data, x = NULL, y = NULL, color_var = NU
                                         plot_type = c("scatter", "line", "column", "map"),
                                         work_inspired_by = c("judith_beheading_holofernes", "mary_magdalene", "self_portrait_lute_player"),
                                         show_labels = FALSE, add_glow = FALSE, add_grid_lines = FALSE, show_background = TRUE,
-                                        coord_flip = FALSE, text_size = 12) {
+                                        coord_flip = FALSE, text_size = 12,   add_texture = FALSE, canvas = NULL) {
 
   style_artist_common(
     data = data,
@@ -537,7 +544,7 @@ style_artemisia_gentileschi <- function(data, x = NULL, y = NULL, color_var = NU
     grid_linewidth = 0.3,
     axis_line_linewidth = 0.8,
     panel_background_map_specific = FALSE,
-    text_size = text_size
+     text_size = text_size,     add_texture = add_texture,     canvas = canvas
   )
 
 }
@@ -579,7 +586,7 @@ style_kandinsky <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var
                             plot_type = c("scatter", "line", "column", "map"),
                             work_inspired_by = c("composition_viii", "yellow_red_blue", "on_white_ii"),
                             show_labels = FALSE, add_shapes = FALSE, add_grid_lines = FALSE,
-                            show_background = TRUE, coord_flip = FALSE, text_size = 12) {
+                            show_background = TRUE, coord_flip = FALSE, text_size = 12,   add_texture = FALSE, canvas = NULL) {
 
   style_artist_common(
     data = data,
@@ -596,7 +603,7 @@ style_kandinsky <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var
     grid_linewidth = 0.3,
     axis_line_linewidth = 0.8,
     panel_background_map_specific = FALSE,
-    text_size = text_size
+     text_size = text_size,     add_texture = add_texture,     canvas = canvas
   )
 
 }
@@ -637,7 +644,7 @@ style_andy_warhol <- function(data, x = NULL, y = NULL, color_var = NULL, fill_v
                               plot_type = c("scatter", "line", "column", "map"),
                               work_inspired_by = c("soup_cans", "marilyn_monroe", "cow_wallpaper"),
                               show_labels = FALSE, add_grid_lines = FALSE,
-                              show_background = TRUE, coord_flip = FALSE, text_size = 12) {
+                              show_background = TRUE, coord_flip = FALSE, text_size = 12,   add_texture = FALSE, canvas = NULL) {
 
   style_artist_common(
     data = data,
@@ -654,7 +661,7 @@ style_andy_warhol <- function(data, x = NULL, y = NULL, color_var = NULL, fill_v
     grid_linewidth = 0.3,
     axis_line_linewidth = 0.8,
     panel_background_map_specific = FALSE,
-    text_size = text_size
+     text_size = text_size,     add_texture = add_texture,     canvas = canvas
   )
 }
 

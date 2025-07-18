@@ -27,53 +27,59 @@ style_artist_common(
   grid_linewidth = 0.3,
   axis_line_linewidth = 0.8,
   panel_background_map_specific = FALSE,
-  text_size = 12
+  text_size = 12,
+  add_texture = F,
+  canvas = NULL
 )
 }
 \arguments{
-\item{data}{A data frame (for scatter, line, column plots) or an sf object (for map plots).}
+\item{data}{A data frame or `sf` object, depending on the plot type.}
 
-\item{artist}{The name of the artist (e.g., `"da_vinci"`, `"van_gogh"`). Used to retrieve style settings.}
+\item{artist}{String. Artist name (e.g., `"van_gogh"`, `"da_vinci"`).}
 
-\item{obra_inspiracion}{A specific work of the artist to define the palette and theme.}
+\item{obra_inspiracion}{String. Specific artwork to define the palette/theme.}
 
-\item{x, y}{Tidy-evaluated expressions specifying the variables for the x and y axes (not used in maps).}
+\item{x, y}{Tidy-evaluated expressions for aesthetics.}
 
-\item{color_var}{Optional. Tidy-evaluated expression for the variable mapped to color. Defaults to NULL.}
+\item{color_var}{Optional. Tidy-evaluated expression for color mapping.}
 
-\item{fill_var}{Optional. Tidy-evaluated expression for the variable mapped to fill (used in column or map plots). Defaults to NULL.}
+\item{fill_var}{Optional. Tidy-evaluated expression for fill mapping.}
 
-\item{label_var}{Optional. Tidy-evaluated expression for the variable used in text labels (e.g., geom_text or geom_sf_text).}
+\item{label_var}{Optional. Tidy-evaluated expression for label text.}
 
-\item{plot_type}{The type of plot to produce: `"scatter"`, `"line"`, `"column"`, or `"map"`.}
+\item{plot_type}{One of `"scatter"`, `"line"`, `"column"`, or `"map"`.}
 
-\item{title, subtitle, caption}{Strings for the plot's main title, subtitle, and caption.}
+\item{title, subtitle, caption}{Plot title, subtitle, and caption.}
 
-\item{show_labels}{Logical. Whether to add text labels to points or bars. Defaults to FALSE.}
+\item{show_labels}{Logical. Add text labels.}
 
-\item{add_grid_lines}{Logical. Whether to show major grid lines (only for non-map plots). Defaults to FALSE.}
+\item{add_grid_lines}{Logical. Show grid lines.}
 
-\item{show_background}{Logical. Whether to display the panel background. Defaults to TRUE.}
+\item{show_background}{Logical. Show background fill (for non-map plots).}
 
-\item{add_glow}{Logical. Whether to apply a glow effect to geoms (used in maps or other plots). Defaults to FALSE.}
+\item{add_glow}{Logical. Apply glow effect to geoms.}
 
-\item{coord_flip}{Logical. If TRUE and plot_type is `"column"`, the plot orientation is flipped and labels are rotated accordingly. Defaults to FALSE.}
+\item{coord_flip}{Logical. Flip coordinates (for column plots).}
 
-\item{theme_base}{Base ggplot2 theme function to apply (e.g., `theme_void`, `theme_minimal`). Defaults to `theme_void`.}
+\item{theme_base}{Base ggplot2 theme. Default: `theme_void`.}
 
-\item{grid_linetype}{Type of line for major grid (e.g., `"dotted"`). Used only when `add_grid_lines = TRUE`. Defaults to `"dotted"`.}
+\item{grid_linetype}{Line type for grid. Default: `"dotted"`.}
 
-\item{grid_linewidth}{Width of grid lines. Defaults to 0.3.}
+\item{grid_linewidth}{Width of grid lines. Default: `0.3`.}
 
-\item{axis_line_linewidth}{Width of axis lines (when shown). Defaults to 0.8.}
+\item{axis_line_linewidth}{Width of axis lines. Default: `0.8`.}
 
-\item{panel_background_map_specific}{Logical. If TRUE and plot is a map, applies a special background fill. Defaults to FALSE.}
+\item{panel_background_map_specific}{Logical. Special map background fill. Default: `FALSE`.}
 
-\item{text_size}{Numeric. Controls base size of all text elements (titles, subtitles, legend, labels). Labels are scaled proportionally. Defaults to 12.}
+\item{text_size}{Numeric. Base text size for titles, labels, etc. Default: `12`.}
+
+\item{add_texture}{Logical. Applies visual texture effects (blur, oil paint, canvas pattern). Default: `FALSE`.}
+
+\item{canvas}{Integer (1–6). Adds canvas-style background image. Default: `NULL`.}
 }
 \value{
-A ggplot2 object styled according to the specified artist and visual configuration.
+A `ggplot` object styled with artistic aesthetics.
 }
 \description{
-This function applies a visual style to ggplot2 charts inspired by a specific artist and artwork. It supports scatter, line, column, and map plots, and integrates theming, labeling, color scaling, and optional visual effects.
+Applies a visual style to ggplot2 charts inspired by an artist and specific artwork, with optional painterly effects like texture, canvas overlays, and glow.
 }

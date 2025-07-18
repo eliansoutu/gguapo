@@ -38,7 +38,7 @@ load_all_fonts() #Esto puede demorar unos segundos
 Cada función de `style_()` posee parámetros para personalizar aún más el estilo del gráfico. Como mínimo debemos indicarle las variables de X e Y (excepto mapas). Tomemos como ejemplo la función de Da Vinci en versión columnas:
 
 ```{r}
-style_da_vinci(data, name, paintings, plot_type = "column")
+style_da_vinci(data, name, paintings, plot_type = "column", canvas = 2)
 ```
 
 ### work_inspired_by
@@ -86,10 +86,31 @@ style_da_vinci(data, name, paintings, plot_type = "column", title = "Título", s
 
 ### Otros
 
-Para aquellos artistas valientes que quieran retocar aún más el gráfico y desafiar los límites del arte, se pueden ajustar otros parámetros:
+Para aquellos artistas valientes que quieran retocar aún más el gráfico y desafiar los límites del arte, se pueden ajustar otros parámetros como `add_glow`, `canvas` y `add_texture.` 
+
+- `add_grid_lines` incorpora las líneas de la grilla del gráfico.
+
+- `show_background` agrega color al panel del gráfico para mayor contraste.
+
+- `add_texture` es aún muy experimental, no funciona con el fill_var y puede demorar unos segundos en cargar. Aplica un filtro estilo pintura al gráfico entero, generando márgenes indeseados. También le agrega textura a los gráficos de columnas. Se sugiere aumentar el `text_size` para mejorar la visual de los textos.
+
+- `canvas` ofrece la posibilidad de agregar un fondo estilo lienzo al panel del gráfico, lo cual no es compatible con el uso de `add_grid_lines` o `show_background`, y se puede optar por distintos lienzos (del 1 al 6).
+
+- `add_glow` agrega brillo a las geom principales.
 
 ```{r}
 style_da_vinci(data, name, paintings, plot_type = "column",
-               add_texture = T)
+               work_inspired_by = "last_supper", 
+               canvas = 6, 
+               add_glow = T)
+```
+
+
+```{r}
+style_da_vinci(data, name, paintings, plot_type = "column",
+               work_inspired_by = "mona_lisa", 
+               canvas = 5, 
+               add_texture = T,
+               text_size = 32)
 ```
 

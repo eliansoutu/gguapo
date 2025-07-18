@@ -17,7 +17,10 @@ Imports:
     ggrepel,
     rlang,
     sf,
-    purrr
+    purrr,
+    ggpattern,
+    magick,
+    grid
 Encoding: UTF-8
 License: GPL
 LazyData: true

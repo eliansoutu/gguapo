@@ -486,41 +486,46 @@ apply_common_theme_and_labs <- function(p, settings, plot_type, add_grid_lines, 
 
 
 #' @title Common core function for artist-inspired ggplot2 styles
-#' @description This function applies a visual style to ggplot2 charts inspired by a specific artist and artwork. It supports scatter, line, column, and map plots, and integrates theming, labeling, color scaling, and optional visual effects.
+#' @description Applies a visual style to ggplot2 charts inspired by an artist and specific artwork, with optional painterly effects like texture, canvas overlays, and glow.
 #'
-#' @param data A data frame (for scatter, line, column plots) or an sf object (for map plots).
-#' @param artist The name of the artist (e.g., `"da_vinci"`, `"van_gogh"`). Used to retrieve style settings.
-#' @param obra_inspiracion A specific work of the artist to define the palette and theme.
-#' @param x,y Tidy-evaluated expressions specifying the variables for the x and y axes (not used in maps).
-#' @param color_var Optional. Tidy-evaluated expression for the variable mapped to color. Defaults to NULL.
-#' @param fill_var Optional. Tidy-evaluated expression for the variable mapped to fill (used in column or map plots). Defaults to NULL.
-#' @param label_var Optional. Tidy-evaluated expression for the variable used in text labels (e.g., geom_text or geom_sf_text).
-#' @param plot_type The type of plot to produce: `"scatter"`, `"line"`, `"column"`, or `"map"`.
-#' @param title,subtitle,caption Strings for the plot's main title, subtitle, and caption.
-#' @param show_labels Logical. Whether to add text labels to points or bars. Defaults to FALSE.
-#' @param add_grid_lines Logical. Whether to show major grid lines (only for non-map plots). Defaults to FALSE.
-#' @param show_background Logical. Whether to display the panel background. Defaults to TRUE.
-#' @param add_glow Logical. Whether to apply a glow effect to geoms (used in maps or other plots). Defaults to FALSE.
-#' @param coord_flip Logical. If TRUE and plot_type is `"column"`, the plot orientation is flipped and labels are rotated accordingly. Defaults to FALSE.
-#' @param theme_base Base ggplot2 theme function to apply (e.g., `theme_void`, `theme_minimal`). Defaults to `theme_void`.
-#' @param grid_linetype Type of line for major grid (e.g., `"dotted"`). Used only when `add_grid_lines = TRUE`. Defaults to `"dotted"`.
-#' @param grid_linewidth Width of grid lines. Defaults to 0.3.
-#' @param axis_line_linewidth Width of axis lines (when shown). Defaults to 0.8.
-#' @param panel_background_map_specific Logical. If TRUE and plot is a map, applies a special background fill. Defaults to FALSE.
-#' @param text_size Numeric. Controls base size of all text elements (titles, subtitles, legend, labels). Labels are scaled proportionally. Defaults to 12.
+#' @param data A data frame or `sf` object, depending on the plot type.
+#' @param artist String. Artist name (e.g., `"van_gogh"`, `"da_vinci"`).
+#' @param obra_inspiracion String. Specific artwork to define the palette/theme.
+#' @param x,y Tidy-evaluated expressions for aesthetics.
+#' @param color_var Optional. Tidy-evaluated expression for color mapping.
+#' @param fill_var Optional. Tidy-evaluated expression for fill mapping.
+#' @param label_var Optional. Tidy-evaluated expression for label text.
+#' @param plot_type One of `"scatter"`, `"line"`, `"column"`, or `"map"`.
+#' @param title,subtitle,caption Plot title, subtitle, and caption.
+#' @param show_labels Logical. Add text labels.
+#' @param add_grid_lines Logical. Show grid lines.
+#' @param show_background Logical. Show background fill (for non-map plots).
+#' @param add_glow Logical. Apply glow effect to geoms.
+#' @param coord_flip Logical. Flip coordinates (for column plots).
+#' @param theme_base Base ggplot2 theme. Default: `theme_void`.
+#' @param grid_linetype Line type for grid. Default: `"dotted"`.
+#' @param grid_linewidth Width of grid lines. Default: `0.3`.
+#' @param axis_line_linewidth Width of axis lines. Default: `0.8`.
+#' @param panel_background_map_specific Logical. Special map background fill. Default: `FALSE`.
+#' @param text_size Numeric. Base text size for titles, labels, etc. Default: `12`.
+#' @param add_texture Logical. Applies visual texture effects (blur, oil paint, canvas pattern). Default: `FALSE`.
+#' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
 #'
-#' @return A ggplot2 object styled according to the specified artist and visual configuration.
+#' @return A `ggplot` object styled with artistic aesthetics.
 #'
 #' @importFrom ggplot2 ggplot aes geom_point geom_line geom_col theme_void theme element_text element_rect unit labs element_blank
 #' @importFrom ggplot2 scale_color_manual scale_fill_manual scale_color_gradientn scale_fill_gradientn coord_flip
-#' @importFrom ggplot2 geom_sf geom_sf_text geom_text
+#' @importFrom ggplot2 geom_sf geom_sf_text geom_text annotation_custom
 #' @importFrom ggrepel geom_text_repel
 #' @importFrom ggtext element_markdown
 #' @importFrom tools toTitleCase
 #' @importFrom sf st_bbox
 #' @importFrom ggfx with_shadow with_outer_glow
-#' @importFrom rlang sym enquo as_label quo_is_null inject
+#' @importFrom rlang sym enquo as_label quo_is_null inject expr
 #' @importFrom purrr map
+#' @importFrom grid rasterGrob unit
+#' @importFrom magick image_read image_colorize image_graph image_oilpaint image_ggplot
+#' @importFrom ggpattern geom_col_pattern
 #' @export
 style_artist_common <- function(data, artist, obra_inspiracion,
                                 x = NULL, y = NULL,
@@ -536,7 +541,8 @@ style_artist_common <- function(data, artist, obra_inspiracion,
                                 axis_line_linewidth = 0.8,
                                 panel_background_map_specific = FALSE,
                                 text_size = 12,
-                                add_texture = F) {
+                                add_texture = F,
+                                canvas = NULL) {
   plot_type <- match.arg(plot_type)
   settings <- get_artist_settings(artist, obra_inspiracion)
 
@@ -579,33 +585,26 @@ style_artist_common <- function(data, artist, obra_inspiracion,
     p <- p + generate_color_scale(data, as_label(fill_quo), settings$colors, "fill")
   }
 
-  if (add_texture) {
-    # # 1. Aplicar blur a las capas geométricas
-    # if (plot_type %in% c("scatter", "column", "line")) {
-    #   p <- ggfx::with_blur(p, sigma = .2)
-    # }
+  if (!is.null(canvas)) {
 
-    # 2. Agregar fondo con textura raster
-    textura <- png::readPNG(here::here("man","figures","dotted.png")) # asegurate de tener una textura artística
-    raster <- grid::rasterGrob(textura, width = unit(1, "npc"), height = unit(1, "npc"))
-    p <- p + ggplot2::annotation_custom(raster, xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf)
+    if (canvas %in% 1:6) {
 
-    if (plot_type == "column" && add_texture) {
-      if (requireNamespace("ggpattern", quietly = TRUE)) {
-        p <- p + ggpattern::geom_col_pattern(
-          #aes(pattern = !!fill_quo),
-          pattern = "stripe",
-          #pattern_fill = settings$colors[1],
-          pattern_density = 0.2,
-          pattern_spacing = 0.02,
-          fill = settings$colors[2],
-          colour = settings$colors[1]
-        )
-      }
+    img_path <- system.file("extdata", paste0("texture", canvas, ".png"), package = "gguapo")
+
+    if (file.exists(img_path)) {
+      textura <- magick::image_read(img_path)
+      textura <- magick::image_colorize(textura, opacity = 50, color = settings$panel_fill)
+      raster <- grid::rasterGrob(textura, width = unit(1, "npc"), height = unit(1, "npc"))
+      p <- p + ggplot2::annotation_custom(raster, xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf)
+    } else {
+      warning("No se encontró la imagen de textura correspondiente al canvas seleccionado.")
     }
+
+  } else {
+    warning("Las opciones de canvas van del 1 al 6")
   }
 
-
+  }
   # Geoms según tipo
   if (plot_type %in% c("scatter", "line", "column")) {
     if (plot_type == "scatter") {
@@ -632,7 +631,22 @@ style_artist_common <- function(data, artist, obra_inspiracion,
         x_var <- as_label(x_quo)
         data[[x_var]] <- factor(data[[x_var]])
       }
-      geom_layer <- if (quo_is_null(fill_quo)) {
+      geom_layer <- if (add_texture) {
+
+        ggpattern::geom_col_pattern(
+              #aes(pattern_fill = !!fill_quo),
+              pattern = "circle",
+              #pattern_fill = settings$colors[1],
+              pattern_density = 0.3,
+              pattern_spacing = 0.02,
+              pattern_alpha = .7,
+              fill = settings$colors[1],
+              colour = settings$colors[2],
+              pattern_fill = settings$colors[1],
+              pattern_fill2 = settings$colors[2]
+            )
+
+      } else if (quo_is_null(fill_quo)) {
         geom_col(width = 0.7, alpha = settings$geom_alpha, fill = settings$colors[1])
       } else {
         geom_col(aes(fill = !!fill_quo), width = 0.7, alpha = settings$geom_alpha)
@@ -701,7 +715,7 @@ style_artist_common <- function(data, artist, obra_inspiracion,
   }
 
   # Tema común final
-  apply_common_theme_and_labs(
+  p <- apply_common_theme_and_labs(
     p = p,
     settings = settings,
     plot_type = plot_type,
@@ -719,4 +733,29 @@ style_artist_common <- function(data, artist, obra_inspiracion,
     panel_background_map_specific = panel_background_map_specific,
     text_size = text_size
   )
+
+  # Opciones de textura/difuminacion
+  # if (add_texture) {
+  #   # 1. Aplicar blur a las capas geométricas
+  #   if (plot_type %in% c("scatter", "column", "line")) {
+  #     p <- ggfx::with_blur(p, sigma = .5)
+  #   }
+  # }
+
+
+  if (add_texture) {
+
+    img_magick <- magick::image_graph(width = 1800, height = 1000)
+    print(p)   # importante: usar print()
+    dev.off()  # cer
+
+    #temp <- magick::image_noise(img_magick, "Uniform")
+    temp <- magick::image_oilpaint(img_magick, radius = 1)
+
+    p <- magick::image_ggplot(temp)
+
+  }
+
+
+  return(p)
 }

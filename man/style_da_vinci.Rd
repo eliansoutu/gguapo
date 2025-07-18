@@ -21,7 +21,9 @@ style_da_vinci(
   show_background = TRUE,
   add_glow = FALSE,
   coord_flip = FALSE,
-  text_size = 12
+  text_size = 12,
+  add_texture = FALSE,
+  canvas = NULL
 )
 }
 \arguments{
@@ -58,6 +60,10 @@ style_da_vinci(
 \item{coord_flip}{Logical. If TRUE, flips coordinates (e.g., for horizontal column charts with matching label orientation). Defaults to FALSE.}
 
 \item{text_size}{Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 12.}
+
+\item{add_texture}{Logical. Applies visual texture effects (blur, oil paint, canvas pattern). Default: `FALSE`.}
+
+\item{canvas}{Integer (1–6). Adds canvas-style background image. Default: `NULL`.}
 }
 \value{
 A ggplot2 object styled with Da Vinci-inspired visual elements.

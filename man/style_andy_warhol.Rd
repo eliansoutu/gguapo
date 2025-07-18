@@ -20,7 +20,9 @@ style_andy_warhol(
   add_grid_lines = FALSE,
   show_background = TRUE,
   coord_flip = FALSE,
-  text_size = 12
+  text_size = 12,
+  add_texture = FALSE,
+  canvas = NULL
 )
 }
 \arguments{
