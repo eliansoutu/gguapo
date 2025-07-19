@@ -57,39 +57,49 @@ generate_color_scale <- function(data, var_name, current_colors, type = c("color
   }
 }
 
-#' @title Load all Google Fonts used in artist styles
-#' @description This function loads all necessary Google Fonts for the artist-inspired ggplot2 styles,
-#'   preventing redundant loading when multiple style functions are called.
+#' @title Load Google Fonts used in artist styles
+#' @description Load only the Google Fonts used in a specific artist's visual styles,
+#' or all fonts if 'artist = "all"'. This avoids unnecessary font loading and speeds up rendering.
+#'
+#' @param artist Character. One of the supported artists (e.g., "dali", "monet") or "all" to load all fonts. Default is "all".
 #' @importFrom sysfonts font_add_google
 #' @importFrom showtext showtext_auto
 #' @export
-load_all_fonts <- function() {
-  # Call showtext_auto once to enable font rendering
+load_all_fonts <- function(artist = "all") {
   showtext::showtext_auto()
 
-  # Load all unique fonts used across the artist styles
-  sysfonts::font_add_google("Permanent Marker", "Permanent Marker")
-  sysfonts::font_add_google("Cabin Sketch", "Cabin Sketch")
-  sysfonts::font_add_google("Cutive Mono", "Cutive Mono")
-  sysfonts::font_add_google("Playfair Display", "Playfair Display")
-  sysfonts::font_add_google("Special Elite", "Special Elite")
-  sysfonts::font_add_google("Merriweather", "Merriweather")
-  sysfonts::font_add_google("Roboto Condensed", "Roboto Condensed")
-  sysfonts::font_add_google("Lato", "Lato")
-  sysfonts::font_add_google("Amatic SC", "Amatic SC")
-  sysfonts::font_add_google("Indie Flower", "Indie Flower")
-  sysfonts::font_add_google("Architects Daughter", "Architects Daughter")
-  sysfonts::font_add_google("Pacifico", "Pacifico")
-  sysfonts::font_add_google("Libre Barcode 39 Text", "Libre Barcode 39 Text")
-  sysfonts::font_add_google("Oswald", "Oswald")
-  sysfonts::font_add_google("Bebas Neue", "Bebas Neue")
-  sysfonts::font_add_google("Bangers", "Bangers")
-  sysfonts::font_add_google("Poppins", "Poppins")
-  sysfonts::font_add_google("Orbitron", "Orbitron")
-  sysfonts::font_add_google("Open Sans", "Open Sans")
+  fonts_by_artist <- list(
+    da_vinci     = c("Playfair Display", "Merriweather"),
+    michelangelo = c("Merriweather", "Open Sans", "Roboto Condensed", "Lato"),
+    rembrandt    = c("Merriweather", "Roboto Condensed", "Playfair Display", "Lato", "Special Elite", "Cutive Mono"),
+    van_gogh     = c("Playfair Display", "Roboto Condensed", "Permanent Marker", "Cabin Sketch", "Lato", "Open Sans"),
+    monet        = c("Playfair Display", "Poppins", "Open Sans", "Roboto Condensed"),
+    banksy       = c("Permanent Marker", "Cabin Sketch", "Cutive Mono"),
+    dali         = c("Playfair Display", "Special Elite", "Merriweather", "Roboto Condensed", "Lato"),
+    miro         = c("Amatic SC", "Indie Flower", "Architects Daughter", "Pacifico", "Lato"),
+    gentileschi  = c("Playfair Display", "Merriweather", "Lato", "Roboto Condensed"),
+    kandinsky    = c("Oswald", "Bebas Neue", "Lato"),
+    warhol       = c("Bangers", "Oswald", "Permanent Marker", "Cabin Sketch", "Cutive Mono", "Libre Barcode 39 Text", "Bebas Neue")
+  )
 
-  message("Todas las fuentes de los estilos de artistas han sido cargadas.")
+  if (!artist %in% c("all", names(fonts_by_artist))) {
+    stop("Artista no reconocido. Usa 'all' o uno de: ", paste(names(fonts_by_artist), collapse = ", "))
+  }
+
+  fonts_to_load <- if (artist == "all") {
+    unique(unlist(fonts_by_artist))
+  } else {
+    unique(fonts_by_artist[[artist]])
+  }
+
+  for (f in fonts_to_load) {
+    sysfonts::font_add_google(f, f)
+  }
+
+  message("Fuentes cargadas: ", paste(fonts_to_load, collapse = ", "))
 }
+
+
 
 #' @title Configura los estilos visuales según el artista y obra
 #' @description Devuelve una lista con parámetros visuales como paleta, tipografía, colores y más, según el artista y la obra elegida.
@@ -98,7 +108,7 @@ load_all_fonts <- function() {
 #' @return Una lista con los parámetros del estilo visual.
 #' @export
 get_artist_settings <- function(artist = c("da_vinci", "michelangelo", "rembrandt", "van_gogh", "monet",
-                                           "banksy", "dali", "artemisia", "miro", "kandinsky", "warhol"), work) {
+                                           "banksy", "dali", "gentileschi", "miro", "kandinsky", "warhol"), work) {
   artist <- match.arg(artist)
 
   da_vinci_settings <- list(
@@ -196,22 +206,22 @@ get_artist_settings <- function(artist = c("da_vinci", "michelangelo", "rembrand
 
   monet_settings <- list(
     "water_lilies" = list(
-      colors = c("#87CEEB", "#ADD8E6", "#B0E0E6", "#6A5ACD", "#483D8B"), # Tonos azules, púrpuras suaves
-      font_title = "Playfair Display", font_body = "Lato",
-      background_fill = "#E0F2F7", panel_fill = "#F0FFFF", # panel_fill se usará solo para no-mapas
+      colors = c("#87CEEB", "#ADD8E6", "#B0E0E6", "#6A5ACD", "#483D8B"),
+      font_title = "Playfair Display", font_body = "Poppins",  # actualizado
+      background_fill = "#E0F2F7", panel_fill = "#F0FFFF",
       grid_color = "#C0D9E0", text_color = "#4682B4", geom_alpha = 0.7,
       glow_color = "#ADD8E6"
     ),
     "impression_sunrise" = list(
-      colors = c("#FF8C00", "#FF4500", "#FFA07A", "#FFD700", "#FFEA00"), # Naranjas, rojos, dorados amanecer
-      font_title = "Playfair Display", font_body = "Merriweather",
+      colors = c("#FF8C00", "#FF4500", "#FFA07A", "#FFD700", "#FFEA00"),
+      font_title = "Playfair Display", font_body = "Poppins",  # actualizado
       background_fill = "#FFF0D9", panel_fill = "#FFF5E0",
       grid_color = "#FFD700", text_color = "#D2691E", geom_alpha = 0.8,
       glow_color = "#FFD700"
     ),
     "poppy_fields" = list(
-      colors = c("#B22222", "#DC143C", "#FF6347", "#556B2F", "#8FBC8F"), # Rojos amapola, verdes campestres
-      font_title = "Open Sans", font_body = "Roboto Condensed",
+      colors = c("#B22222", "#DC143C", "#FF6347", "#556B2F", "#8FBC8F"),
+      font_title = "Open Sans", font_body = "Poppins",  # actualizado
       background_fill = "#F5FFFA", panel_fill = "#F0FFF0",
       grid_color = "#98FB98", text_color = "#8B0000", geom_alpha = 0.8,
       glow_color = "#DC143C"
@@ -291,7 +301,7 @@ get_artist_settings <- function(artist = c("da_vinci", "michelangelo", "rembrand
     )
   )
 
-  artemisia_settings <- list(
+  gentileschi_settings <- list(
     "judith_beheading_holofernes" = list(
       colors = c("#8B0000", "#5C4033", "#0A0A0A", "#CD853F", "#C0C0C0"), # Rojos sangre, marrones oscuros, negros, dorados
       font_title = "Playfair Display", font_body = "Merriweather",
@@ -344,21 +354,21 @@ get_artist_settings <- function(artist = c("da_vinci", "michelangelo", "rembrand
 
   warhol_settings <- list(
     "soup_cans" = list(
-      colors = c("#FF0000", "#FFFFFF", "#000000", "#FFD700", "#808080"), # Rojo Campbell, blanco, negro, amarillo, gris
-      font_title = "Libre Barcode 39 Text", font_body = "Oswald",
+      colors = c("#FF0000", "#FFFFFF", "#000000", "#FFD700", "#808080"),
+      font_title = "Bangers", font_body = "Oswald",  # actualizado
       background_fill = "#D3D3D3", panel_fill = "#C0C0C0",
-      grid_color = "#A9A9A9", text_color = "#000000", geom_alpha = 1, # Opacidad total para colores planos
-      geom_lwd = 1.0 # Line width for map outlines
+      grid_color = "#A9A9A9", text_color = "#000000", geom_alpha = 1,
+      geom_lwd = 1.0
     ),
     "marilyn_monroe" = list(
-      colors = c("#FF00FF", "#00FFFF", "#FFD700", "#B22222", "#4169E1"), # Colores pop, fucsia, cian, amarillo, rojo, azul
+      colors = c("#FF00FF", "#00FFFF", "#FFD700", "#B22222", "#4169E1"),
       font_title = "Permanent Marker", font_body = "Cabin Sketch",
       background_fill = "#F5F5F5", panel_fill = "#F8F8F8",
       grid_color = "#E0E0E0", text_color = "#000000", geom_alpha = 0.9,
       geom_lwd = 0.8
     ),
     "cow_wallpaper" = list(
-      colors = c("#006400", "#9ACD32", "#FFFFFF", "#000000", "#8B4513"), # Verdes vibrantes, blanco, negro, marrón (vacas)
+      colors = c("#006400", "#9ACD32", "#FFFFFF", "#000000", "#8B4513"),
       font_title = "Bebas Neue", font_body = "Cutive Mono",
       background_fill = "#E6E6FA", panel_fill = "#D8BFD8",
       grid_color = "#A9A9A9", text_color = "#000000", geom_alpha = 0.9,
@@ -375,7 +385,7 @@ get_artist_settings <- function(artist = c("da_vinci", "michelangelo", "rembrand
                      "banksy" = banksy_settings[[work]],
                      "dali" = dali_settings[[work]],
                      "miro" = miro_settings[[work]],
-                     "artemisia" = artemisia_settings[[work]],
+                     "gentileschi" = gentileschi_settings[[work]],
                      "kandinsky" = kandinsky_settings[[work]],
                      "warhol" = warhol_settings[[work]]
                      )
@@ -508,8 +518,9 @@ apply_common_theme_and_labs <- function(p, settings, plot_type, add_grid_lines, 
 #' @param axis_line_linewidth Width of axis lines. Default: `0.8`.
 #' @param panel_background_map_specific Logical. Special map background fill. Default: `FALSE`.
 #' @param text_size Numeric. Base text size for titles, labels, etc. Default: `12`.
-#' @param add_texture Logical. Applies visual texture effects (blur, oil paint, canvas pattern). Default: `FALSE`.
+#' @param add_texture Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.
 #' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
+#' @param add_filter Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.
 #'
 #' @return A `ggplot` object styled with artistic aesthetics.
 #'
@@ -520,12 +531,13 @@ apply_common_theme_and_labs <- function(p, settings, plot_type, add_grid_lines, 
 #' @importFrom ggtext element_markdown
 #' @importFrom tools toTitleCase
 #' @importFrom sf st_bbox
-#' @importFrom ggfx with_shadow with_outer_glow
+#' @importFrom ggfx with_shadow with_outer_glow with_blur
 #' @importFrom rlang sym enquo as_label quo_is_null inject expr
 #' @importFrom purrr map
 #' @importFrom grid rasterGrob unit
 #' @importFrom magick image_read image_colorize image_graph image_oilpaint image_ggplot
 #' @importFrom ggpattern geom_col_pattern
+#' @importFrom grDevices dev.off
 #' @export
 style_artist_common <- function(data, artist, obra_inspiracion,
                                 x = NULL, y = NULL,
@@ -541,8 +553,9 @@ style_artist_common <- function(data, artist, obra_inspiracion,
                                 axis_line_linewidth = 0.8,
                                 panel_background_map_specific = FALSE,
                                 text_size = 12,
-                                add_texture = F,
-                                canvas = NULL) {
+                                add_texture = NULL,
+                                canvas = NULL,
+                                add_filter = FALSE) {
   plot_type <- match.arg(plot_type)
   settings <- get_artist_settings(artist, obra_inspiracion)
 
@@ -593,7 +606,7 @@ style_artist_common <- function(data, artist, obra_inspiracion,
 
     if (file.exists(img_path)) {
       textura <- magick::image_read(img_path)
-      textura <- magick::image_colorize(textura, opacity = 50, color = settings$panel_fill)
+      textura <- magick::image_colorize(textura, opacity = 70, color = settings$panel_fill)
       raster <- grid::rasterGrob(textura, width = unit(1, "npc"), height = unit(1, "npc"))
       p <- p + ggplot2::annotation_custom(raster, xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf)
     } else {
@@ -608,14 +621,23 @@ style_artist_common <- function(data, artist, obra_inspiracion,
   # Geoms según tipo
   if (plot_type %in% c("scatter", "line", "column")) {
     if (plot_type == "scatter") {
-      geom_layer <- if (quo_is_null(color_quo)) {
+      geom_layer <- if(!is.null(add_texture) && add_texture %in% 1:3) {
+
+        with_blur(geom_point(size = 4, alpha = settings$geom_alpha, color = settings$colors[1]), sigma = 2)
+
+      } else if (quo_is_null(color_quo)) {
         geom_point(size = 4, alpha = settings$geom_alpha, color = settings$colors[1])
       } else {
         geom_point(aes(color = !!color_quo), size = 4, alpha = settings$geom_alpha)
       }
     } else if (plot_type == "line") {
       geom_layer <- list(
-        if (quo_is_null(color_quo)) {
+        if (!is.null(add_texture) && add_texture %in% 1:3) {
+
+          list(with_blur(geom_line(aes(group = 1), size = 1.5, color = settings$colors[1]), sigma = 1),  # línea tipo pincel
+          with_blur(geom_point(size = 2, alpha = settings$geom_alpha, color = settings$colors[1]), sigma = 2))
+
+        } else if (quo_is_null(color_quo)) {
           geom_line(aes(group = 1), size = 1.5, alpha = settings$geom_alpha, color = settings$colors[1])
         } else {
           geom_line(aes(color = !!color_quo, group = !!color_quo), size = 1.5, alpha = settings$geom_alpha)
@@ -631,17 +653,17 @@ style_artist_common <- function(data, artist, obra_inspiracion,
         x_var <- as_label(x_quo)
         data[[x_var]] <- factor(data[[x_var]])
       }
-      geom_layer <- if (add_texture) {
+      geom_layer <- if (!is.null(add_texture) && add_texture %in% 1:3) {
 
         ggpattern::geom_col_pattern(
-              #aes(pattern_fill = !!fill_quo),
-              pattern = "circle",
-              #pattern_fill = settings$colors[1],
-              pattern_density = 0.3,
-              pattern_spacing = 0.02,
+              #pattern_density = 0.3,
+              #pattern_spacing = 0.02,
               pattern_alpha = .7,
+              pattern = "image",
+              pattern_type = "expand",
+              pattern_filename = system.file("extdata", paste0("column_texture",add_texture,".png"), package = "gguapo"),
               fill = settings$colors[1],
-              colour = settings$colors[2],
+              colour = settings$colors[3],
               pattern_fill = settings$colors[1],
               pattern_fill2 = settings$colors[2]
             )
@@ -743,7 +765,7 @@ style_artist_common <- function(data, artist, obra_inspiracion,
   # }
 
 
-  if (add_texture) {
+  if (add_filter) {
 
     img_magick <- magick::image_graph(width = 1800, height = 1000)
     print(p)   # importante: usar print()

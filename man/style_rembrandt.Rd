@@ -17,13 +17,14 @@ style_rembrandt(
   plot_type = c("scatter", "line", "column", "map"),
   work_inspired_by = c("night_watch", "self_portrait", "storm_sea"),
   show_labels = FALSE,
-  add_glow = FALSE,
   add_grid_lines = FALSE,
   show_background = TRUE,
+  add_glow = FALSE,
   coord_flip = FALSE,
   text_size = 12,
-  add_texture = FALSE,
-  canvas = NULL
+  add_texture = NULL,
+  canvas = NULL,
+  add_filter = FALSE
 )
 }
 \arguments{
@@ -51,15 +52,21 @@ style_rembrandt(
 
 \item{show_labels}{Logical. Whether to display text labels on the plot. Defaults to FALSE.}
 
-\item{add_glow}{Logical. Whether to apply an outer glow effect to geoms. Defaults to FALSE.}
-
 \item{add_grid_lines}{Logical. Whether to show major grid lines (non-map plots only). Defaults to FALSE.}
 
 \item{show_background}{Logical. Whether to show the panel background. Defaults to TRUE.}
 
+\item{add_glow}{Logical. Whether to apply an outer glow effect to geoms. Defaults to FALSE.}
+
 \item{coord_flip}{Logical. If TRUE and `plot_type` is "column", flips axes and label positions. Defaults to FALSE.}
 
-\item{text_size}{Numeric. Base size for titles, subtitles, labels, and annotations. Defaults to 12.}
+\item{text_size}{Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 12.}
+
+\item{add_texture}{Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.}
+
+\item{canvas}{Integer (1–6). Adds canvas-style background image. Default: `NULL`.}
+
+\item{add_filter}{Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.}
 }
 \value{
 A ggplot2 object styled with Rembrandt-inspired aesthetics.

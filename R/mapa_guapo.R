@@ -45,6 +45,13 @@ mapa_guapo <- function(data, tipo = "poligono", fill = NULL, color = NULL, size 
     shadow_color = "grey30"
   )
 
+
+  if (font == "Poppins") {
+
+    sysfonts::font_add_google("Poppins", "Poppins")
+    showtext::showtext_auto()
+  }
+
   # Capturar las expresiones de las variables como quosures para tidy evaluation
   fill_quo <- rlang::enquo(fill)
   color_quo <- rlang::enquo(color)

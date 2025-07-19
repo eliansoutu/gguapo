@@ -53,6 +53,12 @@ plot_guapo <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
   plot_type <- match.arg(plot_type)
   palette_name <- match.arg(palette_name)
 
+  if (font_body_name == "Poppins") {
+
+    sysfonts::font_add_google("Poppins", "Poppins")
+    showtext::showtext_auto()
+  }
+
   # Definición de paletas y ajustes
   palettes <- list(
     "neoflash" = list(

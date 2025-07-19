@@ -2,11 +2,14 @@
 % Please edit documentation in R/artist_aux.R
 \name{load_all_fonts}
 \alias{load_all_fonts}
-\title{Load all Google Fonts used in artist styles}
+\title{Load Google Fonts used in artist styles}
 \usage{
-load_all_fonts()
+load_all_fonts(artist = "all")
+}
+\arguments{
+\item{artist}{Character. One of the supported artists (e.g., "dali", "monet") or "all" to load all fonts. Default is "all".}
 }
 \description{
-This function loads all necessary Google Fonts for the artist-inspired ggplot2 styles,
-  preventing redundant loading when multiple style functions are called.
+Load only the Google Fonts used in a specific artist's visual styles,
+or all fonts if 'artist = "all"'. This avoids unnecessary font loading and speeds up rendering.
 }

@@ -28,8 +28,9 @@ style_artist_common(
   axis_line_linewidth = 0.8,
   panel_background_map_specific = FALSE,
   text_size = 12,
-  add_texture = F,
-  canvas = NULL
+  add_texture = NULL,
+  canvas = NULL,
+  add_filter = FALSE
 )
 }
 \arguments{
@@ -73,9 +74,11 @@ style_artist_common(
 
 \item{text_size}{Numeric. Base text size for titles, labels, etc. Default: `12`.}
 
-\item{add_texture}{Logical. Applies visual texture effects (blur, oil paint, canvas pattern). Default: `FALSE`.}
+\item{add_texture}{Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.}
 
 \item{canvas}{Integer (1–6). Adds canvas-style background image. Default: `NULL`.}
+
+\item{add_filter}{Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.}
 }
 \value{
 A `ggplot` object styled with artistic aesthetics.

@@ -92,11 +92,14 @@ Para aquellos artistas valientes que quieran retocar aún más el gráfico y des
 
 - `show_background` agrega color al panel del gráfico para mayor contraste.
 
-- `add_texture` es aún muy experimental, no funciona con el fill_var y puede demorar unos segundos en cargar. Aplica un filtro estilo pintura al gráfico entero, generando márgenes indeseados. También le agrega textura a los gráficos de columnas. Se sugiere aumentar el `text_size` para mejorar la visual de los textos.
+- `add_texture` aplica a gráficos de columnas, le agrega textura al relleno simulando pinceladas. Hay tres opciones (1 al 3), No funciona con fill_var.
 
 - `canvas` ofrece la posibilidad de agregar un fondo estilo lienzo al panel del gráfico, lo cual no es compatible con el uso de `add_grid_lines` o `show_background`, y se puede optar por distintos lienzos (del 1 al 6).
 
 - `add_glow` agrega brillo a las geom principales.
+
+- `add_filter` es aún muy experimental, puede demorar unos segundos en cargar. Aplica un filtro estilo pintura al gráfico entero, generando márgenes indeseados. e sugiere aumentar el `text_size` para mejorar la visual de los textos.
+
 
 ```{r}
 style_da_vinci(data, name, paintings, plot_type = "column",
@@ -108,9 +111,14 @@ style_da_vinci(data, name, paintings, plot_type = "column",
 
 ```{r}
 style_da_vinci(data, name, paintings, plot_type = "column",
-               work_inspired_by = "mona_lisa", 
                canvas = 5, 
-               add_texture = T,
-               text_size = 32)
+               add_texture = 1)
 ```
 
+```{r}
+style_da_vinci(data, name, paintings, plot_type = "column",
+               canvas = 5, 
+               add_texture = 2,
+               add_filter = T,
+               text_size = 30)
+```

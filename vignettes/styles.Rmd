@@ -8,29 +8,27 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(
+knitr::opts_chunk$set(fig.width = 6, fig.height = 4,  fig.align = "center",
   collapse = TRUE,
+  echo = FALSE,
+  warning = FALSE,
+  message = FALSE,
   comment = "#>"
 )
 ```
 
-Explicación de cada estilo artístico (según IA):
+
+```{r setup}
+library(gguapo)
+```
+
+Explicación de cada estilo artístico (según IA) y previsualización:
 
 ## style_da_vinci() - Leonardo da Vinci
 
 Esta función genera gráficos inspirados en la maestría renacentista de Leonardo da Vinci, utilizando su característico claroscuro, el sfumato (transiciones suaves entre colores) y tonos terrosos y naturales. Prioriza la legibilidad y un aire de estudio profundo.
 
 Inspiración General: Proporción, armonía y un realismo detallado.
-
-Parámetros Estéticos Clave:
-
-Paleta de Colores: Predominan los marrones, ocres, verdes y azules apagados, reflejando pigmentos naturales y la iluminación suave de sus obras.
-
-Tipografía: Fuentes serif clásicas como Playfair Display y Merriweather, que evocan la caligrafía y los textos de su época.
-
-Transparencia (geom_alpha): Moderada para simular el efecto de "sfumato", creando transiciones sutiles.
-
-Fondo/Rejilla: Fondos en tonos beige/crema y rejillas discretas para mantener el foco en los datos.
 
 Opciones de work_inspired_by:
 
@@ -40,23 +38,15 @@ Opciones de work_inspired_by:
 
 - "vitruvian_man": Colores más limpios y un fondo más claro, con énfasis en las formas y la estructura.
 
+```{r}
+preview_styles("da_vinci")
+```
+
 ## style_michelangelo() - Miguel Ángel
 
 La función de Miguel Ángel captura la grandeza y fuerza del Alto Renacimiento, inspirándose en sus esculturas y frescos. El estilo se enfoca en la monumentalidad, los tonos marmóreos y el claroscuro dramático.
 
 Inspiración General: Poder, volumen y una profunda sensación de presencia.
-
-Parámetros Estéticos Clave:
-
-Paleta de Colores: Tonos fríos de gris, blanco mármol, azul piedra y toques de colores profundos como el rojo o el dorado para acentos.
-
-Tipografía: Fuentes serif robustas y sans-serif limpias como Merriweather, Open Sans y Playfair Display que transmiten solidez y arte clásico.
-
-Transparencia (geom_alpha): Baja para dar una sensación de solidez.
-
-Brillo (add_glow = FALSE (por defecto)): Opción para añadir un sutil brillo, evocando la luz sobre superficies pulidas o figuras divinas.
-
-Fondo/Rejilla: Fondos claros y rejillas sólidas, casi escultóricas, para enmarcar los datos con precisión.
 
 Opciones de work_inspired_by:
 
@@ -65,6 +55,10 @@ Opciones de work_inspired_by:
 - "sistine_chapel": Tonos más intensos con rojos, dorados y azules profundos, inspirados en los frescos.
 
 - "pieta": Enfocado en grises y platas con toques de azul-verde para la solemnidad y el dolor.
+
+```{r}
+preview_styles("michelangelo")
+```
 
 ## style_rembrandt() - Rembrandt
 
@@ -237,7 +231,7 @@ Opciones de work_inspired_by:
 - "blue_series": Predominio de azules, con elementos negros para el contraste y la estructura.
 
 
-## style_artemisia_gentileschi() - Artemisia Gentileschi
+## style_gentileschi() - Artemisia Gentileschi
 
 Esta función rinde homenaje a la maestra barroca Artemisia Gentileschi, conocida por su claroscuro intenso, colores ricos y profundos, y la representación de figuras femeninas poderosas y dramáticas.
 
@@ -293,7 +287,7 @@ Opciones de work_inspired_by:
 - "on_white_ii": Mayor uso del blanco y tonos claros, con formas de colores más sutiles que flotan en el espacio.
 
 
-## style_andy_warhol() - Andy Warhol
+## style_warhol() - Andy Warhol
 
 Esta función sumerge los datos en el vibrante mundo del Pop Art de Andy Warhol. Se caracteriza por colores planos y contrastantes, la repetición de imágenes icónicas y una estética que celebra la cultura de consumo masivo.
 

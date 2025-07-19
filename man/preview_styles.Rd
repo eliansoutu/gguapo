@@ -7,13 +7,13 @@
 preview_styles(style_name = "all", display_plots = TRUE)
 }
 \arguments{
-\item{style_name}{Un string opcional para previsualizar un estilo específico. Si es "all" (por defecto), se previsualizan todos los estilos. Otras opciones válidas son: "da vinci"}
+\item{style_name}{Un string opcional para previsualizar un estilo específico. Si es "all" (por defecto), se previsualizan todos los estilos disponibles. Otras opciones válidas: "da_vinci", "michelangelo", etc.}
 
-\item{display_plots}{Logical. Si es TRUE (por defecto), los gráficos se imprimen en el dispositivo actual uno por uno. Si es FALSE, se retorna una lista de objetos ggplot.}
+\item{display_plots}{Logical. Si es TRUE (por defecto), los gráficos se imprimen en el dispositivo actual. Si es FALSE, se retorna una lista de objetos ggplot.}
 }
 \value{
 Una lista de objetos ggplot si `display_plots` es FALSE. Si `display_plots` es TRUE, los gráficos se imprimen y la función retorna `NULL` de forma invisible.
 }
 \description{
-Genera y muestra ejemplos de gráficos utilizando cada uno de los estilos definidos (Leonardo da Vinci, Artemisia Gentileschi, Cómic, Mapa Guapo, Porcentaje, Robótico, Elegante). Esto permite al usuario previsualizar y elegir el estilo que mejor se adapta a sus necesidades.
+Genera y muestra ejemplos de gráficos utilizando cada uno de los estilos definidos. Esto permite al usuario previsualizar y elegir el estilo que mejor se adapta a sus necesidades.
 }

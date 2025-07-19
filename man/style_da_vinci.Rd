@@ -22,8 +22,9 @@ style_da_vinci(
   add_glow = FALSE,
   coord_flip = FALSE,
   text_size = 12,
-  add_texture = FALSE,
-  canvas = NULL
+  add_texture = NULL,
+  canvas = NULL,
+  add_filter = FALSE
 )
 }
 \arguments{
@@ -61,9 +62,11 @@ style_da_vinci(
 
 \item{text_size}{Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 12.}
 
-\item{add_texture}{Logical. Applies visual texture effects (blur, oil paint, canvas pattern). Default: `FALSE`.}
+\item{add_texture}{Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.}
 
 \item{canvas}{Integer (1–6). Adds canvas-style background image. Default: `NULL`.}
+
+\item{add_filter}{Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.}
 }
 \value{
 A ggplot2 object styled with Da Vinci-inspired visual elements.

@@ -6,7 +6,7 @@
 \usage{
 get_artist_settings(
   artist = c("da_vinci", "michelangelo", "rembrandt", "van_gogh", "monet", "banksy",
-    "dali", "artemisia", "miro", "kandinsky", "warhol"),
+    "dali", "gentileschi", "miro", "kandinsky", "warhol"),
   work
 )
 }

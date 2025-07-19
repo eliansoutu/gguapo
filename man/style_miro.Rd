@@ -17,13 +17,14 @@ style_miro(
   plot_type = c("scatter", "line", "column", "map"),
   work_inspired_by = c("the_farm", "constellations", "blue_series"),
   show_labels = FALSE,
-  add_shapes = FALSE,
   add_grid_lines = FALSE,
   show_background = TRUE,
+  add_glow = FALSE,
   coord_flip = FALSE,
   text_size = 12,
-  add_texture = FALSE,
-  canvas = NULL
+  add_texture = NULL,
+  canvas = NULL,
+  add_filter = FALSE
 )
 }
 \arguments{
@@ -51,15 +52,21 @@ style_miro(
 
 \item{show_labels}{Logical, whether to show data labels. Defaults to FALSE.}
 
-\item{add_shapes}{Logical, whether to use varied shapes for scatter points (only for scatter plots). Defaults to FALSE.}
-
 \item{add_grid_lines}{Logical, whether to show major grid lines (only for non-map plots). Defaults to FALSE.}
 
 \item{show_background}{Logical, whether to show the panel background (for non-map plots). Defaults to TRUE.}
 
 \item{coord_flip}{Logical, whether to flip coordinates in column charts. Defaults to FALSE.}
 
-\item{text_size}{Numeric, base text size in the plot. Defaults to 12.}
+\item{text_size}{Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 12.}
+
+\item{add_texture}{Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.}
+
+\item{canvas}{Integer (1–6). Adds canvas-style background image. Default: `NULL`.}
+
+\item{add_filter}{Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.}
+
+\item{add_shapes}{Logical, whether to use varied shapes for scatter points (only for scatter plots). Defaults to FALSE.}
 }
 \value{
 A ggplot2 object.
