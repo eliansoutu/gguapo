@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_guapo.R
 \name{plot_guapo}
 \alias{plot_guapo}
-\title{plot_guapo: Función de visualización de datos altamente estilizada}
+\title{plot_guapo: Highly stylized data visualization function}
 \usage{
 plot_guapo(
   data,
@@ -15,7 +15,7 @@ plot_guapo(
   subtitle = "Con Estilo y Diseño Avanzado",
   caption = "Generado con plot_guapo",
   plot_type = c("scatter", "line", "column", "area", "map"),
-  palette_name = c("neoflash", "glamour", "soft_futuristic", "bold_minimal"),
+  palette_name = c("guapo", "guapero", "guapon", "guapisimo"),
   font_title_name = "Orbitron",
   font_body_name = "Poppins",
   show_labels = FALSE,
@@ -30,66 +30,69 @@ plot_guapo(
   gradient_fill = FALSE,
   base_alpha = 0.8,
   geom_size = 3,
-  geom_stroke = 0.5
+  geom_stroke = 0.5,
+  text_size = 20
 )
 }
 \arguments{
-\item{data}{Un data frame (o un objeto `sf` para `plot_type = "map"`).}
+\item{data}{A data frame (or an `sf` object for `plot_type = "map"`).}
 
-\item{x}{(Opcional) Nombre de la columna para el eje x (puede ser sin comillas para tidy eval). Por defecto es NULL.}
+\item{x}{(Optional) Name of the column for the x-axis (can be unquoted for tidy evaluation). Defaults to NULL.}
 
-\item{y}{(Opcional) Nombre de la columna para el eje y (puede ser sin comillas para tidy eval). Por defecto es NULL.}
+\item{y}{(Optional) Name of the column for the y-axis (can be unquoted for tidy evaluation). Defaults to NULL.}
 
-\item{color_var}{(Opcional) Nombre de la columna para mapear color (puede ser sin comillas). Por defecto es NULL.}
+\item{color_var}{(Optional) Name of the column to map to color (can be unquoted). Defaults to NULL.}
 
-\item{fill_var}{(Opcional) Nombre de la columna para mapear relleno (puede ser sin comillas). Por defecto es NULL.}
+\item{fill_var}{(Optional) Name of the column to map to fill (can be unquoted). Defaults to NULL.}
 
-\item{label_var}{(Opcional) Nombre de la columna para etiquetas de datos (puede ser sin comillas). Por defecto es NULL.}
+\item{label_var}{(Optional) Name of the column for data labels (can be unquoted). Defaults to NULL.}
 
-\item{title}{El título del gráfico.}
+\item{title}{The main title of the plot.}
 
-\item{subtitle}{El subtítulo del gráfico.}
+\item{subtitle}{The subtitle of the plot.}
 
-\item{caption}{La leyenda o fuente del gráfico.}
+\item{caption}{The caption or source of the plot.}
 
-\item{plot_type}{El tipo de gráfico: "scatter", "line", "column", "area", "map".}
+\item{plot_type}{The type of plot: "scatter", "line", "column", "area", "map".}
 
-\item{palette_name}{El nombre de la paleta de colores a usar: "neoflash", "glamour", "soft_futuristic", "bold_minimal".}
+\item{palette_name}{The name of the color palette to use: "guapo", "guapero", "guapon", "guapisimo".}
 
-\item{font_title_name}{La fuente de Google Fonts para el título.}
+\item{font_title_name}{The Google Font for the plot title.}
 
-\item{font_body_name}{La fuente de Google Fonts para el cuerpo del texto y ejes.}
+\item{font_body_name}{The Google Font for the body text and axes.}
 
-\item{show_labels}{Lógico, si mostrar etiquetas de datos. Por defecto es FALSE.}
+\item{show_labels}{Logical, whether to display data labels. Defaults to FALSE.}
 
-\item{add_trend_line}{Lógico, si añadir una línea de tendencia (solo para scatter/line). Por defecto es FALSE.}
+\item{add_trend_line}{Logical, whether to add a trend line (only for scatter/line plots). Defaults to FALSE.}
 
-\item{highlight_values}{Un vector de valores en `x`, `color_var` o `label_var` a resaltar. Por defecto es NULL.}
+\item{highlight_values}{A vector of values in `x`, `color_var`, or `label_var` to highlight. Defaults to NULL.}
 
-\item{highlight_color}{El color para los valores resaltados. Por defecto es "cyan".}
+\item{highlight_color}{The color for highlighted values. Defaults to "#FFD700" (Gold).}
 
-\item{facet_var}{(Opcional) Nombre de la columna para facetear el gráfico (puede ser sin comillas). Por defecto es NULL.}
+\item{facet_var}{(Optional) Name of the column to facet the plot by (can be unquoted). Defaults to NULL.}
 
-\item{dark_mode}{Lógico, si usar un esquema de colores oscuro. Por defecto es TRUE.}
+\item{dark_mode}{Logical, whether to use a dark color scheme. Defaults to FALSE.}
 
-\item{apply_shadow}{Lógico, si aplicar una sombra a los elementos geométricos. Requiere `ggfx`. Por defecto es FALSE.}
+\item{apply_shadow}{Logical, whether to apply a shadow effect to geometric elements. Requires `ggfx`. Defaults to FALSE.}
 
-\item{apply_glow}{Lógico, si aplicar un efecto de brillo a los elementos geométricos. Requiere `ggfx`. Por defecto es FALSE.}
+\item{apply_glow}{Logical, whether to apply a glow effect to geometric elements. Requires `ggfx`. Defaults to FALSE.}
 
-\item{apply_blur_background}{Lógico, si aplicar un desenfoque al fondo del panel. Requiere `ggfx`. Por defecto es FALSE.}
+\item{apply_blur_background}{Logical, whether to apply a blur effect to the panel background. Requires `ggfx`. Defaults to FALSE.}
 
-\item{gradient_fill}{Lógico, si usar un relleno degradado para variables continuas. Por defecto es FALSE.}
+\item{gradient_fill}{Logical, whether to use a gradient fill for continuous variables (note: this parameter isn't directly used in the provided code for scale generation; scales are determined automatically based on variable type). Defaults to FALSE.}
 
-\item{base_alpha}{La transparencia base de los elementos geométricos. Por defecto es 0.8.}
+\item{base_alpha}{The base transparency of the geometric elements. Defaults to 0.8.}
 
-\item{geom_size}{El tamaño base de los puntos o el grosor de las líneas. Por defecto es 3.}
+\item{geom_size}{The base size of points or thickness of lines. Defaults to 3.}
 
-\item{geom_stroke}{El grosor del borde de los puntos. Por defecto es 0.5.}
+\item{geom_stroke}{The border thickness of points. Defaults to 0.5.}
+
+\item{text_size}{The base text size for the plot. Defaults to 20.}
 }
 \value{
-Un objeto ggplot2.
+A ggplot2 object.
 }
 \description{
-Genera gráficos ggplot2 con un alto impacto visual, utilizando paletas de colores
-  modernas, tipografías distintivas y efectos visuales avanzados de `ggfx`.
+Generates ggplot2 graphics with high visual impact, utilizing
+modern color palettes, distinctive fonts, and advanced visual effects from `ggfx`.
 }

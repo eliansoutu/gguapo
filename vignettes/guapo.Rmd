@@ -10,6 +10,8 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(fig.width = 10, fig.height = 7, fig.align = "center",
   collapse = TRUE,
+   warning = FALSE,
+  message = FALSE,
   comment = "#>"
 )
 ```
@@ -28,8 +30,6 @@ data <- structure(list(name = c("Van Gogh", "Degas", "Picasso",
 "High Renaissance,Mannerism"), paintings = c(877L, 702L, 439L, 
 336L, 328L, 311L, 291L, 262L, 259L, 255L)), class = "data.frame", row.names = c(NA, 
 -10L))
-
-load_all_fonts() #Esto puede demorar unos segundos
 ```
 
 ## plot_guapo
@@ -48,16 +48,16 @@ plot_guapo(data, name, paintings, fill_var = genre, plot_type = "column")
 
 ### palette_name + dark_mode
 
-plot_guapo tiene algunas variantes de paletas para utilizar. Las opciones son: neoflash, glamour, soft_futuristic y bold_minimal.
+plot_guapo tiene algunas variantes de paletas para utilizar. Las opciones son: guapo, guapero, guapon y guapisimo.
 Además, con el dark_mode se puede cambiar la estética general a algo oscuro/claro.
 
 ```{r}
-plot_guapo(data, name, paintings, plot_type = "column", palette_name = "glamour")
+plot_guapo(data, name, paintings, plot_type = "column", palette_name = "guapero")
 ```
 
 ```{r}
 plot_guapo(data, name, paintings, plot_type = "column", 
-           palette_name = "soft_futuristic", dark_mode = T)
+           palette_name = "guapisimo", dark_mode = T)
 ```
 
 ### highlight_values
