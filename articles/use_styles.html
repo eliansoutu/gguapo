@@ -78,7 +78,7 @@
 <span><span class="op">-</span><span class="fl">10L</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/load_all_fonts.html">load_all_fonts</a></span><span class="op">(</span><span class="op">)</span> <span class="co">#Esto puede demorar unos segundos</span></span>
-<span><span class="co">#&gt; Todas las fuentes de los estilos de artistas han sido cargadas.</span></span></code></pre></div>
+<span><span class="co">#&gt; Fuentes cargadas: Playfair Display, Merriweather, Open Sans, Roboto Condensed, Lato, Special Elite, Cutive Mono, Permanent Marker, Cabin Sketch, Poppins, Amatic SC, Indie Flower, Architects Daughter, Pacifico, Oswald, Bebas Neue, Bangers, Libre Barcode 39 Text</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="funciones-de-artistas">Funciones de artistas<a class="anchor" aria-label="anchor" href="#funciones-de-artistas"></a>
 </h2>
@@ -159,17 +159,19 @@ parámetros como <code>add_glow</code>, <code>canvas</code> y
 gráfico.</p></li>
 <li><p><code>show_background</code> agrega color al panel del gráfico
 para mayor contraste.</p></li>
-<li><p><code>add_texture</code> es aún muy experimental, no funciona con
-el fill_var y puede demorar unos segundos en cargar. Aplica un filtro
-estilo pintura al gráfico entero, generando márgenes indeseados. También
-le agrega textura a los gráficos de columnas. Se sugiere aumentar el
-<code>text_size</code> para mejorar la visual de los textos.</p></li>
+<li><p><code>add_texture</code> aplica a gráficos de columnas, le agrega
+textura al relleno simulando pinceladas. Hay tres opciones (1 al 3), No
+funciona con fill_var.</p></li>
 <li><p><code>canvas</code> ofrece la posibilidad de agregar un fondo
 estilo lienzo al panel del gráfico, lo cual no es compatible con el uso
 de <code>add_grid_lines</code> o <code>show_background</code>, y se
 puede optar por distintos lienzos (del 1 al 6).</p></li>
 <li><p><code>add_glow</code> agrega brillo a las geom
 principales.</p></li>
+<li><p><code>add_filter</code> es aún muy experimental, puede demorar
+unos segundos en cargar. Aplica un filtro estilo pintura al gráfico
+entero, generando márgenes indeseados. e sugiere aumentar el
+<code>text_size</code> para mejorar la visual de los textos.</p></li>
 </ul>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/style_da_vinci.html">style_da_vinci</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">name</span>, <span class="va">paintings</span>, plot_type <span class="op">=</span> <span class="st">"column"</span>,</span>
@@ -179,11 +181,16 @@ principales.</p></li>
 <p><img src="use_styles_files/figure-html/unnamed-chunk-9-1.png" width="960" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/style_da_vinci.html">style_da_vinci</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">name</span>, <span class="va">paintings</span>, plot_type <span class="op">=</span> <span class="st">"column"</span>,</span>
-<span>               work_inspired_by <span class="op">=</span> <span class="st">"mona_lisa"</span>, </span>
 <span>               canvas <span class="op">=</span> <span class="fl">5</span>, </span>
-<span>               add_texture <span class="op">=</span> <span class="cn">T</span>,</span>
-<span>               text_size <span class="op">=</span> <span class="fl">32</span><span class="op">)</span></span></code></pre></div>
+<span>               add_texture <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="use_styles_files/figure-html/unnamed-chunk-10-1.png" width="960" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/style_da_vinci.html">style_da_vinci</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">name</span>, <span class="va">paintings</span>, plot_type <span class="op">=</span> <span class="st">"column"</span>,</span>
+<span>               canvas <span class="op">=</span> <span class="fl">5</span>, </span>
+<span>               add_texture <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>               add_filter <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>               text_size <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span></code></pre></div>
+<p><img src="use_styles_files/figure-html/unnamed-chunk-11-1.png" width="960" style="display: block; margin: auto;"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

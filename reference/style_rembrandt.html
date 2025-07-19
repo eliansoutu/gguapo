@@ -56,13 +56,14 @@
 <span>  plot_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"scatter"</span>, <span class="st">"line"</span>, <span class="st">"column"</span>, <span class="st">"map"</span><span class="op">)</span>,</span>
 <span>  work_inspired_by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"night_watch"</span>, <span class="st">"self_portrait"</span>, <span class="st">"storm_sea"</span><span class="op">)</span>,</span>
 <span>  show_labels <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  add_glow <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  add_grid_lines <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  show_background <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  add_glow <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  coord_flip <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  text_size <span class="op">=</span> <span class="fl">12</span>,</span>
-<span>  add_texture <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  canvas <span class="op">=</span> <span class="cn">NULL</span></span>
+<span>  add_texture <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  canvas <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  add_filter <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -118,10 +119,6 @@
 <dd><p>Logical. Whether to display text labels on the plot. Defaults to FALSE.</p></dd>
 
 
-<dt id="arg-add-glow">add_glow<a class="anchor" aria-label="anchor" href="#arg-add-glow"></a></dt>
-<dd><p>Logical. Whether to apply an outer glow effect to geoms. Defaults to FALSE.</p></dd>
-
-
 <dt id="arg-add-grid-lines">add_grid_lines<a class="anchor" aria-label="anchor" href="#arg-add-grid-lines"></a></dt>
 <dd><p>Logical. Whether to show major grid lines (non-map plots only). Defaults to FALSE.</p></dd>
 
@@ -130,12 +127,28 @@
 <dd><p>Logical. Whether to show the panel background. Defaults to TRUE.</p></dd>
 
 
+<dt id="arg-add-glow">add_glow<a class="anchor" aria-label="anchor" href="#arg-add-glow"></a></dt>
+<dd><p>Logical. Whether to apply an outer glow effect to geoms. Defaults to FALSE.</p></dd>
+
+
 <dt id="arg-coord-flip">coord_flip<a class="anchor" aria-label="anchor" href="#arg-coord-flip"></a></dt>
 <dd><p>Logical. If TRUE and `plot_type` is "column", flips axes and label positions. Defaults to FALSE.</p></dd>
 
 
 <dt id="arg-text-size">text_size<a class="anchor" aria-label="anchor" href="#arg-text-size"></a></dt>
-<dd><p>Numeric. Base size for titles, subtitles, labels, and annotations. Defaults to 12.</p></dd>
+<dd><p>Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 12.</p></dd>
+
+
+<dt id="arg-add-texture">add_texture<a class="anchor" aria-label="anchor" href="#arg-add-texture"></a></dt>
+<dd><p>Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.</p></dd>
+
+
+<dt id="arg-canvas">canvas<a class="anchor" aria-label="anchor" href="#arg-canvas"></a></dt>
+<dd><p>Integer (1–6). Adds canvas-style background image. Default: `NULL`.</p></dd>
+
+
+<dt id="arg-add-filter">add_filter<a class="anchor" aria-label="anchor" href="#arg-add-filter"></a></dt>
+<dd><p>Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.</p></dd>
 
 </dl></div>
     <div class="section level2">
