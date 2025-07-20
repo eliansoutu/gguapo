@@ -1,5 +1,5 @@
 
-# gguapo <img src="man/figures/logo.png" align="right" width="200" />
+# gguapo <img src="man/figures/logo.png" align="right" width="150" />
 
 `{gguapo}` ofrece opciones rápidas para crear gráficos básicos (columnas, líneas, puntos y mapas) con la lógica de ggplot2 y con estilos únicos inspirados en artistas reconocidos. Además cuenta con funciones propias para hacer visualizaciones con mayor impacto visual.
 
