@@ -20,7 +20,7 @@ library(gguapo)
 
 ```{r}
 data <- structure(list(name = c("Van Gogh", "Degas", "Picasso", 
-" Renoir", "Dürer", "Gauguin", "Goya", 
+"Renoir", "Dürer", "Gauguin", "Goya", 
 "Rembrandt", "Sisley", "Titian"), genre = c("Post-Impressionism", 
 "Impressionism", "Cubism", "Impressionism", "Northern Renaissance", 
 "Symbolism,Post-Impressionism", "Romanticism", "Baroque", "Impressionism", 
@@ -92,13 +92,13 @@ Para aquellos artistas valientes que quieran retocar aún más el gráfico y des
 
 - `show_background` agrega color al panel del gráfico para mayor contraste.
 
-- `add_texture` aplica a gráficos de columnas, le agrega textura al relleno simulando pinceladas. Hay tres opciones (1 al 3), No funciona con fill_var.
+- `add_texture` aplica textura al geom simulando pinceladas o trazos. Para gráficos de columna hay tres opciones (1 al 3) y no funciona con fill_var. En el caso de gráficos de líneas o puntos cualquiera de las opciones (1 al 3) aplica el mismo efecto.
 
-- `canvas` ofrece la posibilidad de agregar un fondo estilo lienzo al panel del gráfico, lo cual no es compatible con el uso de `add_grid_lines` o `show_background`, y se puede optar por distintos lienzos (del 1 al 6).
+- `canvas` ofrece la posibilidad de agregar un fondo estilo lienzo al panel del gráfico, lo cual no es compatible con el uso de `add_grid_lines` o `show_background`. Se puede optar por distintos lienzos (del 1 al 6).
 
 - `add_glow` agrega brillo a las geom principales.
 
-- `add_filter` es aún muy experimental, puede demorar unos segundos en cargar. Aplica un filtro estilo pintura al gráfico entero, generando márgenes indeseados. e sugiere aumentar el `text_size` para mejorar la visual de los textos.
+- `add_filter` es aún muy experimental, puede demorar unos segundos en cargar. Aplica un filtro estilo pintura al gráfico entero, generando márgenes indeseados. Se sugiere aumentar el `text_size` para mejorar la visual de los textos.
 
 
 ```{r}

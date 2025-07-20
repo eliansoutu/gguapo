@@ -14,7 +14,7 @@ style_monet(
   title = "La Impresión de los Datos al Estilo de Monet",
   subtitle = "Armonía de luz y color",
   caption = "Análisis Impresionista",
-  plot_type = c("scatter", "line", "column", "map"),
+  plot_type = c("column", "scatter", "line", "map"),
   work_inspired_by = c("water_lilies", "impression_sunrise", "poppy_fields"),
   show_labels = FALSE,
   add_grid_lines = FALSE,

@@ -14,7 +14,7 @@ style_van_gogh(
   title = "Datos con la Pasión de Van Gogh",
   subtitle = "Un remolino de información",
   caption = "Impresiones de Datos",
-  plot_type = c("scatter", "line", "column", "map"),
+  plot_type = c("column", "scatter", "line", "map"),
   work_inspired_by = c("starry_night", "sunflowers", "irises"),
   show_labels = FALSE,
   add_grid_lines = FALSE,

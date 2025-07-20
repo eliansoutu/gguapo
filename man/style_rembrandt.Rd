@@ -14,7 +14,7 @@ style_rembrandt(
   title = "Iluminando Datos al Estilo de Rembrandt",
   subtitle = "Profundidad y contraste en la visualización",
   caption = "Maestría en la Sombra",
-  plot_type = c("scatter", "line", "column", "map"),
+  plot_type = c("column", "scatter", "line", "map"),
   work_inspired_by = c("night_watch", "self_portrait", "storm_sea"),
   show_labels = FALSE,
   add_grid_lines = FALSE,

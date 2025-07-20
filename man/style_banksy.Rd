@@ -14,7 +14,7 @@ style_banksy(
   title = "Datos con la Calle de Banksy",
   subtitle = "Un mensaje subversivo en cada punto",
   caption = "Arte Urbano de Datos",
-  plot_type = c("scatter", "line", "column", "map"),
+  plot_type = c("column", "scatter", "line", "map"),
   work_inspired_by = c("girl_with_balloon", "flower_thrower", "rat_graffiti"),
   show_labels = FALSE,
   add_grid_lines = FALSE,

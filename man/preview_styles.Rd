@@ -2,18 +2,31 @@
 % Please edit documentation in R/preview_styles.R
 \name{preview_styles}
 \alias{preview_styles}
-\title{Previsualizar Estilos de Gráficos}
+\title{Previsualiza los estilos gráficos disponibles inspirados en artistas}
 \usage{
 preview_styles(style_name = "all", display_plots = TRUE)
 }
 \arguments{
-\item{style_name}{Un string opcional para previsualizar un estilo específico. Si es "all" (por defecto), se previsualizan todos los estilos disponibles. Otras opciones válidas: "da_vinci", "michelangelo", etc.}
+\item{style_name}{Nombre del estilo a previsualizar. Puede ser un artista específico (por ejemplo, `"da_vinci"`)
+o `"all"` para mostrar todos los estilos disponibles.}
 
-\item{display_plots}{Logical. Si es TRUE (por defecto), los gráficos se imprimen en el dispositivo actual. Si es FALSE, se retorna una lista de objetos ggplot.}
+\item{display_plots}{Lógico. Si `TRUE`, se muestran los gráficos en pantalla. Si `FALSE`, se devuelve una lista
+de objetos `ggplot`.}
 }
 \value{
-Una lista de objetos ggplot si `display_plots` es FALSE. Si `display_plots` es TRUE, los gráficos se imprimen y la función retorna `NULL` de forma invisible.
+Invisiblemente `NULL` si `display_plots = TRUE`, o una lista de objetos `ggplot` si `FALSE`.
 }
 \description{
-Genera y muestra ejemplos de gráficos utilizando cada uno de los estilos definidos. Esto permite al usuario previsualizar y elegir el estilo que mejor se adapta a sus necesidades.
+Esta función genera gráficos de ejemplo utilizando los estilos definidos para distintos artistas.
+Para cada artista se grafican tres obras representativas (columna, línea, dispersión).
+}
+\examples{
+# Mostrar todos los estilos
+preview_styles("all")
+
+# Solo el estilo de Monet
+preview_styles("monet")
+
+# Obtener los gráficos sin mostrarlos
+plots <- preview_styles("warhol", display_plots = FALSE)
 }

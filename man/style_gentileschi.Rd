@@ -14,7 +14,7 @@ style_gentileschi(
   title = "Datos con la Fuerza de Artemisia Gentileschi",
   subtitle = "Un contraste dramático en la visualización",
   caption = "Barroco de Datos",
-  plot_type = c("scatter", "line", "column", "map"),
+  plot_type = c("column", "scatter", "line", "map"),
   work_inspired_by = c("judith_beheading_holofernes", "mary_magdalene",
     "self_portrait_lute_player"),
   show_labels = FALSE,

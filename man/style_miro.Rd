@@ -14,7 +14,7 @@ style_miro(
   title = "Datos con la Fantasía de Miró",
   subtitle = "Un universo de formas y color",
   caption = "Análisis Surrealista Abstracto",
-  plot_type = c("scatter", "line", "column", "map"),
+  plot_type = c("column", "scatter", "line", "map"),
   work_inspired_by = c("the_farm", "constellations", "blue_series"),
   show_labels = FALSE,
   add_grid_lines = FALSE,

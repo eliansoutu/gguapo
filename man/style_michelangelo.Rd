@@ -14,7 +14,7 @@ style_michelangelo(
   title = "Magnificencia de Datos al Estilo de Miguel Ángel",
   subtitle = "Una composición de fuerza y detalle",
   caption = "Obra Maestra del Análisis",
-  plot_type = c("scatter", "line", "column", "map"),
+  plot_type = c("column", "scatter", "line", "map"),
   work_inspired_by = c("david", "sistine_chapel", "pieta"),
   show_labels = FALSE,
   add_grid_lines = FALSE,

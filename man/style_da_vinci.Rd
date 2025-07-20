@@ -14,7 +14,7 @@ style_da_vinci(
   title = "Datos con la Maestría de Da Vinci",
   subtitle = "Un estudio de proporciones y armonía",
   caption = "Análisis Renacentista",
-  plot_type = c("scatter", "line", "column", "map"),
+  plot_type = c("column", "scatter", "line", "map"),
   work_inspired_by = c("mona_lisa", "last_supper", "vitruvian_man"),
   show_labels = FALSE,
   add_grid_lines = FALSE,

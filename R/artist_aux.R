@@ -542,7 +542,7 @@ apply_common_theme_and_labs <- function(p, settings, plot_type, add_grid_lines, 
 style_artist_common <- function(data, artist, obra_inspiracion,
                                 x = NULL, y = NULL,
                                 color_var = NULL, fill_var = NULL, label_var = NULL,
-                                plot_type = c("scatter", "line", "column", "map"),
+                                plot_type = c("column","scatter", "line", "map"),
                                 title, subtitle, caption,
                                 show_labels = FALSE, add_grid_lines = FALSE,
                                 show_background = TRUE, add_glow = FALSE,
@@ -573,9 +573,10 @@ style_artist_common <- function(data, artist, obra_inspiracion,
   # Construcción del gráfico
   p <- if (plot_type == "map") {
     if (!inherits(data, "sf")) stop("Para plot_type = 'map', 'data' debe ser un objeto 'sf'.")
-    fill_map <- if (!quo_is_null(fill_quo)) expr(fill = !!fill_quo) else NULL
-    color_map <- if (!quo_is_null(color_quo)) expr(color = !!color_quo) else NULL
-    aes_map_sf <- inject(aes(!!!c(fill_map, color_map)))
+
+    aes_map_sf <- aes()
+    if (!quo_is_null(fill_quo)) aes_map_sf <- modifyList(aes_map_sf, aes(fill = !!fill_quo))
+    if (!quo_is_null(color_quo)) aes_map_sf <- modifyList(aes_map_sf, aes(color = !!color_quo))
 
     geom_sf_layer <- geom_sf(aes_map_sf, lwd = 0.6, colour = settings$grid_color)
 

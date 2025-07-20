@@ -20,7 +20,8 @@ Imports:
     purrr,
     ggpattern,
     magick,
-    grid
+    grid,
+    glue
 Encoding: UTF-8
 License: GPL
 LazyData: true

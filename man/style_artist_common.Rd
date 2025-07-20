@@ -13,7 +13,7 @@ style_artist_common(
   color_var = NULL,
   fill_var = NULL,
   label_var = NULL,
-  plot_type = c("scatter", "line", "column", "map"),
+  plot_type = c("column", "scatter", "line", "map"),
   title,
   subtitle,
   caption,

@@ -36,7 +36,7 @@
 #' @importFrom dplyr filter
 #' @importFrom sf st_as_sf
 #' @importFrom rlang .data !! sym enexpr as_string
-#' @importFrom sysfonts font_add_google
+#' @importFrom sysfonts font_add_google font_families
 #' @importFrom showtext showtext_auto
 #' @importFrom grDevices colorRampPalette
 #' @importFrom ggfx with_shadow with_outer_glow with_blur

@@ -14,7 +14,7 @@ style_kandinsky(
   title = "Datos con la Abstracción de Kandinsky",
   subtitle = "Una sinfonía visual de formas y colores",
   caption = "Composición de Datos",
-  plot_type = c("scatter", "line", "column", "map"),
+  plot_type = c("column", "scatter", "line", "map"),
   work_inspired_by = c("composition_viii", "yellow_red_blue", "on_white_ii"),
   show_labels = FALSE,
   add_grid_lines = FALSE,

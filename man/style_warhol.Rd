@@ -14,7 +14,7 @@ style_warhol(
   title = "Datos como Pop Art de Andy Warhol",
   subtitle = "La repetición se convierte en arte",
   caption = "Consumo de Datos",
-  plot_type = c("scatter", "line", "column", "map"),
+  plot_type = c("column", "scatter", "line", "map"),
   work_inspired_by = c("soup_cans", "marilyn_monroe", "cow_wallpaper"),
   show_labels = FALSE,
   add_grid_lines = FALSE,

@@ -23,7 +23,7 @@ library(gguapo)
 
 ```{r}
 data <- structure(list(name = c("Van Gogh", "Degas", "Picasso", 
-" Renoir", "Dürer", "Gauguin", "Goya", 
+"Renoir", "Dürer", "Gauguin", "Goya", 
 "Rembrandt", "Sisley", "Titian"), genre = c("Post-Impressionism", 
 "Impressionism", "Cubism", "Impressionism", "Northern Renaissance", 
 "Symbolism,Post-Impressionism", "Romanticism", "Baroque", "Impressionism", 
