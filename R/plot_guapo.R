@@ -10,7 +10,7 @@
 #' @param title The main title of the plot.
 #' @param subtitle The subtitle of the plot.
 #' @param caption The caption or source of the plot.
-#' @param plot_type The type of plot: "scatter", "line", "column", "area", "map".
+#' @param plot_type The type of plot:  "column", "scatter", "line", "map".
 #' @param palette_name The name of the color palette to use: "guapo", "guapero", "guapon", "guapisimo".
 #' @param font_title_name The Google Font for the plot title.
 #' @param font_body_name The Google Font for the body text and axes.
@@ -29,7 +29,7 @@
 #' @param geom_stroke The border thickness of points. Defaults to 0.5.
 #' @param text_size The base text size for the plot. Defaults to 20.
 #' @return A ggplot2 object.
-#' @importFrom ggplot2 ggplot aes geom_point geom_line geom_col geom_area geom_smooth theme_void theme element_text element_rect unit labs element_blank scale_color_manual scale_fill_manual scale_color_gradientn scale_fill_gradientn facet_wrap geom_sf geom_sf_text
+#' @importFrom ggplot2 ggplot aes geom_point geom_line geom_col geom_smooth theme_void theme element_text element_rect unit labs element_blank scale_color_manual scale_fill_manual scale_color_gradientn scale_fill_gradientn facet_wrap geom_sf geom_sf_text
 #' @importFrom ggrepel geom_text_repel
 #' @importFrom ggtext element_markdown
 #' @importFrom tools toTitleCase
@@ -45,7 +45,7 @@ plot_guapo <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
                        title = "Visualización de Datos Impactante",
                        subtitle = "Con Estilo y Diseño Avanzado",
                        caption = "Generado con plot_guapo",
-                       plot_type = c("scatter", "line", "column", "area", "map"),
+                       plot_type = c("column", "scatter", "line", "map"),
                        palette_name = c("guapo", "guapero", "guapon", "guapisimo"),
                        font_title_name = "Orbitron", font_body_name = "Poppins",
                        show_labels = FALSE, add_trend_line = FALSE,
@@ -252,19 +252,6 @@ plot_guapo <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
     }
     geom_layer_base <- do.call(ggplot2::geom_col, col_args)
 
-  } else if (plot_type == "area") {
-    area_aes_list <- list()
-    if (!is.null(fill_var_sym)) area_aes_list$fill <- fill_var_sym
-
-    area_args <- list(
-      mapping = ggplot2::aes(!!!area_aes_list),
-      alpha = base_alpha
-    )
-    if (is.null(fill_var_sym)) { # Only add 'fill' arg if it's a fixed value
-      area_args$fill <- current_settings$colors[1]
-    }
-    geom_layer_base <- do.call(ggplot2::geom_area, area_args)
-
   } else if (plot_type == "map") {
     if (!is.null(fill_var_sym)) {
       map_aes_list <- list(fill = fill_var_sym)
@@ -343,7 +330,7 @@ plot_guapo <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
   # Labels
   if (show_labels && !is.null(label_var_sym)) {
     label_aes_list <- list(label = label_var_sym)
-    if (plot_type == "column" || plot_type == "area") {
+    if (plot_type == "column") {
       p <- p + ggplot2::geom_text(ggplot2::aes(!!!label_aes_list), vjust = -0.5, hjust = 0.5,
                                   size = 3.5, color = current_settings$text_color, family = font_body_name)
     } else if (plot_type == "scatter" || plot_type == "line") {

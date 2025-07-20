@@ -37,13 +37,13 @@ data <- structure(list(name = c("Van Gogh", "Degas", "Picasso",
 `gguapo` provee una función genérica para aplicar un estilo limpio y elegante a tus gráficos, con distintos parámetros que se pueden ajustar. La salida predeterminada luce así:
 
 ```{r}
-plot_guapo(data, name, paintings)
+plot_guapo(data, name, paintings, plot_type = "scatter")
 ```
 
-### fill_var/color_var + plot_type
+### fill_var/color_var
 
 ```{r}
-plot_guapo(data, name, paintings, fill_var = genre, plot_type = "column")
+plot_guapo(data, name, paintings, fill_var = genre)
 ```
 
 ### palette_name + dark_mode
@@ -52,12 +52,15 @@ plot_guapo tiene algunas variantes de paletas para utilizar. Las opciones son: g
 Además, con el dark_mode se puede cambiar la estética general a algo oscuro/claro.
 
 ```{r}
-plot_guapo(data, name, paintings, plot_type = "column", palette_name = "guapero")
+plot_guapo(data, name, paintings, palette_name = "guapero")
 ```
 
 ```{r}
-plot_guapo(data, name, paintings, plot_type = "column", 
-           palette_name = "guapisimo", dark_mode = T)
+plot_guapo(data, name, paintings, palette_name = "guapisimo", dark_mode = T)
+```
+
+```{r}
+plot_guapo(data, name, paintings, palette_name = "guapon", dark_mode = T)
 ```
 
 ### highlight_values
@@ -65,8 +68,7 @@ plot_guapo(data, name, paintings, plot_type = "column",
 Una opción útil es resaltar algún dato, para lo cual podemos indicar el valor del eje x que nos interesa destacar.
 
 ```{r}
-plot_guapo(data, name, paintings, plot_type = "column", dark_mode = T, 
-           highlight_values = c("Picasso"))
+plot_guapo(data, name, paintings, dark_mode = T, highlight_values = c("Picasso"))
 ```
 
 ### Otros
@@ -74,13 +76,13 @@ plot_guapo(data, name, paintings, plot_type = "column", dark_mode = T,
 Hay múltiples parámetros para ajustar. Por ejemplo, sombras, brillo y difuminación.
 
 ```{r}
-plot_guapo(data, name, paintings, plot_type = "column", dark_mode = T,
+plot_guapo(data, name, paintings, dark_mode = T,
            apply_shadow = T, apply_glow = T, apply_blur_background = T)
 ```
 
 ## mapa_guapo
 
-`plot_guapo` acepta objetos sf para hacer mapas, sin embargo, una alternativa estilística es usar `mapa_guapo` que tiene un enfoque distinto.
+`plot_guapo` acepta objetos sf para hacer mapas, sin embargo, una alternativa estilística es usar `mapa_guapo` que tiene un enfoque distinto. Esta función se encuentra en desarrollo, por lo que puede modificarse a futuro.
 
 ```{r}
 # Datos de los polígonos en WKT

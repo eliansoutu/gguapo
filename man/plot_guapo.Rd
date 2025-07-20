@@ -14,7 +14,7 @@ plot_guapo(
   title = "Visualización de Datos Impactante",
   subtitle = "Con Estilo y Diseño Avanzado",
   caption = "Generado con plot_guapo",
-  plot_type = c("scatter", "line", "column", "area", "map"),
+  plot_type = c("column", "scatter", "line", "map"),
   palette_name = c("guapo", "guapero", "guapon", "guapisimo"),
   font_title_name = "Orbitron",
   font_body_name = "Poppins",
@@ -53,7 +53,7 @@ plot_guapo(
 
 \item{caption}{The caption or source of the plot.}
 
-\item{plot_type}{The type of plot: "scatter", "line", "column", "area", "map".}
+\item{plot_type}{The type of plot:  "column", "scatter", "line", "map".}
 
 \item{palette_name}{The name of the color palette to use: "guapo", "guapero", "guapon", "guapisimo".}
 
