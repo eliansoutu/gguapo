@@ -13,6 +13,7 @@
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Gráficos de ggplot2 con estilos artísticos y personalizados">
 <meta name="description" content="Conjunto de funciones para crear gráficos básicos (columnas, líneas, puntos y mapas) basados en ggplot2 y con estilos únicos inspirados en artistas.">
 <meta property="og:description" content="Conjunto de funciones para crear gráficos básicos (columnas, líneas, puntos y mapas) basados en ggplot2 y con estilos únicos inspirados en artistas.">
+<meta property="og:image" content="https://eliansoutu.github.io/gguapo/logo.png">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -52,17 +53,12 @@
   </div>
 </nav><div class="container template-home">
 <div class="row">
-  <main id="main" class="col-md-9"><p><a href="https://eliansoutu.github.io/gguapo/">gguapo</a> ofrece opciones rápidas para crear gráficos básicos (columnas, líneas, puntos y mapas) con la lógica de ggplot2 y con estilos únicos inspirados en artistas reconocidos. Además cuenta con funciones propias para hacer visualizaciones con mayor impacto visual.</p>
-<p>¿Te imaginaste alguna vez a Van Gogh como analista de datos?</p>
-<p><strong>Disclaimers varios</strong></p>
-<ol style="list-style-type: decimal">
-<li><p>Este paquete surge con la intención estilizar gráficos de manera rápida y diferente a los típicos parámetros estéticos que vienen predefinidos. Se busca aprovechar la infinidad de atributos que ggplot2 permite modificar, sin dejar de lado la sobriedad y un estilo formal para la presentación de datos.</p></li>
-<li><p>Es un paquete en desarrollo, seguramente habrá cambios y agregados a futuro.</p></li>
-<li><p>Las funciones de estilo inspiradas en artistas y sus obras no buscan representar necesariamente el estilo real de los mismos. Es una búsqueda inspirada en paletas de colores, fuentes y otros recursos estéticos.</p></li>
-<li><p>La selección de artistas fue arbitraria y pensada en contar con variedad de estilos, no representa el gusto artístico del autor del paquete (el cual dicho sea de paso no es experto en arte).</p></li>
-<li><p>La mayor parte del código y las decisiones estéticas fueron realizadas con IA. Cualquier error o queja, es culpa de los robots y del estado actual del arte. También un poco culpa del autor del paquete por no dedicarle el tiempo suficiente a revisarlo.</p></li>
-<li><p>Las funciones se nutren de varios y maravillosos paquetes que forman parte del universo ggplot. Como los grandes artistas, un poco hay que <del>robarle a</del> inspirarse en otros.</p></li>
-</ol>
+  <main id="main" class="col-md-9"><div class="section level1">
+<div class="page-header">
+<img src="logo.png" class="logo" alt=""><h1 id="gguapo-">gguapo <a class="anchor" aria-label="anchor" href="#gguapo-"></a>
+</h1>
+</div>
+<p><a href="https://eliansoutu.github.io/gguapo/">gguapo</a> ofrece opciones rápidas para crear gráficos básicos (columnas, líneas, puntos y mapas) con la lógica de ggplot2 y con estilos únicos inspirados en artistas reconocidos. Además cuenta con funciones propias para hacer visualizaciones con mayor impacto visual.</p>
 <div class="section level2">
 <h2 id="instrucciones-de-instalación">Instrucciones de instalación<a class="anchor" aria-label="anchor" href="#instrucciones-de-instalaci%C3%B3n"></a>
 </h2>
@@ -74,11 +70,10 @@
 <h2 id="funciones-principales">Funciones principales<a class="anchor" aria-label="anchor" href="#funciones-principales"></a>
 </h2>
 <ul>
-<li><p><strong><code>style_()</code></strong>: funciones propias de cada artista con atributos predefinidos y personalizables. Los artistas representados son: Da Vinci (<code>da_vinci</code>), Van Gogh (<code>van_gogh</code>), Michelangelo (<code>michelangelo</code>), Rembrandt (<code>rembrandt</code>), Monet (<code>monet</code>), Banksy (<code>banksy</code>), Dalí (<code>salvador_dali</code>), Miró (<code>miro</code>), Gentileschi (<code>artemisia_gentileschi</code>), Kandinsky (<code>kandinsky</code>) y Warhol (<code>warhol</code>). Cada artista, además, posee tres variantes de estilos basadas en tres de sus obras principales (ver documentación de cada función).</p></li>
+<li><p><strong><code>style_()</code></strong>: funciones propias de cada artista con atributos predefinidos y personalizables. Los artistas representados son: Da Vinci (<code>da_vinci</code>), Van Gogh (<code>van_gogh</code>), Michelangelo (<code>michelangelo</code>), Rembrandt (<code>rembrandt</code>), Monet (<code>monet</code>), Banksy (<code>banksy</code>), Dalí (<code>dali</code>), Miró (<code>miro</code>), Gentileschi (<code>gentileschi</code>), Kandinsky (<code>kandinsky</code>) y Warhol (<code>warhol</code>). Cada artista, además, posee tres variantes de estilos basadas en tres de sus obras principales (ver documentación).</p></li>
 <li><p><strong><code><a href="reference/plot_guapo.html">plot_guapo()</a></code></strong>: ofrece parámetros estéticos fáciles de ajustar para crear gráficos guapos.</p></li>
-<li><p><strong><code><a href="reference/load_all_fonts.html">load_all_fonts()</a></code></strong>: necesaria para cargar las fuentes que utilizan los distintos estilos. Se ejecuta una vez por sesión.</p></li>
-<li><p><strong><code><a href="reference/mapa_guapo.html">mapa_guapo()</a></code></strong>: alternativa al <code>plot_guapo</code> y con un enfoque de diseño orientado a mapas.</p></li>
-<li><p><strong><code><a href="reference/plot_porcentaje.html">plot_porcentaje()</a></code> (en desarrollo)</strong>: pensada para representar porcentajes con un estilo visual específico.</p></li>
+<li><p><strong><code><a href="reference/load_all_fonts.html">load_all_fonts()</a></code></strong>: necesaria para cargar las fuentes que utilizan los distintos estilos de artistas. Se ejecuta una vez por sesión.</p></li>
+<li><p><strong><code><a href="reference/mapa_guapo.html">mapa_guapo()</a></code></strong> (<em>en desarrollo</em> ): alternativa al <code>plot_guapo</code> y con un enfoque de diseño orientado a mapas.</p></li>
 </ul>
 </div>
 <div class="section level2">
@@ -88,21 +83,20 @@
 <div class="section level3">
 <h3 id="style_">style_()<a class="anchor" aria-label="anchor" href="#style_"></a>
 </h3>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://eliansoutu.github.io/gguapo/">gguapo</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/structure.html" class="external-link">structure</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Van Gogh"</span>, <span class="st">"Degas"</span>, <span class="st">"Picasso"</span>, </span>
-<span><span class="st">" Renoir"</span>, <span class="st">"Dürer"</span>, <span class="st">"Gauguin"</span>, <span class="st">"Goya"</span>, </span>
-<span><span class="st">"Rembrandt"</span>, <span class="st">"Sisley"</span>, <span class="st">"Titian"</span><span class="op">)</span>, genre <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Post-Impressionism"</span>, </span>
-<span><span class="st">"Impressionism"</span>, <span class="st">"Cubism"</span>, <span class="st">"Impressionism"</span>, <span class="st">"Northern Renaissance"</span>, </span>
-<span><span class="st">"Symbolism,Post-Impressionism"</span>, <span class="st">"Romanticism"</span>, <span class="st">"Baroque"</span>, <span class="st">"Impressionism"</span>, </span>
-<span><span class="st">"High Renaissance,Mannerism"</span><span class="op">)</span>, paintings <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">877L</span>, <span class="fl">702L</span>, <span class="fl">439L</span>, </span>
-<span><span class="fl">336L</span>, <span class="fl">328L</span>, <span class="fl">311L</span>, <span class="fl">291L</span>, <span class="fl">262L</span>, <span class="fl">259L</span>, <span class="fl">255L</span><span class="op">)</span><span class="op">)</span>, class <span class="op">=</span> <span class="st">"data.frame"</span>, row.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, </span>
-<span><span class="op">-</span><span class="fl">10L</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="reference/load_all_fonts.html">load_all_fonts</a></span><span class="op">(</span><span class="op">)</span> <span class="co"># Carga fuentes del paquete</span></span>
-<span></span>
-<span><span class="fu"><a href="reference/style_banksy.html">style_banksy</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">name</span>, <span class="va">paintings</span>, plot_type <span class="op">=</span> <span class="st">"column"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(gguapo)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">structure</span>(<span class="fu">list</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Van Gogh"</span>, <span class="st">"Degas"</span>, <span class="st">"Picasso"</span>, </span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="st">"Renoir"</span>, <span class="st">"Dürer"</span>, <span class="st">"Gauguin"</span>, <span class="st">"Goya"</span>, </span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="st">"Rembrandt"</span>, <span class="st">"Sisley"</span>, <span class="st">"Titian"</span>), <span class="at">genre =</span> <span class="fu">c</span>(<span class="st">"Post-Impressionism"</span>, </span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="st">"Impressionism"</span>, <span class="st">"Cubism"</span>, <span class="st">"Impressionism"</span>, <span class="st">"Northern Renaissance"</span>, </span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="st">"Symbolism,Post-Impressionism"</span>, <span class="st">"Romanticism"</span>, <span class="st">"Baroque"</span>, <span class="st">"Impressionism"</span>, </span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="st">"High Renaissance,Mannerism"</span>), <span class="at">paintings =</span> <span class="fu">c</span>(<span class="dv">877</span><span class="dt">L</span>, <span class="dv">702</span><span class="dt">L</span>, <span class="dv">439</span><span class="dt">L</span>, </span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="dv">336</span><span class="dt">L</span>, <span class="dv">328</span><span class="dt">L</span>, <span class="dv">311</span><span class="dt">L</span>, <span class="dv">291</span><span class="dt">L</span>, <span class="dv">262</span><span class="dt">L</span>, <span class="dv">259</span><span class="dt">L</span>, <span class="dv">255</span><span class="dt">L</span>)), <span class="at">class =</span> <span class="st">"data.frame"</span>, <span class="at">row.names =</span> <span class="fu">c</span>(<span class="cn">NA</span>, </span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="sc">-</span><span class="dv">10</span><span class="dt">L</span>))</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="fu">load_all_fonts</span>(<span class="st">"banksy"") # Carga fuentes del paquete</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="st">style_banksy(data, name, paintings, plot_type = "</span>column<span class="st">")</span></span></code></pre></div>
 <p><img src="reference/figures/banksy.png"></p>
 </div>
 <div class="section level3">
@@ -117,12 +111,23 @@
 </div>
 </div>
 <div class="section level2">
+<h2 id="disclaimers">Disclaimers<a class="anchor" aria-label="anchor" href="#disclaimers"></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li><p>Es un paquete en desarrollo, seguramente habrá cambios y agregados a futuro.</p></li>
+<li><p>Las funciones de estilo inspiradas en artistas y sus obras no buscan representar necesariamente el estilo real de los mismos. Es una búsqueda inspirada en paletas de colores, fuentes y otros recursos estéticos.</p></li>
+<li><p>La selección de artistas fue arbitraria y pensada en contar con variedad de estilos, no representa el gusto artístico del autor del paquete (el cual dicho sea de paso no es experto en arte).</p></li>
+<li><p>Gran parte del código y las decisiones estéticas fueron realizadas con IA, por lo cual es posible encontrarse con errores: los robots al igual que los humanos y el arte no son perfectos. El autor se compromete a seguuir ajustando</p></li>
+<li><p>Las funciones se nutren de varios y maravillosos paquetes que forman parte del universo ggplot. Como los grandes artistas, un poco hay que <del>robarle a</del> inspirarse en otros.</p></li>
+</ol>
+</div>
+<div class="section level2">
 <h2 id="cómo-contribuir-con-el-proyecto">Cómo contribuir con el proyecto<a class="anchor" aria-label="anchor" href="#c%C3%B3mo-contribuir-con-el-proyecto"></a>
 </h2>
 <p>Para colaborar en este proyecto, se recomienda hacer un Fork, trabajar sobre ese repositorio y, antes de hacer el pull request, correr el <code>devtools::check()</code> para garantizar que no haya conflictos.</p>
 <p>Sentíte libre de hacer tu aporte, sea agregar nuevas funciones con estilos o modificar parámetros de las actuales.</p>
 </div>
-
+</div>
   </main><aside class="col-md-3"><div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
