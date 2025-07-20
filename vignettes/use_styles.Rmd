@@ -28,28 +28,35 @@ data <- structure(list(name = c("Van Gogh", "Degas", "Picasso",
 336L, 328L, 311L, 291L, 262L, 259L, 255L)), class = "data.frame", row.names = c(NA, 
 -10L))
 
-load_all_fonts() #Esto puede demorar unos segundos
 ```
 
 ## Funciones de artistas
 
 **Las funciones están pensadas para ofrecer una visualización rápida que no requiera escribir muchas líneas de código. Esto puede traer problemas como superposición de elementos o tamaños inadecuados en determinados gráficos. Tener en cuenta que se pueden pisar algunas configuraciones agregando capas a continuación de la función como si fuera un ggplot común (ver ejemplo más abajo en show_labels).**
 
+### load_all_fonts
+
+**Correr una vez por sesión**
+
+Antes de utilizar las funciones de style se recomienda ejecutar `load_all_fonts()` para cargar las fuentes que se utilizan, siempre y cuando no las tenga ya instaladas en su sistema, las cuales se agregan desde Google con `sysfonts::font_add_google`. En caso de querer usar una solo función de artista, se puede pasar el parámetro de `artist` para cargar específicamente las fuentes de ese artista.
+
+```{r}
+load_all_fonts("da_vinci") #Cargo solo da_vinci
+```
+
 Cada función de `style_()` posee parámetros para personalizar aún más el estilo del gráfico. Como mínimo debemos indicarle las variables de X e Y (excepto mapas). Tomemos como ejemplo la función de Da Vinci en versión columnas:
 
 ```{r}
-style_da_vinci(data, name, paintings, plot_type = "column", canvas = 2)
+style_da_vinci(data, name, paintings)
 ```
 
 ### work_inspired_by
 
-Podemos seleccionar alguna variante inspirada en sus obras. En el caso de Da Vinci, las opciones de `work_inspired_by` son: **mona_lisa**, **last_supper** y **vitruvian_man**
+Podemos seleccionar alguna variante inspirada en sus obras. En el caso de Da Vinci, las opciones de `work_inspired_by` son: **mona_lisa** (*default*), **last_supper** y **vitruvian_man**
 
 ```{r}
-
-style_da_vinci(data, name, paintings, plot_type = "column", work_inspired_by = "mona_lisa")
-style_da_vinci(data, name, paintings, plot_type = "column", work_inspired_by = "last_supper")
-style_da_vinci(data, name, paintings, plot_type = "column", work_inspired_by = "vitruvian_man")
+style_da_vinci(data, name, paintings,  work_inspired_by = "last_supper")
+style_da_vinci(data, name, paintings,  work_inspired_by = "vitruvian_man")
 
 ```
 
@@ -58,7 +65,7 @@ style_da_vinci(data, name, paintings, plot_type = "column", work_inspired_by = "
 Podemos utilizar alguna variable de mapeo para jugar con los colores de la paleta y diferenciar categorías:
 
 ```{r}
-style_da_vinci(data, name, paintings, plot_type = "column", fill_var = genre)
+style_da_vinci(data, name, paintings, fill_var = genre)
 ```
 
 ### show_labels
@@ -66,14 +73,14 @@ style_da_vinci(data, name, paintings, plot_type = "column", fill_var = genre)
 Agregar etiquetas sobre el eje Y (y expando eje Y):
 
 ```{r}
-style_da_vinci(data, name, paintings, plot_type = "column", show_labels = T) +
+style_da_vinci(data, name, paintings,  show_labels = T) +
   ggplot2::scale_y_continuous(limits = c(0, 1000))
 ```
 
 Incluso cambiar la orientación ajustando el parámetro coord_flip
 
 ```{r}
-style_da_vinci(data, name, paintings, plot_type = "column", show_labels = T, coord_flip = T) +
+style_da_vinci(data, name, paintings,  show_labels = T, coord_flip = T) +
   ggplot2::coord_flip() +
   ggplot2::scale_y_continuous(limits = c(0, 1000))
 ```
@@ -81,7 +88,7 @@ style_da_vinci(data, name, paintings, plot_type = "column", show_labels = T, coo
 ### labs
 
 ```{r}
-style_da_vinci(data, name, paintings, plot_type = "column", title = "Título", subtitle = "Subtítulo", caption = "Leyenda")
+style_da_vinci(data, name, paintings,  title = "Título", subtitle = "Subtítulo", caption = "Leyenda")
 ```
 
 ### Otros
@@ -102,7 +109,7 @@ Para aquellos artistas valientes que quieran retocar aún más el gráfico y des
 
 
 ```{r}
-style_da_vinci(data, name, paintings, plot_type = "column",
+style_da_vinci(data, name, paintings, 
                work_inspired_by = "last_supper", 
                canvas = 6, 
                add_glow = T)
@@ -110,13 +117,13 @@ style_da_vinci(data, name, paintings, plot_type = "column",
 
 
 ```{r}
-style_da_vinci(data, name, paintings, plot_type = "column",
+style_da_vinci(data, name, paintings, 
                canvas = 5, 
                add_texture = 1)
 ```
 
 ```{r}
-style_da_vinci(data, name, paintings, plot_type = "column",
+style_da_vinci(data, name, paintings, 
                canvas = 5, 
                add_texture = 2,
                add_filter = T,
