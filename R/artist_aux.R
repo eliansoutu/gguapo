@@ -165,14 +165,14 @@ get_artist_settings <- function(artist = c("da_vinci", "michelangelo", "rembrand
       glow_color = "#DAA520"
     ),
     "self_portrait" = list(
-      colors = c("#362B2B", "#6B4226", "#A0522D", "#D2B48C", "#E0B388"), # Tonos sepia, marrones, piel
+      colors = c("#6B4226", "#362B2B", "#A0522D", "#D2B48C", "#E0B388"), # Tonos sepia, marrones, piel
       font_title = "Playfair Display", font_body = "Lato",
       background_fill = "#252525", panel_fill = "#303030",
       grid_color = "#454545", text_color = "#E0B388", geom_alpha = 0.9,
       glow_color = "#D2B48C"
     ),
     "storm_sea" = list(
-      colors = c("#102027", "#2F4F4F", "#708090", "#C0C0C0", "#F0FFFF"), # Azules-grises oscuros, blanco tormenta
+      colors = c("#2F4F4F","#102027", "#708090", "#C0C0C0", "#F0FFFF"), # Azules-grises oscuros, blanco tormenta
       font_title = "Special Elite", font_body = "Cutive Mono",
       background_fill = "#0A1215", panel_fill = "#1A2225",
       grid_color = "#3A454A", text_color = "#F0FFFF", geom_alpha = 0.7,
@@ -317,7 +317,7 @@ get_artist_settings <- function(artist = c("da_vinci", "michelangelo", "rembrand
       glow_color = "#DAA520", geom_lwd = 0.8
     ),
     "self_portrait_lute_player" = list(
-      colors = c("#362B2B", "#6B4226", "#A0522D", "#D2B48C", "#FFFACD"), # Tonos terrosos, piel, crema
+      colors = c("#6B4226", "#362B2B", "#A0522D", "#D2B48C", "#FFFACD"), # Tonos terrosos, piel, crema
       font_title = "Playfair Display", font_body = "Roboto Condensed",
       background_fill = "#252525", panel_fill = "#303030",
       grid_color = "#454545", text_color = "#D2B48C", geom_alpha = 0.9,
@@ -343,7 +343,7 @@ get_artist_settings <- function(artist = c("da_vinci", "michelangelo", "rembrand
       shapes = c(15, 16, 17, 18)
     ),
     "on_white_ii" = list(
-      colors = c("#FFFFFF", "#000000", "#808080", "#FFD700", "#4169E1"), # Blanco, negro, gris, toques de color
+      colors = c("#000000", "#FFFFFF", "#808080", "#FFD700", "#4169E1"), # Blanco, negro, gris, toques de color
       font_title = "Oswald", font_body = "Lato",
       background_fill = "#FFFFFF", panel_fill = "#F8F8F8",
       grid_color = "#E0E0E0", text_color = "#000000", geom_alpha = 0.7,
