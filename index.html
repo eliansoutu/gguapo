@@ -83,20 +83,21 @@
 <div class="section level3">
 <h3 id="style_">style_()<a class="anchor" aria-label="anchor" href="#style_"></a>
 </h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(gguapo)</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">structure</span>(<span class="fu">list</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">"Van Gogh"</span>, <span class="st">"Degas"</span>, <span class="st">"Picasso"</span>, </span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="st">"Renoir"</span>, <span class="st">"Dürer"</span>, <span class="st">"Gauguin"</span>, <span class="st">"Goya"</span>, </span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="st">"Rembrandt"</span>, <span class="st">"Sisley"</span>, <span class="st">"Titian"</span>), <span class="at">genre =</span> <span class="fu">c</span>(<span class="st">"Post-Impressionism"</span>, </span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="st">"Impressionism"</span>, <span class="st">"Cubism"</span>, <span class="st">"Impressionism"</span>, <span class="st">"Northern Renaissance"</span>, </span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="st">"Symbolism,Post-Impressionism"</span>, <span class="st">"Romanticism"</span>, <span class="st">"Baroque"</span>, <span class="st">"Impressionism"</span>, </span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="st">"High Renaissance,Mannerism"</span>), <span class="at">paintings =</span> <span class="fu">c</span>(<span class="dv">877</span><span class="dt">L</span>, <span class="dv">702</span><span class="dt">L</span>, <span class="dv">439</span><span class="dt">L</span>, </span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="dv">336</span><span class="dt">L</span>, <span class="dv">328</span><span class="dt">L</span>, <span class="dv">311</span><span class="dt">L</span>, <span class="dv">291</span><span class="dt">L</span>, <span class="dv">262</span><span class="dt">L</span>, <span class="dv">259</span><span class="dt">L</span>, <span class="dv">255</span><span class="dt">L</span>)), <span class="at">class =</span> <span class="st">"data.frame"</span>, <span class="at">row.names =</span> <span class="fu">c</span>(<span class="cn">NA</span>, </span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="sc">-</span><span class="dv">10</span><span class="dt">L</span>))</span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="fu">load_all_fonts</span>(<span class="st">"banksy"") # Carga fuentes del paquete</span></span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a></span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="st">style_banksy(data, name, paintings, plot_type = "</span>column<span class="st">")</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://eliansoutu.github.io/gguapo/">gguapo</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/structure.html" class="external-link">structure</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Van Gogh"</span>, <span class="st">"Degas"</span>, <span class="st">"Picasso"</span>, </span>
+<span><span class="st">"Renoir"</span>, <span class="st">"Dürer"</span>, <span class="st">"Gauguin"</span>, <span class="st">"Goya"</span>, </span>
+<span><span class="st">"Rembrandt"</span>, <span class="st">"Sisley"</span>, <span class="st">"Titian"</span><span class="op">)</span>, genre <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Post-Impressionism"</span>, </span>
+<span><span class="st">"Impressionism"</span>, <span class="st">"Cubism"</span>, <span class="st">"Impressionism"</span>, <span class="st">"Northern Renaissance"</span>, </span>
+<span><span class="st">"Symbolism,Post-Impressionism"</span>, <span class="st">"Romanticism"</span>, <span class="st">"Baroque"</span>, <span class="st">"Impressionism"</span>, </span>
+<span><span class="st">"High Renaissance,Mannerism"</span><span class="op">)</span>, paintings <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">877L</span>, <span class="fl">702L</span>, <span class="fl">439L</span>, </span>
+<span><span class="fl">336L</span>, <span class="fl">328L</span>, <span class="fl">311L</span>, <span class="fl">291L</span>, <span class="fl">262L</span>, <span class="fl">259L</span>, <span class="fl">255L</span><span class="op">)</span><span class="op">)</span>, class <span class="op">=</span> <span class="st">"data.frame"</span>, row.names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, </span>
+<span><span class="op">-</span><span class="fl">10L</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/load_all_fonts.html">load_all_fonts</a></span><span class="op">(</span><span class="st">"banksy"</span><span class="op">)</span> <span class="co"># Carga fuentes del paquete</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/style_banksy.html">style_banksy</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">name</span>, <span class="va">paintings</span>, plot_type <span class="op">=</span> <span class="st">"column"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/banksy.png"></p>
 </div>
 <div class="section level3">
@@ -117,7 +118,7 @@
 <li><p>Es un paquete en desarrollo, seguramente habrá cambios y agregados a futuro.</p></li>
 <li><p>Las funciones de estilo inspiradas en artistas y sus obras no buscan representar necesariamente el estilo real de los mismos. Es una búsqueda inspirada en paletas de colores, fuentes y otros recursos estéticos.</p></li>
 <li><p>La selección de artistas fue arbitraria y pensada en contar con variedad de estilos, no representa el gusto artístico del autor del paquete (el cual dicho sea de paso no es experto en arte).</p></li>
-<li><p>Gran parte del código y las decisiones estéticas fueron realizadas con IA, por lo cual es posible encontrarse con errores: los robots al igual que los humanos y el arte no son perfectos. El autor se compromete a seguuir ajustando</p></li>
+<li><p>Gran parte del código y las decisiones estéticas fueron realizadas con IA, por lo cual es posible encontrarse con errores: los robots al igual que los humanos y el arte no son perfectos. El autor se compromete a seguir ajustando las funciones y estilos.</p></li>
 <li><p>Las funciones se nutren de varios y maravillosos paquetes que forman parte del universo ggplot. Como los grandes artistas, un poco hay que <del>robarle a</del> inspirarse en otros.</p></li>
 </ol>
 </div>
