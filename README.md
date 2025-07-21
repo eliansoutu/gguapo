@@ -39,7 +39,7 @@ data <- structure(list(name = c("Van Gogh", "Degas", "Picasso",
 336L, 328L, 311L, 291L, 262L, 259L, 255L)), class = "data.frame", row.names = c(NA, 
 -10L))
 
-load_all_fonts("banksy"") # Carga fuentes del paquete
+load_all_fonts("banksy") # Carga fuentes del paquete
 
 style_banksy(data, name, paintings, plot_type = "column")
 
@@ -68,7 +68,7 @@ Ver vignettes para más detalles sobre el uso de las funciones.
 
 3. La selección de artistas fue arbitraria y pensada en contar con variedad de estilos, no representa el gusto artístico del autor del paquete (el cual dicho sea de paso no es experto en arte). 
 
-4. Gran parte del código y las decisiones estéticas fueron realizadas con IA, por lo cual es posible encontrarse con errores: los robots al igual que los humanos y el arte no son perfectos. El autor se compromete a seguuir ajustando
+4. Gran parte del código y las decisiones estéticas fueron realizadas con IA, por lo cual es posible encontrarse con errores: los robots al igual que los humanos y el arte no son perfectos. El autor se compromete a seguir ajustando las funciones y estilos.
 
 5. Las funciones se nutren de varios y maravillosos paquetes que forman parte del universo ggplot. Como los grandes artistas, un poco hay que ~~robarle a~~ inspirarse en otros.
 
