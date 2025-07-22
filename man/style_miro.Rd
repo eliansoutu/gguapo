@@ -21,7 +21,7 @@ style_miro(
   show_background = TRUE,
   add_glow = FALSE,
   coord_flip = FALSE,
-  text_size = 12,
+  text_size = 20,
   add_texture = NULL,
   canvas = NULL,
   add_filter = FALSE
@@ -58,7 +58,7 @@ style_miro(
 
 \item{coord_flip}{Logical, whether to flip coordinates in column charts. Defaults to FALSE.}
 
-\item{text_size}{Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 12.}
+\item{text_size}{Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 20.}
 
 \item{add_texture}{Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.}
 

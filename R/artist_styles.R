@@ -19,7 +19,7 @@
 #' @param show_background Logical. If TRUE, shows the plot panel background. Defaults to TRUE.
 #' @param add_glow Logical. If TRUE, adds a soft glow effect to map geometries. Defaults to FALSE.
 #' @param coord_flip Logical. If TRUE, flips coordinates (e.g., for horizontal column charts with matching label orientation). Defaults to FALSE.
-#' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 12.
+#' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 20.
 #' @param add_texture Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.
 #' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
 #' @param add_filter Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.
@@ -43,7 +43,7 @@ style_da_vinci <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var 
                            work_inspired_by = c("mona_lisa", "last_supper", "vitruvian_man"),
                            show_labels = FALSE, add_grid_lines = FALSE,
                            show_background = TRUE, add_glow = FALSE,
-                           coord_flip = FALSE, text_size = 12,
+                           coord_flip = FALSE, text_size = 20,
                            add_texture = NULL, canvas = NULL,
                            add_filter = FALSE) {
   style_artist_common(
@@ -87,7 +87,7 @@ style_da_vinci <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var 
 #' @param show_background Logical. Whether to show the panel background. Defaults to TRUE.
 #' @param add_glow Logical. Whether to apply an outer glow effect (for maps or specific geoms). Defaults to FALSE.
 #' @param coord_flip Logical. If TRUE and plot_type is "column", flips axes and label positions. Defaults to FALSE.
-#' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 12.
+#' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 20.
 #' @param add_texture Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.
 #' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
 #' @param add_filter Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.
@@ -111,7 +111,7 @@ style_michelangelo <- function(data, x, y, color_var = NULL, fill_var = NULL, la
                                work_inspired_by = c("david", "sistine_chapel", "pieta"),
                                show_labels = FALSE, add_grid_lines = FALSE,
                                show_background = TRUE, add_glow = FALSE,
-                               coord_flip = FALSE, text_size = 12,
+                               coord_flip = FALSE, text_size = 20,
                                add_texture = NULL, canvas = NULL,
                                add_filter = FALSE) {
 
@@ -157,7 +157,7 @@ style_michelangelo <- function(data, x, y, color_var = NULL, fill_var = NULL, la
 #' @param add_grid_lines Logical. Whether to show major grid lines (non-map plots only). Defaults to FALSE.
 #' @param show_background Logical. Whether to show the panel background. Defaults to TRUE.
 #' @param coord_flip Logical. If TRUE and `plot_type` is "column", flips axes and label positions. Defaults to FALSE.
-#' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 12.
+#' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 20.
 #' @param add_texture Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.
 #' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
 #' @param add_filter Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.
@@ -181,7 +181,7 @@ style_rembrandt <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var
                             work_inspired_by = c("night_watch", "self_portrait", "storm_sea"),
                             show_labels = FALSE, add_grid_lines = FALSE,
                             show_background = TRUE, add_glow = FALSE,
-                            coord_flip = FALSE, text_size = 12,
+                            coord_flip = FALSE, text_size = 20,
                             add_texture = NULL, canvas = NULL,
                             add_filter = FALSE) {
 
@@ -227,7 +227,7 @@ style_rembrandt <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var
 #' @param add_grid_lines Logical, whether to show major grid lines (only for non-map plots). Defaults to FALSE.
 #' @param show_background Logical, whether to show the panel background (for non-map plots). Defaults to TRUE.
 #' @param coord_flip Logical, whether to flip coords in column chart (and so labels). Defaults to FALSE.
-#' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 12.
+#' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 20.
 #' @param add_texture Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.
 #' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
 #' @param add_filter Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.
@@ -250,7 +250,7 @@ style_van_gogh <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var 
                            work_inspired_by = c("starry_night", "sunflowers", "irises"),
                            show_labels = FALSE, add_grid_lines = FALSE,
                            show_background = TRUE, add_glow = FALSE,
-                           coord_flip = FALSE, text_size = 12,
+                           coord_flip = FALSE, text_size = 20,
                            add_texture = NULL, canvas = NULL,
                            add_filter = FALSE) {
 
@@ -296,7 +296,7 @@ style_van_gogh <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var 
 #' @param add_grid_lines Logical, whether to show major grid lines (only for non-map plots). Defaults to FALSE.
 #' @param show_background Logical, whether to show the panel background (for non-map plots). Defaults to TRUE.
 #' @param coord_flip Logical, whether to flip coordinates in column charts. Defaults to FALSE.
-#' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 12.
+#' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 20.
 #' @param add_texture Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.
 #' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
 #' @param add_filter Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.
@@ -319,7 +319,7 @@ style_monet <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = N
                         work_inspired_by = c("water_lilies", "impression_sunrise", "poppy_fields"),
                         show_labels = FALSE, add_grid_lines = FALSE,
                         show_background = TRUE, add_glow = FALSE,
-                        coord_flip = FALSE, text_size = 12,
+                        coord_flip = FALSE, text_size = 20,
                         add_texture = NULL, canvas = NULL,
                         add_filter = FALSE) {
 
@@ -364,7 +364,7 @@ style_monet <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = N
 #' @param add_grid_lines Logical, whether to show major grid lines (only for non-map plots). Defaults to FALSE.
 #' @param show_background Logical, whether to show the panel background (for non-map plots). Defaults to TRUE.
 #' @param coord_flip Logical, whether to flip coordinates in column charts. Defaults to FALSE.
-#' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 12.
+#' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 20.
 #' @param add_texture Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.
 #' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
 #' @param add_filter Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.
@@ -387,7 +387,7 @@ style_banksy <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = 
                          work_inspired_by = c("girl_with_balloon", "flower_thrower", "rat_graffiti"),
                          show_labels = FALSE, add_grid_lines = FALSE,
                          show_background = TRUE, add_glow = FALSE,
-                         coord_flip = FALSE, text_size = 12,
+                         coord_flip = FALSE, text_size = 20,
                          add_texture = NULL, canvas = NULL,
                          add_filter = FALSE) {
 
@@ -433,7 +433,7 @@ style_banksy <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = 
 #' @param add_grid_lines Logical, whether to show major grid lines (only for non-map plots). Defaults to FALSE.
 #' @param show_background Logical, whether to show the panel background (for non-map plots). Defaults to TRUE.
 #' @param coord_flip Logical, whether to flip coordinates in column charts. Defaults to FALSE.
-#' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 12.
+#' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 20.
 #' @param add_texture Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.
 #' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
 #' @param add_filter Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.
@@ -456,7 +456,7 @@ style_dali <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
                                 work_inspired_by = c("persistence_memory", "elephants", "swans_reflecting_elephants"),
                                 show_labels = FALSE, add_grid_lines = FALSE,
                                 show_background = TRUE, add_glow = FALSE,
-                                coord_flip = FALSE, text_size = 12,
+                                coord_flip = FALSE, text_size = 20,
                                 add_texture = NULL, canvas = NULL,
                                 add_filter = FALSE) {
 
@@ -501,7 +501,7 @@ style_dali <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
 #' @param add_grid_lines Logical, whether to show major grid lines (only for non-map plots). Defaults to FALSE.
 #' @param show_background Logical, whether to show the panel background (for non-map plots). Defaults to TRUE.
 #' @param coord_flip Logical, whether to flip coordinates in column charts. Defaults to FALSE.
-#' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 12.
+#' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 20.
 #' @param add_texture Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.
 #' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
 #' @param add_filter Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.
@@ -524,7 +524,7 @@ style_miro <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
                        work_inspired_by = c("the_farm", "constellations", "blue_series"),
                        show_labels = FALSE, add_grid_lines = FALSE,
                        show_background = TRUE, add_glow = FALSE,
-                       coord_flip = FALSE, text_size = 12,
+                       coord_flip = FALSE, text_size = 20,
                        add_texture = NULL, canvas = NULL,
                        add_filter = FALSE) {
 
@@ -569,7 +569,7 @@ style_miro <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
 #' @param add_grid_lines Logical, whether to show major grid lines (only for non-map plots). Defaults to FALSE.
 #' @param show_background Logical, whether to show the panel background (for non-map plots). Defaults to TRUE.
 #' @param coord_flip Logical, whether to flip coordinates in column charts. Defaults to FALSE.
-#' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 12.
+#' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 20.
 #' @param add_texture Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.
 #' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
 #' @param add_filter Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.
@@ -592,7 +592,7 @@ style_gentileschi <- function(data, x = NULL, y = NULL, color_var = NULL, fill_v
                                         work_inspired_by = c("judith_beheading_holofernes", "mary_magdalene", "self_portrait_lute_player"),
                                         show_labels = FALSE, add_grid_lines = FALSE,
                                         show_background = TRUE, add_glow = FALSE,
-                                        coord_flip = FALSE, text_size = 12,
+                                        coord_flip = FALSE, text_size = 20,
                                         add_texture = NULL, canvas = NULL,
                                         add_filter = FALSE) {
 
@@ -638,7 +638,7 @@ style_gentileschi <- function(data, x = NULL, y = NULL, color_var = NULL, fill_v
 #' @param add_grid_lines Logical, whether to show major grid lines (only for non-map plots). Defaults to FALSE.
 #' @param show_background Logical, whether to show the panel background. Defaults to TRUE.
 #' @param coord_flip Logical, whether to flip coordinates in column charts. Defaults to FALSE.
-#' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 12.
+#' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 20.
 #' @param add_texture Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.
 #' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
 #' @param add_filter Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.
@@ -661,7 +661,7 @@ style_kandinsky <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var
                             work_inspired_by = c("composition_viii", "yellow_red_blue", "on_white_ii"),
                             show_labels = FALSE, add_grid_lines = FALSE,
                             show_background = TRUE, add_glow = FALSE,
-                            coord_flip = FALSE, text_size = 12,
+                            coord_flip = FALSE, text_size = 20,
                             add_texture = NULL, canvas = NULL,
                             add_filter = FALSE) {
 
@@ -706,7 +706,7 @@ style_kandinsky <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var
 #' @param add_grid_lines Logical, whether to show major grid lines (only for non-map plots). Defaults to FALSE.
 #' @param show_background Logical, whether to show the panel background. Defaults to TRUE.
 #' @param coord_flip Logical, whether to flip coordinates in column charts. Defaults to FALSE.
-#' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 12.
+#' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 20.
 #' @param add_texture Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.
 #' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
 #' @param add_filter Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.
@@ -729,7 +729,7 @@ style_warhol <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = 
                               work_inspired_by = c("soup_cans", "marilyn_monroe", "cow_wallpaper"),
                          show_labels = FALSE, add_grid_lines = FALSE,
                          show_background = TRUE, add_glow = FALSE,
-                         coord_flip = FALSE, text_size = 12,
+                         coord_flip = FALSE, text_size = 20,
                          add_texture = NULL, canvas = NULL,
                          add_filter = FALSE) {
 

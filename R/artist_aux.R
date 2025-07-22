@@ -703,7 +703,7 @@ style_artist_common <- function(data, artist, obra_inspiracion,
   # Etiquetas
   if (show_labels) {
     label_quo_final <- if (!quo_is_null(label_quo)) label_quo else y_quo
-    label_size <- text_size * 0.28
+    label_size <- text_size * 0.35
     if (plot_type == "map") {
       p <- p + geom_sf_text(
         aes(label = !!label_quo_final),
