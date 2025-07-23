@@ -70,18 +70,10 @@ style_da_vinci(data, name, paintings, fill_var = genre)
 
 ### show_labels
 
-Agregar etiquetas sobre el eje Y (y expando eje Y):
+Agregar etiquetas sobre el eje Y:
 
 ```{r}
 style_da_vinci(data, name, paintings,  show_labels = T)
-```
-
-Incluso cambiar la orientación ajustando el parámetro coord_flip
-
-```{r}
-style_da_vinci(data, name, paintings,  show_labels = T, coord_flip = T) +
-  ggplot2::coord_flip() +
-  ggplot2::scale_y_continuous(limits = c(0, 1000))
 ```
 
 ### labs
