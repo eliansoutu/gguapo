@@ -21,7 +21,7 @@ style_da_vinci(
   show_background = TRUE,
   add_glow = FALSE,
   coord_flip = FALSE,
-  text_size = 20,
+  text_size = 16,
   add_texture = NULL,
   canvas = NULL,
   add_filter = FALSE
@@ -60,7 +60,7 @@ style_da_vinci(
 
 \item{coord_flip}{Logical. If TRUE, flips coordinates (e.g., for horizontal column charts with matching label orientation). Defaults to FALSE.}
 
-\item{text_size}{Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 20.}
+\item{text_size}{Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 16}
 
 \item{add_texture}{Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.}
 

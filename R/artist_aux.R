@@ -70,7 +70,7 @@ load_all_fonts <- function(artist = "all") {
 
   fonts_by_artist <- list(
     da_vinci     = c("Playfair Display", "Merriweather"),
-    michelangelo = c("Merriweather", "Open Sans", "Roboto Condensed", "Lato"),
+    michelangelo = c("Playfair Display", "Merriweather", "Open Sans", "Roboto Condensed", "Lato"),
     rembrandt    = c("Merriweather", "Roboto Condensed", "Playfair Display", "Lato", "Special Elite", "Cutive Mono"),
     van_gogh     = c("Playfair Display", "Roboto Condensed", "Permanent Marker", "Cabin Sketch", "Lato", "Open Sans"),
     monet        = c("Playfair Display", "Poppins", "Open Sans", "Roboto Condensed"),
