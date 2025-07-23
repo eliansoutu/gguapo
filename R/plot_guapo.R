@@ -199,7 +199,7 @@ plot_guapo <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
       stroke = geom_stroke
     )
     if (is.null(color_var_sym)) { # Only add 'color' arg if it's a fixed value
-      point_args$color <- current_settings$colors[4]
+      point_args$color <- current_settings$colors[2]
     }
     geom_layer_base <- do.call(ggplot2::geom_point, point_args)
 
@@ -220,8 +220,8 @@ plot_guapo <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
     )
 
     if (is.null(color_var_sym)) { # Apply fixed color to both if not mapped
-      line_args$color <- current_settings$colors[1]
-      point_args$color <- current_settings$colors[1]
+      line_args$color <- current_settings$colors[2]
+      point_args$color <- current_settings$colors[2]
     }
 
     geom_layer_base <- list(
@@ -248,7 +248,7 @@ plot_guapo <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
       alpha = base_alpha
     )
     if (is.null(fill_var_sym)) { # Only add 'fill' arg if it's a fixed value
-      col_args$fill <- current_settings$colors[1]
+      col_args$fill <- current_settings$colors[2]
     }
     geom_layer_base <- do.call(ggplot2::geom_col, col_args)
 

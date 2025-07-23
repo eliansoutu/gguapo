@@ -679,6 +679,32 @@ style_artist_common <- function(data, artist, obra_inspiracion,
 
     }
 
+
+    # Expansión automática del eje numérico (solo límite superior)
+    expand_axis_var <- if (coord_flip) as_label(x_quo) else as_label(y_quo)
+
+    if (!is.null(expand_axis_var) && is.numeric(data[[expand_axis_var]])) {
+      axis_range <- range(data[[expand_axis_var]], na.rm = TRUE)
+      if (diff(axis_range) > 0) {
+        # Solo expandir en el extremo superior
+        if (coord_flip) {
+          p <- p + scale_x_continuous(expand = expansion(mult = c(0, 0.15)))
+        } else {
+          p <- p + scale_y_continuous(expand = expansion(mult = c(0, 0.15)))
+        }
+      } else {
+        # Todos los valores son iguales, agregar pequeño buffer
+        buffer <- ifelse(axis_range[1] == 0, 0.5, abs(axis_range[1]) * 0.05)
+        lim <- c(axis_range[1], axis_range[2] + buffer)
+        if (coord_flip) {
+          p <- p + scale_x_continuous(limits = lim)
+        } else {
+          p <- p + scale_y_continuous(limits = lim)
+        }
+      }
+    }
+
+
     # Aplicar glow
     if (add_glow) {
       if (is.list(geom_layer)) {
@@ -703,7 +729,7 @@ style_artist_common <- function(data, artist, obra_inspiracion,
   # Etiquetas
   if (show_labels) {
     label_quo_final <- if (!quo_is_null(label_quo)) label_quo else y_quo
-    label_size <- text_size * 0.35
+    label_size <- text_size * 0.33
     if (plot_type == "map") {
       p <- p + geom_sf_text(
         aes(label = !!label_quo_final),
