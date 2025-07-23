@@ -32,7 +32,7 @@ data <- structure(list(name = c("Van Gogh", "Degas", "Picasso",
 
 ## Funciones de artistas
 
-**Las funciones están pensadas para ofrecer una visualización rápida que no requiera escribir muchas líneas de código. Esto puede traer problemas como superposición de elementos o tamaños inadecuados en determinados gráficos. Tener en cuenta que se pueden pisar algunas configuraciones agregando capas a continuación de la función como si fuera un ggplot común.**
+Las funciones están pensadas para ofrecer una visualización rápida que no requiera escribir muchas líneas de código. Esto puede traer problemas como superposición de elementos o tamaños inadecuados en determinados gráficos. Tener en cuenta que se pueden sobreescribir algunas configuraciones sumando capas o funciones a continuación como si fuera un ggplot común.
 
 ### load_all_fonts
 
