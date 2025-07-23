@@ -130,19 +130,28 @@ de la paleta y diferenciar categorías:</p>
 <p><img src="use_styles_files/figure-html/unnamed-chunk-6-1.png" width="960" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
-<h3 id="show_labels">show_labels<a class="anchor" aria-label="anchor" href="#show_labels"></a>
+<h3 id="show_labels-y-labs">show_labels y labs<a class="anchor" aria-label="anchor" href="#show_labels-y-labs"></a>
 </h3>
 <p>Agregar etiquetas sobre el eje Y:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/style_da_vinci.html">style_da_vinci</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">name</span>, <span class="va">paintings</span>,  show_labels <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/style_da_vinci.html">style_da_vinci</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">name</span>, <span class="va">paintings</span>, show_labels <span class="op">=</span> <span class="cn">T</span>,</span>
+<span>               title <span class="op">=</span> <span class="st">"Título"</span>, subtitle <span class="op">=</span> <span class="st">"Subtítulo"</span>, caption <span class="op">=</span> <span class="st">"Leyenda"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="use_styles_files/figure-html/unnamed-chunk-7-1.png" width="960" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
-<h3 id="labs">labs<a class="anchor" aria-label="anchor" href="#labs"></a>
+<h3 id="coord_flip">coord_flip<a class="anchor" aria-label="anchor" href="#coord_flip"></a>
 </h3>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/style_da_vinci.html">style_da_vinci</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">name</span>, <span class="va">paintings</span>,  title <span class="op">=</span> <span class="st">"Título"</span>, subtitle <span class="op">=</span> <span class="st">"Subtítulo"</span>, caption <span class="op">=</span> <span class="st">"Leyenda"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/style_da_vinci.html">style_da_vinci</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">name</span>, <span class="va">paintings</span>, show_labels <span class="op">=</span> <span class="cn">T</span>, coord_flip <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
 <p><img src="use_styles_files/figure-html/unnamed-chunk-8-1.png" width="960" style="display: block; margin: auto;"></p>
+</div>
+<div class="section level3">
+<h3 id="add_grid_lines-y-show_background">add_grid_lines y show_background<a class="anchor" aria-label="anchor" href="#add_grid_lines-y-show_background"></a>
+</h3>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/style_da_vinci.html">style_da_vinci</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">name</span>, <span class="va">paintings</span>, plot_type <span class="op">=</span> <span class="st">"line"</span>,</span>
+<span>               show_background <span class="op">=</span> <span class="cn">F</span>, add_grid_lines <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
+<p><img src="use_styles_files/figure-html/unnamed-chunk-9-1.png" width="960" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="otros">Otros<a class="anchor" aria-label="anchor" href="#otros"></a>
@@ -162,8 +171,8 @@ y no funciona con fill_var. En el caso de gráficos de líneas o puntos
 cualquiera de las opciones (1 al 3) aplica el mismo efecto.</p></li>
 <li><p><code>canvas</code> ofrece la posibilidad de agregar un fondo
 estilo lienzo al panel del gráfico, lo cual no es compatible con el uso
-de <code>add_grid_lines</code> o <code>show_background</code>. Se puede
-optar por distintos lienzos (del 1 al 6).</p></li>
+de <code>add_grid_lines = T</code> o <code>show_background = T</code>.
+Se puede optar por distintos lienzos (del 1 al 6).</p></li>
 <li><p><code>add_glow</code> agrega brillo a las geom
 principales.</p></li>
 <li><p><code>add_filter</code> es aún muy experimental, puede demorar
@@ -171,24 +180,24 @@ unos segundos en cargar. Aplica un filtro estilo pintura al gráfico
 entero, generando márgenes indeseados. Se sugiere aumentar el
 <code>text_size</code> para mejorar la visual de los textos.</p></li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/style_da_vinci.html">style_da_vinci</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">name</span>, <span class="va">paintings</span>, </span>
 <span>               work_inspired_by <span class="op">=</span> <span class="st">"last_supper"</span>, </span>
 <span>               canvas <span class="op">=</span> <span class="fl">6</span>, </span>
 <span>               add_glow <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
-<p><img src="use_styles_files/figure-html/unnamed-chunk-9-1.png" width="960" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<p><img src="use_styles_files/figure-html/unnamed-chunk-10-1.png" width="960" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/style_da_vinci.html">style_da_vinci</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">name</span>, <span class="va">paintings</span>, </span>
 <span>               canvas <span class="op">=</span> <span class="fl">5</span>, </span>
 <span>               add_texture <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="use_styles_files/figure-html/unnamed-chunk-10-1.png" width="960" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<p><img src="use_styles_files/figure-html/unnamed-chunk-11-1.png" width="960" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/style_da_vinci.html">style_da_vinci</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">name</span>, <span class="va">paintings</span>, </span>
 <span>               canvas <span class="op">=</span> <span class="fl">5</span>, </span>
 <span>               add_texture <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>               add_filter <span class="op">=</span> <span class="cn">T</span>,</span>
 <span>               text_size <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span></code></pre></div>
-<p><img src="use_styles_files/figure-html/unnamed-chunk-11-1.png" width="960" style="display: block; margin: auto;"></p>
+<p><img src="use_styles_files/figure-html/unnamed-chunk-12-1.png" width="960" style="display: block; margin: auto;"></p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
