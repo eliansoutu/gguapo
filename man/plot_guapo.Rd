@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_guapo.R
 \name{plot_guapo}
 \alias{plot_guapo}
-\title{plot_guapo: Highly stylized data visualization function}
+\title{plot_guapo: Highly Stylized Data Visualization with ggplot2}
 \usage{
 plot_guapo(
   data,
@@ -19,7 +19,8 @@ plot_guapo(
   font_title_name = "Orbitron",
   font_body_name = "Poppins",
   show_labels = FALSE,
-  add_trend_line = FALSE,
+  coord_flip = FALSE,
+  show_baseline = TRUE,
   highlight_values = NULL,
   highlight_color = "#FFD700",
   facet_var = NULL,
@@ -35,64 +36,65 @@ plot_guapo(
 )
 }
 \arguments{
-\item{data}{A data frame (or an `sf` object for `plot_type = "map"`).}
+\item{data}{A data frame (`data.frame`) or an `sf` object (for `plot_type = "map"`).}
 
-\item{x}{(Optional) Name of the column for the x-axis (can be unquoted for tidy evaluation). Defaults to NULL.}
+\item{x}{Variable for the x-axis (unquoted).}
 
-\item{y}{(Optional) Name of the column for the y-axis (can be unquoted for tidy evaluation). Defaults to NULL.}
+\item{y}{Variable for the y-axis (unquoted).}
 
-\item{color_var}{(Optional) Name of the column to map to color (can be unquoted). Defaults to NULL.}
+\item{color_var}{Variable used for color aesthetics.}
 
-\item{fill_var}{(Optional) Name of the column to map to fill (can be unquoted). Defaults to NULL.}
+\item{fill_var}{Variable used for fill aesthetics.}
 
-\item{label_var}{(Optional) Name of the column for data labels (can be unquoted). Defaults to NULL.}
+\item{label_var}{Variable used for text labels.}
 
-\item{title}{The main title of the plot.}
+\item{title}{Main plot title.}
 
-\item{subtitle}{The subtitle of the plot.}
+\item{subtitle}{Subtitle of the plot.}
 
-\item{caption}{The caption or source of the plot.}
+\item{caption}{Caption text displayed below the plot.}
 
-\item{plot_type}{The type of plot:  "column", "scatter", "line", "map".}
+\item{plot_type}{Type of plot: `"column"`, `"scatter"`, `"line"`, or `"map"`.}
 
-\item{palette_name}{The name of the color palette to use: "guapo", "guapero", "guapon", "guapisimo".}
+\item{palette_name}{Color palette to use: `"guapo"`, `"guapero"`, `"guapon"`, or `"guapisimo"`.}
 
-\item{font_title_name}{The Google Font for the plot title.}
+\item{font_title_name}{Font for the title (Google Fonts, default: `"Orbitron"`).}
 
-\item{font_body_name}{The Google Font for the body text and axes.}
+\item{font_body_name}{Font for the body and labels (default: `"Poppins"`).}
 
-\item{show_labels}{Logical, whether to display data labels. Defaults to FALSE.}
+\item{show_labels}{Logical. If `TRUE`, displays text labels on bars or points.}
 
-\item{add_trend_line}{Logical, whether to add a trend line (only for scatter/line plots). Defaults to FALSE.}
+\item{coord_flip}{Logical. If `TRUE`, flips x and y axes (useful for bar plots).}
 
-\item{highlight_values}{A vector of values in `x`, `color_var`, or `label_var` to highlight. Defaults to NULL.}
+\item{show_baseline}{Logical. If `TRUE`, draws a baseline at y = 0 for column and line plots.}
 
-\item{highlight_color}{The color for highlighted values. Defaults to "#FFD700" (Gold).}
+\item{highlight_values}{A vector of values to highlight (based on `color_var` or `fill_var`).}
 
-\item{facet_var}{(Optional) Name of the column to facet the plot by (can be unquoted). Defaults to NULL.}
+\item{highlight_color}{Color used for highlighting specific values.}
 
-\item{dark_mode}{Logical, whether to use a dark color scheme. Defaults to FALSE.}
+\item{facet_var}{Variable used for faceting (unquoted).}
 
-\item{apply_shadow}{Logical, whether to apply a shadow effect to geometric elements. Requires `ggfx`. Defaults to FALSE.}
+\item{dark_mode}{Logical. If `TRUE`, applies a dark-themed background.}
 
-\item{apply_glow}{Logical, whether to apply a glow effect to geometric elements. Requires `ggfx`. Defaults to FALSE.}
+\item{apply_shadow}{Logical. If `TRUE`, applies a shadow effect to geoms.}
 
-\item{apply_blur_background}{Logical, whether to apply a blur effect to the panel background. Requires `ggfx`. Defaults to FALSE.}
+\item{apply_glow}{Logical. If `TRUE`, applies a glow effect to geoms.}
 
-\item{gradient_fill}{Logical, whether to use a gradient fill for continuous variables (note: this parameter isn't directly used in the provided code for scale generation; scales are determined automatically based on variable type). Defaults to FALSE.}
+\item{apply_blur_background}{Logical. If `TRUE`, adds a blurred background to the plot.}
 
-\item{base_alpha}{The base transparency of the geometric elements. Defaults to 0.8.}
+\item{gradient_fill}{Logical. If `TRUE`, fills bars/points with a color gradient instead of solid colors.}
 
-\item{geom_size}{The base size of points or thickness of lines. Defaults to 3.}
+\item{base_alpha}{Alpha transparency applied to geoms (default: 0.8).}
 
-\item{geom_stroke}{The border thickness of points. Defaults to 0.5.}
+\item{geom_size}{Size of geom elements (points, lines, or bars).}
 
-\item{text_size}{The base text size for the plot. Defaults to 20.}
+\item{geom_stroke}{Stroke width for geoms (e.g., outline of points).}
+
+\item{text_size}{Base size for plot text (titles, labels, etc.).}
 }
 \value{
-A ggplot2 object.
+A stylized `ggplot` object.
 }
 \description{
-Generates ggplot2 graphics with high visual impact, utilizing
-modern color palettes, distinctive fonts, and advanced visual effects from `ggfx`.
+Creates high-impact, visually appealing plots using `ggplot2`, supporting multiple plot types (`"column"`, `"scatter"`, `"line"`, and `"map"`), modern color palettes, Google Fonts, and advanced visual effects like glow, shadow, and background blur.
 }

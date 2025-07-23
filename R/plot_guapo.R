@@ -1,131 +1,111 @@
-#' @title plot_guapo: Highly stylized data visualization function
-#' @description Generates ggplot2 graphics with high visual impact, utilizing
-#' modern color palettes, distinctive fonts, and advanced visual effects from `ggfx`.
-#' @param data A data frame (or an `sf` object for `plot_type = "map"`).
-#' @param x (Optional) Name of the column for the x-axis (can be unquoted for tidy evaluation). Defaults to NULL.
-#' @param y (Optional) Name of the column for the y-axis (can be unquoted for tidy evaluation). Defaults to NULL.
-#' @param color_var (Optional) Name of the column to map to color (can be unquoted). Defaults to NULL.
-#' @param fill_var (Optional) Name of the column to map to fill (can be unquoted). Defaults to NULL.
-#' @param label_var (Optional) Name of the column for data labels (can be unquoted). Defaults to NULL.
-#' @param title The main title of the plot.
-#' @param subtitle The subtitle of the plot.
-#' @param caption The caption or source of the plot.
-#' @param plot_type The type of plot:  "column", "scatter", "line", "map".
-#' @param palette_name The name of the color palette to use: "guapo", "guapero", "guapon", "guapisimo".
-#' @param font_title_name The Google Font for the plot title.
-#' @param font_body_name The Google Font for the body text and axes.
-#' @param show_labels Logical, whether to display data labels. Defaults to FALSE.
-#' @param add_trend_line Logical, whether to add a trend line (only for scatter/line plots). Defaults to FALSE.
-#' @param highlight_values A vector of values in `x`, `color_var`, or `label_var` to highlight. Defaults to NULL.
-#' @param highlight_color The color for highlighted values. Defaults to "#FFD700" (Gold).
-#' @param facet_var (Optional) Name of the column to facet the plot by (can be unquoted). Defaults to NULL.
-#' @param dark_mode Logical, whether to use a dark color scheme. Defaults to FALSE.
-#' @param apply_shadow Logical, whether to apply a shadow effect to geometric elements. Requires `ggfx`. Defaults to FALSE.
-#' @param apply_glow Logical, whether to apply a glow effect to geometric elements. Requires `ggfx`. Defaults to FALSE.
-#' @param apply_blur_background Logical, whether to apply a blur effect to the panel background. Requires `ggfx`. Defaults to FALSE.
-#' @param gradient_fill Logical, whether to use a gradient fill for continuous variables (note: this parameter isn't directly used in the provided code for scale generation; scales are determined automatically based on variable type). Defaults to FALSE.
-#' @param base_alpha The base transparency of the geometric elements. Defaults to 0.8.
-#' @param geom_size The base size of points or thickness of lines. Defaults to 3.
-#' @param geom_stroke The border thickness of points. Defaults to 0.5.
-#' @param text_size The base text size for the plot. Defaults to 20.
-#' @return A ggplot2 object.
-#' @importFrom ggplot2 ggplot aes geom_point geom_line geom_col geom_smooth theme_void theme element_text element_rect unit labs element_blank scale_color_manual scale_fill_manual scale_color_gradientn scale_fill_gradientn facet_wrap geom_sf geom_sf_text
-#' @importFrom ggrepel geom_text_repel
-#' @importFrom ggtext element_markdown
-#' @importFrom tools toTitleCase
-#' @importFrom dplyr filter
-#' @importFrom sf st_as_sf
-#' @importFrom rlang .data !! sym enexpr as_string
-#' @importFrom sysfonts font_add_google font_families
-#' @importFrom showtext showtext_auto
-#' @importFrom grDevices colorRampPalette
-#' @importFrom ggfx with_shadow with_outer_glow with_blur
+#' @title plot_guapo: Highly Stylized Data Visualization with ggplot2
+#'
+#' @description
+#' Creates high-impact, visually appealing plots using `ggplot2`, supporting multiple plot types (`"column"`, `"scatter"`, `"line"`, and `"map"`), modern color palettes, Google Fonts, and advanced visual effects like glow, shadow, and background blur.
+#'
+#' @param data A data frame (`data.frame`) or an `sf` object (for `plot_type = "map"`).
+#' @param x Variable for the x-axis (unquoted).
+#' @param y Variable for the y-axis (unquoted).
+#' @param color_var Variable used for color aesthetics.
+#' @param fill_var Variable used for fill aesthetics.
+#' @param label_var Variable used for text labels.
+#' @param title Main plot title.
+#' @param subtitle Subtitle of the plot.
+#' @param caption Caption text displayed below the plot.
+#' @param plot_type Type of plot: `"column"`, `"scatter"`, `"line"`, or `"map"`.
+#' @param palette_name Color palette to use: `"guapo"`, `"guapero"`, `"guapon"`, or `"guapisimo"`.
+#' @param font_title_name Font for the title (Google Fonts, default: `"Orbitron"`).
+#' @param font_body_name Font for the body and labels (default: `"Poppins"`).
+#' @param show_labels Logical. If `TRUE`, displays text labels on bars or points.
+#' @param coord_flip Logical. If `TRUE`, flips x and y axes (useful for bar plots).
+#' @param show_baseline Logical. If `TRUE`, draws a baseline at y = 0 for column and line plots.
+#' @param highlight_values A vector of values to highlight (based on `color_var` or `fill_var`).
+#' @param highlight_color Color used for highlighting specific values.
+#' @param facet_var Variable used for faceting (unquoted).
+#' @param dark_mode Logical. If `TRUE`, applies a dark-themed background.
+#' @param apply_shadow Logical. If `TRUE`, applies a shadow effect to geoms.
+#' @param apply_glow Logical. If `TRUE`, applies a glow effect to geoms.
+#' @param apply_blur_background Logical. If `TRUE`, adds a blurred background to the plot.
+#' @param gradient_fill Logical. If `TRUE`, fills bars/points with a color gradient instead of solid colors.
+#' @param base_alpha Alpha transparency applied to geoms (default: 0.8).
+#' @param geom_size Size of geom elements (points, lines, or bars).
+#' @param geom_stroke Stroke width for geoms (e.g., outline of points).
+#' @param text_size Base size for plot text (titles, labels, etc.).
+#'
+#' @return A stylized `ggplot` object.
+#'
 #' @export
-plot_guapo <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NULL, label_var = NULL,
+plot_guapo <- function(data, x = NULL, y = NULL,
+                       color_var = NULL, fill_var = NULL, label_var = NULL,
                        title = "Visualización de Datos Impactante",
                        subtitle = "Con Estilo y Diseño Avanzado",
                        caption = "Generado con plot_guapo",
                        plot_type = c("column", "scatter", "line", "map"),
                        palette_name = c("guapo", "guapero", "guapon", "guapisimo"),
                        font_title_name = "Orbitron", font_body_name = "Poppins",
-                       show_labels = FALSE, add_trend_line = FALSE,
-                       highlight_values = NULL, highlight_color = "#FFD700", # Gold for highlighting
+                       show_labels = FALSE,
+                       coord_flip = FALSE,
+                       show_baseline = TRUE,
+                       highlight_values = NULL,
+                       highlight_color = "#FFD700",
                        facet_var = NULL,
                        dark_mode = FALSE,
-                       apply_shadow = FALSE, apply_glow = FALSE,
+                       apply_shadow = FALSE,
+                       apply_glow = FALSE,
                        apply_blur_background = FALSE,
-                       gradient_fill = FALSE, base_alpha = 0.8,
-                       geom_size = 3, geom_stroke = 0.5,
+                       gradient_fill = FALSE,
+                       base_alpha = 0.8,
+                       geom_size = 3,
+                       geom_stroke = 0.5,
                        text_size = 20) {
-
   plot_type <- match.arg(plot_type)
   palette_name <- match.arg(palette_name)
 
-
-  if (sum(c("Orbitron","Poppins") %in% sysfonts::font_families()) == 0) {
-
+  if (sum(c(font_title_name, font_body_name) %in% sysfonts::font_families()) < 2) {
     showtext::showtext_auto()
-
-    sysfonts::font_add_google("Orbitron", "Orbitron")
-    sysfonts::font_add_google("Poppins", "Poppins")
-
+    sysfonts::font_add_google(font_title_name, font_title_name)
+    sysfonts::font_add_google(font_body_name, font_body_name)
   }
 
-  # Definición de paletas y ajustes
+  # Paletas
   palettes <- list(
     "guapo" = list(
-      light = list(
-        colors = c("#00FFFF", "#FF00FF", "#FFFF00", "#FF69B4", "#00FF7F"),
-        background_fill = "#F0F8FF", panel_fill = "#E0FFFF",
-        grid_color = "#D3D3D3", text_color = "#333333", geom_alpha = 0.9
-      ),
-      dark = list(
-        colors = c("#00FFFF", "#FF00FF", "#FFFF00", "#FF69B4", "#00FF7F"),
-        background_fill = "#1A1A2E", panel_fill = "#0F0F1A",
-        grid_color = "#4A4A5C", text_color = "#E0FFFF", geom_alpha = 0.8
-      )
+      light = list(colors = c("#04dede", "#FF00FF", "#FFFF00", "#FF69B4", "#00FF7F"),
+                   background_fill = "#F0F8FF", panel_fill = "#E0FFFF",
+                   grid_color = "#D3D3D3", text_color = "#333333", geom_alpha = 0.9),
+      dark = list(colors = c("#00FFFF", "#FF00FF", "#FFFF00", "#FF69B4", "#00FF7F"),
+                  background_fill = "#1A1A2E", panel_fill = "#0F0F1A",
+                  grid_color = "#4A4A5C", text_color = "#E0FFFF", geom_alpha = 0.8)
     ),
     "guapero" = list(
-      light = list(
-        colors = c("#FF1493", "#8A2BE2", "#FFD700", "#00CED1", "#FF6347"),
-        background_fill = "#FFF0F5", panel_fill = "#F5E0EB",
-        grid_color = "#E6E6FA", text_color = "#4B0082", geom_alpha = 0.9
-      ),
-      dark = list(
-        colors = c("#FF1493", "#8A2BE2", "#FFD700", "#00CED1", "#FF6347"),
-        background_fill = "#2C003D", panel_fill = "#1A002A",
-        grid_color = "#5A2A6B", text_color = "#FFD700", geom_alpha = 0.8
-      )
+      light = list(colors = c("#FF1493", "#8A2BE2", "#FFD700", "#00CED1", "#FF6347"),
+                   background_fill = "#FFF0F5", panel_fill = "#F5E0EB",
+                   grid_color = "#E6E6FA", text_color = "#4B0082", geom_alpha = 0.9),
+      dark = list(colors = c("#FF1493", "#8A2BE2", "#FFD700", "#00CED1", "#FF6347"),
+                  background_fill = "#2C003D", panel_fill = "#1A002A",
+                  grid_color = "#5A2A6B", text_color = "#FFD700", geom_alpha = 0.8)
     ),
     "guapon" = list(
-      light = list(
-        colors = c("#A3D9EE", "#C7F2A4", "#FFE180", "#FFB6C1", "#D8BFD8"),
-        background_fill = "#F5F5F5", panel_fill = "#EFEFEF",
-        grid_color = "#D0D0D0", text_color = "#555555", geom_alpha = 0.9
-      ),
-      dark = list(
-        colors = c("#A3D9EE", "#C7F2A4", "#FFE180", "#FFB6C1", "#D8BFD8"),
-        background_fill = "#2B2D42", panel_fill = "#1B1D32",
-        grid_color = "#4A4C62", text_color = "#A3D9EE", geom_alpha = 0.8
-      )
+      light = list(colors = c("#A3D9EE", "#C7F2A4", "#FFE180", "#FFB6C1", "#D8BFD8"),
+                   background_fill = "#F5F5F5", panel_fill = "#EFEFEF",
+                   grid_color = "#D0D0D0", text_color = "#555555", geom_alpha = 0.9),
+      dark = list(colors = c("#A3D9EE", "#C7F2A4", "#FFE180", "#FFB6C1", "#D8BFD8"),
+                  background_fill = "#2B2D42", panel_fill = "#1B1D32",
+                  grid_color = "#4A4C62", text_color = "#A3D9EE", geom_alpha = 0.8)
     ),
     "guapisimo" = list(
-      light = list(
-        colors = c("#FF4500", "#1E90FF", "#32CD32", "#FFD700", "#8A2BE2"),
-        background_fill = "#FFFFFF", panel_fill = "#F8F8F8",
-        grid_color = "#E0E0E0", text_color = "#000000", geom_alpha = 0.95
-      ),
-      dark = list(
-        colors = c("#FF4500", "#1E90FF", "#32CD32", "#FFD700", "#8A2BE2"),
-        background_fill = "#000000", panel_fill = "#111111",
-        grid_color = "#333333", text_color = "#FFFFFF", geom_alpha = 0.9
-      )
+      light = list(colors = c("#FF4500", "#1E90FF", "#32CD32", "#FFD700", "#8A2BE2"),
+                   background_fill = "#FFFFFF", panel_fill = "#F8F8F8",
+                   grid_color = "#E0E0E0", text_color = "#000000", geom_alpha = 0.95),
+      dark = list(colors = c("#FF4500", "#1E90FF", "#32CD32", "#FFD700", "#8A2BE2"),
+                  background_fill = "#000000", panel_fill = "#111111",
+                  grid_color = "#333333", text_color = "#FFFFFF", geom_alpha = 0.9)
     )
   )
 
   current_settings <- if (dark_mode) palettes[[palette_name]]$dark else palettes[[palette_name]]$light
 
-  # Capturar las expresiones de las variables
+  # Capturar expresiones
   x_sym <- rlang::enexpr(x)
   y_sym <- rlang::enexpr(y)
   color_var_sym <- rlang::enexpr(color_var)
@@ -133,7 +113,6 @@ plot_guapo <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
   label_var_sym <- rlang::enexpr(label_var)
   facet_var_sym <- rlang::enexpr(facet_var)
 
-  # Base plot
   if (plot_type == "map") {
     p <- ggplot2::ggplot(data)
   } else {
@@ -142,147 +121,83 @@ plot_guapo <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
     if (!is.null(y_sym)) aes_mapping_list$y <- y_sym
     if (!is.null(color_var_sym)) aes_mapping_list$color <- color_var_sym
     if (!is.null(fill_var_sym)) aes_mapping_list$fill <- fill_var_sym
-
     p <- ggplot2::ggplot(data, ggplot2::aes(!!!aes_mapping_list))
   }
 
-  # Dynamic color/fill scales (logic integrated from generate_color_scale)
-  # Color scale
-  if (!is.null(color_var_sym) && rlang::as_string(color_var_sym) %in% names(data)) {
-    var_name_str <- rlang::as_string(color_var_sym)
-    var_data <- data[[var_name_str]]
-    if (is.numeric(var_data)) {
-      p <- p + ggplot2::scale_color_gradientn(colors = current_settings$colors)
-    } else {
-      unique_levels <- unique(var_data)
-      num_levels <- length(unique_levels)
-      if (num_levels <= length(current_settings$colors)) {
-        p <- p + ggplot2::scale_color_manual(values = current_settings$colors[1:num_levels])
+  # Escalas de color y fill
+  for (var in c("color", "fill")) {
+    var_sym <- if (var == "color") color_var_sym else fill_var_sym
+    if (!is.null(var_sym) && rlang::as_string(var_sym) %in% names(data)) {
+      var_data <- data[[rlang::as_string(var_sym)]]
+      if (is.numeric(var_data)) {
+        p <- p + do.call(get(paste0("scale_", var, "_gradientn")), list(colors = current_settings$colors))
       } else {
-        extended_palette_fun <- grDevices::colorRampPalette(current_settings$colors)
-        extended_colors <- extended_palette_fun(num_levels)
-        p <- p + ggplot2::scale_color_manual(values = extended_colors)
+        unique_levels <- unique(var_data)
+        num_levels <- length(unique_levels)
+        pal_fun <- grDevices::colorRampPalette(current_settings$colors)
+        colors <- if (num_levels <= length(current_settings$colors)) {
+          current_settings$colors[1:num_levels]
+        } else {
+          pal_fun(num_levels)
+        }
+        p <- p + do.call(get(paste0("scale_", var, "_manual")), list(values = colors))
       }
     }
   }
 
-  # Fill scale
-  if (!is.null(fill_var_sym) && rlang::as_string(fill_var_sym) %in% names(data)) {
-    var_name_str <- rlang::as_string(fill_var_sym)
-    var_data <- data[[var_name_str]]
-    if (is.numeric(var_data)) {
-      p <- p + ggplot2::scale_fill_gradientn(colors = current_settings$colors)
-    } else {
-      unique_levels <- unique(var_data)
-      num_levels <- length(unique_levels)
-      if (num_levels <= length(current_settings$colors)) {
-        p <- p + ggplot2::scale_fill_manual(values = current_settings$colors[1:num_levels])
-      } else {
-        extended_palette_fun <- grDevices::colorRampPalette(current_settings$colors)
-        extended_colors <- extended_palette_fun(num_levels)
-        p <- p + ggplot2::scale_fill_manual(values = extended_colors)
-      }
-    }
-  }
-
-  # Geom layers with ggfx effects
+  # Geoms principales
   geom_layer_base <- NULL
-
   if (plot_type == "scatter") {
-    point_aes_list <- list()
-    if (!is.null(color_var_sym)) point_aes_list$color <- color_var_sym
-
-    point_args <- list(
-      mapping = ggplot2::aes(!!!point_aes_list),
-      size = geom_size,
-      alpha = base_alpha,
-      stroke = geom_stroke
-    )
-    if (is.null(color_var_sym)) { # Only add 'color' arg if it's a fixed value
-      point_args$color <- current_settings$colors[2]
-    }
-    geom_layer_base <- do.call(ggplot2::geom_point, point_args)
-
+    args <- list(size = geom_size, alpha = base_alpha, stroke = geom_stroke)
+    if (is.null(color_var_sym)) args$color <- current_settings$colors[1]
+    geom_layer_base <- do.call(ggplot2::geom_point, args)
   } else if (plot_type == "line") {
-    line_point_aes_list <- list()
-    if (!is.null(color_var_sym)) line_point_aes_list$color <- color_var_sym
-
-    line_args <- list(
-      mapping = ggplot2::aes(!!!line_point_aes_list),
-      size = geom_size / 2,
-      alpha = base_alpha
-    )
-    point_args <- list(
-      mapping = ggplot2::aes(!!!line_point_aes_list),
-      size = geom_size,
-      alpha = base_alpha,
-      stroke = geom_stroke
-    )
-
-    if (is.null(color_var_sym)) { # Apply fixed color to both if not mapped
-      line_args$color <- current_settings$colors[2]
-      point_args$color <- current_settings$colors[2]
+    args_line <- list(size = geom_size / 2, alpha = base_alpha)
+    args_point <- list(size = geom_size, alpha = base_alpha, stroke = geom_stroke)
+    if (is.null(color_var_sym)) {
+      args_line$color <- current_settings$colors[1]
+      args_point$color <- current_settings$colors[1]
     }
-
     geom_layer_base <- list(
-      do.call(ggplot2::geom_line, line_args),
-      do.call(ggplot2::geom_point, point_args)
+      do.call(ggplot2::geom_line, args_line),
+      do.call(ggplot2::geom_point, args_point)
     )
-
-    if (add_trend_line) {
-      geom_layer_base <- c(geom_layer_base, ggplot2::geom_smooth(method = "lm", se = FALSE, color = current_settings$text_color, linetype = "dashed", size = 0.5))
-    }
-
   } else if (plot_type == "column") {
-    # Ensure x is discrete for columns
-    if (!is.null(x_sym) && rlang::as_string(x_sym) %in% names(data)) {
-      data[[rlang::as_string(x_sym)]] <- factor(data[[rlang::as_string(x_sym)]])
+    if (!is.null(x_sym)) {
+      x_str <- rlang::as_string(x_sym)
+      data[[x_str]] <- factor(data[[x_str]])
     }
-
-    column_aes_list <- list()
-    if (!is.null(fill_var_sym)) column_aes_list$fill <- fill_var_sym
-
-    col_args <- list(
-      mapping = ggplot2::aes(!!!column_aes_list),
-      width = 0.7,
-      alpha = base_alpha
-    )
-    if (is.null(fill_var_sym)) { # Only add 'fill' arg if it's a fixed value
-      col_args$fill <- current_settings$colors[2]
-    }
-    geom_layer_base <- do.call(ggplot2::geom_col, col_args)
-
+    args <- list(width = 0.7, alpha = base_alpha)
+    if (is.null(fill_var_sym)) args$fill <- current_settings$colors[1]
+    geom_layer_base <- do.call(ggplot2::geom_col, args)
   } else if (plot_type == "map") {
     if (!is.null(fill_var_sym)) {
-      map_aes_list <- list(fill = fill_var_sym)
-      geom_layer_base <- ggplot2::geom_sf(
-        ggplot2::aes(!!!map_aes_list),
-        alpha = base_alpha,
-        color = current_settings$grid_color, linewidth = 0.1
-      )
+      geom_layer_base <- ggplot2::geom_sf(ggplot2::aes(fill = !!fill_var_sym),
+                                          alpha = base_alpha, color = current_settings$grid_color, linewidth = 0.1)
     } else {
-      geom_layer_base <- ggplot2::geom_sf(
-        fill = current_settings$colors[1], # Fixed fill
-        alpha = base_alpha,
-        color = current_settings$grid_color, linewidth = 0.1
-      )
+      geom_layer_base <- ggplot2::geom_sf(fill = current_settings$colors[1],
+                                          alpha = base_alpha, color = current_settings$grid_color, linewidth = 0.1)
     }
   }
 
-  # Apply ggfx effects
+
+
+  # Aplicar efectos
   if (!is.null(geom_layer_base)) {
     if (apply_shadow) {
-      if (apply_glow) {
-        p <- p + ggfx::with_shadow(ggfx::with_outer_glow(geom_layer_base, colour = highlight_color, sigma = 8, expand = 5),
-                                   colour = "black", x_offset = 3, y_offset = 3, sigma = 5)
-      } else {
-        p <- p + ggfx::with_shadow(geom_layer_base, colour = "black", x_offset = 3, y_offset = 3, sigma = 5)
-      }
+      layer <- if (apply_glow) ggfx::with_outer_glow(geom_layer_base, colour = highlight_color, sigma = 8, expand = 5) else geom_layer_base
+      p <- p + ggfx::with_shadow(layer, colour = "black", x_offset = 3, y_offset = 3, sigma = 5)
     } else if (apply_glow) {
       p <- p + ggfx::with_outer_glow(geom_layer_base, colour = highlight_color, sigma = 8, expand = 5)
     } else {
       p <- p + geom_layer_base
     }
+  }
+
+  # Línea base
+  if (show_baseline && plot_type %in% c("column", "line")) {
+    p <- p + ggplot2::geom_hline(yintercept = 0, linetype = "dashed",
+                                 color = current_settings$grid_color, linewidth = 0.4)
   }
 
   # Highlight specific values
@@ -327,88 +242,87 @@ plot_guapo <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
     }
   }
 
-  # Labels
+  # Etiquetas
   if (show_labels && !is.null(label_var_sym)) {
-    label_aes_list <- list(label = label_var_sym)
-    if (plot_type == "column") {
-      p <- p + ggplot2::geom_text(ggplot2::aes(!!!label_aes_list), vjust = -0.5, hjust = 0.5,
-                                  size = 3.5, color = current_settings$text_color, family = font_body_name)
-    } else if (plot_type == "scatter" || plot_type == "line") {
-      p <- p + ggrepel::geom_text_repel(ggplot2::aes(!!!label_aes_list), size = 3.5, box.padding = 0.5,
-                                        min.segment.length = 0.3, segment.color = current_settings$grid_color,
-                                        segment.size = 0.3, max.overlaps = 50, direction = "y",
-                                        family = font_body_name, color = current_settings$text_color)
-    } else if (plot_type == "map") {
-      p <- p + ggplot2::geom_sf_text(ggplot2::aes(!!!label_aes_list),
-                                     size = 3.5, color = current_settings$text_color, family = font_body_name,
-                                     check_overlap = TRUE)
+    label_str <- rlang::as_string(label_var_sym)
+    if (label_str %in% names(data)) {
+      label_aes <- ggplot2::aes(label = !!label_var_sym)
+      if (plot_type == "column") {
+        p <- p + ggplot2::geom_text(
+          mapping = label_aes,
+          vjust = if (coord_flip) 0.5 else -0.5,
+          hjust = if (coord_flip) -0.2 else 0.5,
+          size = 3.5, color = current_settings$text_color,
+          family = font_body_name
+        )
+      } else if (plot_type %in% c("scatter", "line")) {
+        p <- p + ggrepel::geom_text_repel(
+          mapping = label_aes, max.overlaps = 50,
+          size = 3.5, box.padding = 0.5, direction = "y",
+          segment.color = current_settings$grid_color, segment.size = 0.3,
+          family = font_body_name, color = current_settings$text_color
+        )
+      } else if (plot_type == "map") {
+        p <- p + ggplot2::geom_sf_text(mapping = label_aes,
+                                       size = 3.5, color = current_settings$text_color,
+                                       family = font_body_name, check_overlap = TRUE)
+      }
     }
   }
 
-  # Faceting
   if (!is.null(facet_var_sym)) {
     p <- p + ggplot2::facet_wrap(facet_var_sym)
   }
 
-  # Theme
-  final_theme <- ggplot2::theme_void() +
+  if (coord_flip && plot_type != "map") {
+    p <- p + ggplot2::coord_flip()
+  }
+
+  # Tema y labs
+  theme_final <- ggplot2::theme_void() +
     ggplot2::theme(
-      text = element_text(size = text_size),
-      plot.title = ggtext::element_markdown(face = "bold", hjust = 0.5, family = font_title_name, color = current_settings$text_color, margin = ggplot2::margin(b = 20)),
-      plot.subtitle = ggtext::element_markdown(hjust = 0.5, family = font_body_name, color = current_settings$text_color, margin = ggplot2::margin(b = 30)),
-      plot.caption = ggtext::element_markdown( hjust = 1, family = font_body_name, color = current_settings$text_color, margin = ggplot2::margin(t = 20)),
+      text = ggplot2::element_text(size = text_size),
+      plot.title = ggtext::element_markdown(face = "bold", hjust = 0.5, family = font_title_name, color = current_settings$text_color),
+      plot.subtitle = ggtext::element_markdown(hjust = 0.5, family = font_body_name, color = current_settings$text_color),
+      plot.caption = ggtext::element_markdown(hjust = 1, family = font_body_name, color = current_settings$text_color),
       legend.position = "bottom",
-      legend.title = ggtext::element_markdown(family = font_body_name, color = current_settings$text_color),
-      legend.text = ggplot2::element_text(family = font_body_name, color = current_settings$text_color),
-      legend.background = ggplot2::element_rect(fill = "transparent", colour = NA),
       plot.margin = ggplot2::unit(c(1.5, 1.5, 1.5, 1.5), "cm"),
       plot.background = ggplot2::element_rect(fill = current_settings$background_fill, colour = NA),
+      panel.background = if (apply_blur_background)
+        ggfx::with_blur(ggplot2::element_rect(fill = current_settings$panel_fill, colour = NA), sigma = 10)
+      else
+        ggplot2::element_rect(fill = current_settings$panel_fill, colour = NA),
       axis.text = ggplot2::element_text(color = current_settings$text_color, family = font_body_name),
       axis.title = ggtext::element_markdown(color = current_settings$text_color, family = font_body_name),
-      panel.grid.major = ggplot2::element_line(color = current_settings$grid_color, linetype = "dotted", linewidth = 0.4),
+      panel.grid.major = if (plot_type == "map") ggplot2::element_blank() else ggplot2::element_line(color = current_settings$grid_color, linetype = "dotted", linewidth = 0.2),
       panel.grid.minor = ggplot2::element_blank(),
-      axis.line = ggplot2::element_line(color = current_settings$grid_color, linewidth = 0.8)
+      axis.line = if (plot_type == "map") ggplot2::element_blank() else ggplot2::element_line(color = current_settings$grid_color, linewidth = 0.8)
     )
 
-  # Apply blur to panel background
-  if (apply_blur_background) {
-    final_theme <- final_theme + ggplot2::theme(
-      panel.background = ggfx::with_blur(ggplot2::element_rect(fill = current_settings$panel_fill, colour = NA),
-                                         sigma = 10)
-    )
-  } else {
-    final_theme <- final_theme + ggplot2::theme(
-      panel.background = ggplot2::element_rect(fill = current_settings$panel_fill, colour = NA)
-    )
-  }
-
-  # Specific adjustments for map plots
   if (plot_type == "map") {
-    final_theme <- final_theme +
-      ggplot2::theme(
-        axis.text = ggplot2::element_blank(),
-        axis.title = ggplot2::element_blank(),
-        axis.ticks = ggplot2::element_blank(),
-        panel.grid.major = ggplot2::element_blank(),
-        panel.grid.minor = ggplot2::element_blank()
-      )
+    theme_final <- theme_final + ggplot2::theme(
+      axis.text = ggplot2::element_blank(),
+      axis.title = ggplot2::element_blank(),
+      axis.ticks = ggplot2::element_blank(),
+      panel.grid = ggplot2::element_blank()
+    )
   }
 
-  # Construct the labs arguments dynamically to avoid "argument x is missing" error
-  lab_args <- list(
+  labs_list <- list(
     title = paste0("<span style='font-family:\"", font_title_name, "\";'>", title, "</span>"),
     subtitle = paste0("<span style='font-family:\"", font_body_name, "\";'>", subtitle, "</span>"),
     caption = paste0("<span style='font-family:\"", font_body_name, "\";'>", caption, "</span>")
   )
 
-  if (!is.null(x_sym) && plot_type != "map") { # x is relevant for non-map plots
-    lab_args$x = paste0("<span style='font-family:\"", font_body_name, "\";'>", tools::toTitleCase(gsub("_", " ", rlang::as_string(x_sym))), "</span>")
+  if (!is.null(x_sym) && plot_type != "map") {
+    labs_list$x <- paste0("<span style='font-family:\"", font_body_name, "\";'>",
+                          tools::toTitleCase(gsub("_", " ", rlang::as_string(x_sym))), "</span>")
   }
 
-  if (!is.null(y_sym) && plot_type != "map") { # y is relevant for non-map plots
-    lab_args$y = paste0("<span style='font-family:\"", font_body_name, "\";'>", tools::toTitleCase(gsub("_", " ", rlang::as_string(y_sym))), "</span>")
+  if (!is.null(y_sym) && plot_type != "map") {
+    labs_list$y <- paste0("<span style='font-family:\"", font_body_name, "\";'>",
+                          tools::toTitleCase(gsub("_", " ", rlang::as_string(y_sym))), "</span>")
   }
 
-  p + final_theme + do.call(ggplot2::labs, lab_args)
+  p + theme_final + do.call(ggplot2::labs, labs_list)
 }
-

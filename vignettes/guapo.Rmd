@@ -69,11 +69,13 @@ Una opción útil es resaltar algún dato, para lo cual podemos indicar el valor
 
 ```{r}
 plot_guapo(data, name, paintings, dark_mode = T, highlight_values = c("Picasso"))
+plot_guapo(data, name, paintings, dark_mode = T, plot_type = "scatter",
+           highlight_values = c("Picasso","Van Gogh"), show_baseline = T)
 ```
 
 ### Otros
 
-Hay múltiples parámetros para ajustar. Por ejemplo, sombras, brillo y difuminación.
+Hay otros parámetros para ajustar. Por ejemplo, sombras, brillo y difuminación.
 
 ```{r}
 plot_guapo(data, name, paintings, dark_mode = T,
