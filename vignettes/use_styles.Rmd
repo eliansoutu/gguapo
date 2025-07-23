@@ -68,19 +68,29 @@ Podemos utilizar alguna variable de mapeo para jugar con los colores de la palet
 style_da_vinci(data, name, paintings, fill_var = genre)
 ```
 
-### show_labels
+### show_labels y labs
 
 Agregar etiquetas sobre el eje Y:
 
 ```{r}
-style_da_vinci(data, name, paintings,  show_labels = T)
+style_da_vinci(data, name, paintings, show_labels = T,
+               title = "Título", subtitle = "Subtítulo", caption = "Leyenda")
 ```
 
-### labs
+### coord_flip
 
 ```{r}
-style_da_vinci(data, name, paintings,  title = "Título", subtitle = "Subtítulo", caption = "Leyenda")
+style_da_vinci(data, name, paintings, show_labels = T, coord_flip = T)
 ```
+
+### add_grid_lines y show_background
+
+```{r}
+style_da_vinci(data, name, paintings, plot_type = "line",
+               show_background = F, add_grid_lines = T)
+
+```
+
 
 ### Otros
 
@@ -92,7 +102,7 @@ Para aquellos artistas valientes que quieran retocar aún más el gráfico y des
 
 - `add_texture` aplica textura al geom simulando pinceladas o trazos. Para gráficos de columna hay tres opciones (1 al 3) y no funciona con fill_var. En el caso de gráficos de líneas o puntos cualquiera de las opciones (1 al 3) aplica el mismo efecto.
 
-- `canvas` ofrece la posibilidad de agregar un fondo estilo lienzo al panel del gráfico, lo cual no es compatible con el uso de `add_grid_lines` o `show_background`. Se puede optar por distintos lienzos (del 1 al 6).
+- `canvas` ofrece la posibilidad de agregar un fondo estilo lienzo al panel del gráfico, lo cual no es compatible con el uso de `add_grid_lines = T` o `show_background = T`. Se puede optar por distintos lienzos (del 1 al 6).
 
 - `add_glow` agrega brillo a las geom principales.
 
