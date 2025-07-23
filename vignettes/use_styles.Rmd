@@ -32,7 +32,7 @@ data <- structure(list(name = c("Van Gogh", "Degas", "Picasso",
 
 ## Funciones de artistas
 
-**Las funciones están pensadas para ofrecer una visualización rápida que no requiera escribir muchas líneas de código. Esto puede traer problemas como superposición de elementos o tamaños inadecuados en determinados gráficos. Tener en cuenta que se pueden pisar algunas configuraciones agregando capas a continuación de la función como si fuera un ggplot común (ver ejemplo más abajo en show_labels).**
+**Las funciones están pensadas para ofrecer una visualización rápida que no requiera escribir muchas líneas de código. Esto puede traer problemas como superposición de elementos o tamaños inadecuados en determinados gráficos. Tener en cuenta que se pueden pisar algunas configuraciones agregando capas a continuación de la función como si fuera un ggplot común.**
 
 ### load_all_fonts
 
@@ -73,8 +73,7 @@ style_da_vinci(data, name, paintings, fill_var = genre)
 Agregar etiquetas sobre el eje Y (y expando eje Y):
 
 ```{r}
-style_da_vinci(data, name, paintings,  show_labels = T) +
-  ggplot2::scale_y_continuous(limits = c(0, 1000))
+style_da_vinci(data, name, paintings,  show_labels = T)
 ```
 
 Incluso cambiar la orientación ajustando el parámetro coord_flip
