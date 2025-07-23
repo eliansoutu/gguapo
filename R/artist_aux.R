@@ -688,9 +688,9 @@ style_artist_common <- function(data, artist, obra_inspiracion,
       if (diff(axis_range) > 0) {
         # Solo expandir en el extremo superior
         if (coord_flip) {
-          p <- p + scale_x_continuous(expand = expansion(mult = c(0, 0.15)))
+          p <- p + scale_x_continuous(expand = expansion(mult = c(0.05, 0.15)))
         } else {
-          p <- p + scale_y_continuous(expand = expansion(mult = c(0, 0.15)))
+          p <- p + scale_y_continuous(expand = expansion(mult = c(0.05, 0.15)))
         }
       } else {
         # Todos los valores son iguales, agregar pequeño buffer
@@ -729,7 +729,7 @@ style_artist_common <- function(data, artist, obra_inspiracion,
   # Etiquetas
   if (show_labels) {
     label_quo_final <- if (!quo_is_null(label_quo)) label_quo else y_quo
-    label_size <- text_size * 0.33
+    label_size <- text_size * 0.35
     if (plot_type == "map") {
       p <- p + geom_sf_text(
         aes(label = !!label_quo_final),
