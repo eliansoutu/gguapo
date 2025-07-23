@@ -115,13 +115,17 @@ el valor del eje x que nos interesa destacar.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_guapo.html">plot_guapo</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">name</span>, <span class="va">paintings</span>, dark_mode <span class="op">=</span> <span class="cn">T</span>, highlight_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Picasso"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="guapo_files/figure-html/unnamed-chunk-8-1.png" width="960" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_guapo.html">plot_guapo</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">name</span>, <span class="va">paintings</span>, dark_mode <span class="op">=</span> <span class="cn">T</span>, plot_type <span class="op">=</span> <span class="st">"scatter"</span>,</span>
+<span>           highlight_values <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Picasso"</span>,<span class="st">"Van Gogh"</span><span class="op">)</span>, show_baseline <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
+<p><img src="guapo_files/figure-html/unnamed-chunk-8-2.png" width="960" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="otros">Otros<a class="anchor" aria-label="anchor" href="#otros"></a>
 </h3>
-<p>Hay múltiples parámetros para ajustar. Por ejemplo, sombras, brillo y
+<p>Hay otros parámetros para ajustar. Por ejemplo, sombras, brillo y
 difuminación.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_guapo.html">plot_guapo</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">name</span>, <span class="va">paintings</span>, dark_mode <span class="op">=</span> <span class="cn">T</span>,</span>
 <span>           apply_shadow <span class="op">=</span> <span class="cn">T</span>, apply_glow <span class="op">=</span> <span class="cn">T</span>, apply_blur_background <span class="op">=</span> <span class="cn">T</span><span class="op">)</span></span></code></pre></div>
 <p><img src="guapo_files/figure-html/unnamed-chunk-9-1.png" width="960" style="display: block; margin: auto;"></p>
@@ -134,7 +138,7 @@ difuminación.</p>
 embargo, una alternativa estilística es usar <code>mapa_guapo</code> que
 tiene un enfoque distinto. Esta función se encuentra en desarrollo, por
 lo que puede modificarse a futuro.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Datos de los polígonos en WKT</span></span>
 <span><span class="va">wkt_poligonos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"POLYGON ((0 0, 1 0, 1 1, 0 1, 0 0))"</span>,</span>
