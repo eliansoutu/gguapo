@@ -22,6 +22,7 @@
 #' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 16
 #' @param add_texture Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.
 #' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
+#' @param add_margins Logical. Applies margins to plot and labs. Default: `TRUE`.
 #' @param add_filter Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.
 #'
 #' @return A ggplot2 object styled with Da Vinci-inspired visual elements.
@@ -45,7 +46,7 @@ style_da_vinci <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var 
                            show_background = TRUE, add_glow = FALSE,
                            coord_flip = FALSE, text_size = 16,
                            add_texture = NULL, canvas = NULL,
-                           add_filter = FALSE) {
+                           add_margins = TRUE, add_filter = FALSE) {
   style_artist_common(
     data = data,
     artist = "da_vinci",
@@ -64,6 +65,7 @@ style_da_vinci <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var 
     text_size = text_size,
     add_texture = add_texture,
     canvas = canvas,
+    add_margins = add_margins,
     add_filter = add_filter
   )
 }
@@ -90,6 +92,7 @@ style_da_vinci <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var 
 #' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 16
 #' @param add_texture Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.
 #' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
+#' @param add_margins Logical. Applies margins to plot and labs. Default: `TRUE`.
 #' @param add_filter Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.
 #'
 #' @return A ggplot2 object styled with Michelangelo-inspired aesthetics.
@@ -113,7 +116,7 @@ style_michelangelo <- function(data, x, y, color_var = NULL, fill_var = NULL, la
                                show_background = TRUE, add_glow = FALSE,
                                coord_flip = FALSE, text_size = 16,
                                add_texture = NULL, canvas = NULL,
-                               add_filter = FALSE) {
+                               add_margins = TRUE, add_filter = FALSE) {
 
   style_artist_common(
     data = data,
@@ -133,6 +136,7 @@ style_michelangelo <- function(data, x, y, color_var = NULL, fill_var = NULL, la
     text_size = text_size,
     add_texture = add_texture,
     canvas = canvas,
+    add_margins = add_margins,
     add_filter = add_filter
   )
 
@@ -160,6 +164,7 @@ style_michelangelo <- function(data, x, y, color_var = NULL, fill_var = NULL, la
 #' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 16
 #' @param add_texture Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.
 #' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
+#' @param add_margins Logical. Applies margins to plot and labs. Default: `TRUE`.
 #' @param add_filter Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.
 #'
 #' @return A ggplot2 object styled with Rembrandt-inspired aesthetics.
@@ -183,7 +188,7 @@ style_rembrandt <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var
                             show_background = TRUE, add_glow = FALSE,
                             coord_flip = FALSE, text_size = 16,
                             add_texture = NULL, canvas = NULL,
-                            add_filter = FALSE) {
+                            add_margins = TRUE, add_filter = FALSE) {
 
   style_artist_common(
     data = data,
@@ -203,6 +208,7 @@ style_rembrandt <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var
     text_size = text_size,
     add_texture = add_texture,
     canvas = canvas,
+    add_margins = add_margins,
     add_filter = add_filter
   )
 
@@ -230,6 +236,7 @@ style_rembrandt <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var
 #' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 16
 #' @param add_texture Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.
 #' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
+#' @param add_margins Logical. Applies margins to plot and labs. Default: `TRUE`.
 #' @param add_filter Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.
 #'
 #' @return A ggplot2 object.
@@ -252,7 +259,7 @@ style_van_gogh <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var 
                            show_background = TRUE, add_glow = FALSE,
                            coord_flip = FALSE, text_size = 16,
                            add_texture = NULL, canvas = NULL,
-                           add_filter = FALSE) {
+                           add_margins = TRUE, add_filter = FALSE) {
 
   style_artist_common(
     data = data,
@@ -272,6 +279,7 @@ style_van_gogh <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var 
     text_size = text_size,
     add_texture = add_texture,
     canvas = canvas,
+    add_margins = add_margins,
     add_filter = add_filter
   )
 
@@ -299,6 +307,7 @@ style_van_gogh <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var 
 #' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 16
 #' @param add_texture Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.
 #' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
+#' @param add_margins Logical. Applies margins to plot and labs. Default: `TRUE`.
 #' @param add_filter Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.
 #'
 #' @return A ggplot2 object.
@@ -321,7 +330,7 @@ style_monet <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = N
                         show_background = TRUE, add_glow = FALSE,
                         coord_flip = FALSE, text_size = 16,
                         add_texture = NULL, canvas = NULL,
-                        add_filter = FALSE) {
+                        add_margins = TRUE, add_filter = FALSE) {
 
   style_artist_common(
     data = data,
@@ -341,6 +350,7 @@ style_monet <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = N
     text_size = text_size,
     add_texture = add_texture,
     canvas = canvas,
+    add_margins = add_margins,
     add_filter = add_filter
   )
 }
@@ -367,6 +377,7 @@ style_monet <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = N
 #' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 16
 #' @param add_texture Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.
 #' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
+#' @param add_margins Logical. Applies margins to plot and labs. Default: `TRUE`.
 #' @param add_filter Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.
 #'
 #' @return A ggplot2 object.
@@ -389,7 +400,7 @@ style_banksy <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = 
                          show_background = TRUE, add_glow = FALSE,
                          coord_flip = FALSE, text_size = 16,
                          add_texture = NULL, canvas = NULL,
-                         add_filter = FALSE) {
+                         add_margins = TRUE, add_filter = FALSE) {
 
   style_artist_common(
     data = data,
@@ -409,6 +420,7 @@ style_banksy <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = 
     text_size = text_size,
     add_texture = add_texture,
     canvas = canvas,
+    add_margins = add_margins,
     add_filter = add_filter
   )
 }
@@ -436,6 +448,7 @@ style_banksy <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = 
 #' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 16
 #' @param add_texture Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.
 #' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
+#' @param add_margins Logical. Applies margins to plot and labs. Default: `TRUE`.
 #' @param add_filter Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.
 #'
 #' @return A ggplot2 object.
@@ -458,7 +471,7 @@ style_dali <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
                                 show_background = TRUE, add_glow = FALSE,
                                 coord_flip = FALSE, text_size = 16,
                                 add_texture = NULL, canvas = NULL,
-                                add_filter = FALSE) {
+                                add_margins = TRUE, add_filter = FALSE) {
 
 
    style_artist_common(
@@ -479,6 +492,7 @@ style_dali <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
     text_size = text_size,
     add_texture = add_texture,
     canvas = canvas,
+    add_margins = add_margins,
     add_filter = add_filter
   )
 }
@@ -504,6 +518,7 @@ style_dali <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
 #' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 16
 #' @param add_texture Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.
 #' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
+#' @param add_margins Logical. Applies margins to plot and labs. Default: `TRUE`.
 #' @param add_filter Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.
 #'
 #' @return A ggplot2 object.
@@ -526,7 +541,7 @@ style_miro <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
                        show_background = TRUE, add_glow = FALSE,
                        coord_flip = FALSE, text_size = 16,
                        add_texture = NULL, canvas = NULL,
-                       add_filter = FALSE) {
+                       add_margins = TRUE, add_filter = FALSE) {
 
   style_artist_common(
     data = data,
@@ -546,6 +561,7 @@ style_miro <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
     text_size = text_size,
     add_texture = add_texture,
     canvas = canvas,
+    add_margins = add_margins,
     add_filter = add_filter
   )
 
@@ -572,6 +588,7 @@ style_miro <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = NU
 #' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 16
 #' @param add_texture Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.
 #' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
+#' @param add_margins Logical. Applies margins to plot and labs. Default: `TRUE`.
 #' @param add_filter Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.
 #'
 #' @return A ggplot2 object.
@@ -594,7 +611,7 @@ style_gentileschi <- function(data, x = NULL, y = NULL, color_var = NULL, fill_v
                                         show_background = TRUE, add_glow = FALSE,
                                         coord_flip = FALSE, text_size = 16,
                                         add_texture = NULL, canvas = NULL,
-                                        add_filter = FALSE) {
+                                        add_margins = TRUE, add_filter = FALSE) {
 
   style_artist_common(
     data = data,
@@ -614,6 +631,7 @@ style_gentileschi <- function(data, x = NULL, y = NULL, color_var = NULL, fill_v
     text_size = text_size,
     add_texture = add_texture,
     canvas = canvas,
+    add_margins = add_margins,
     add_filter = add_filter
   )
 
@@ -641,6 +659,7 @@ style_gentileschi <- function(data, x = NULL, y = NULL, color_var = NULL, fill_v
 #' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 16
 #' @param add_texture Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.
 #' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
+#' @param add_margins Logical. Applies margins to plot and labs. Default: `TRUE`.
 #' @param add_filter Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.
 #'
 #' @return A ggplot2 object.
@@ -663,7 +682,7 @@ style_kandinsky <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var
                             show_background = TRUE, add_glow = FALSE,
                             coord_flip = FALSE, text_size = 16,
                             add_texture = NULL, canvas = NULL,
-                            add_filter = FALSE) {
+                            add_margins = TRUE, add_filter = FALSE) {
 
   style_artist_common(
     data = data,
@@ -683,6 +702,7 @@ style_kandinsky <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var
     text_size = text_size,
     add_texture = add_texture,
     canvas = canvas,
+    add_margins = add_margins,
     add_filter = add_filter
   )
 
@@ -709,6 +729,7 @@ style_kandinsky <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var
 #' @param text_size Base size for text elements (titles, labels, legend). Labels and annotations scale proportionally from this value. Defaults to 16
 #' @param add_texture Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.
 #' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
+#' @param add_margins Logical. Applies margins to plot and labs. Default: `TRUE`.
 #' @param add_filter Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.
 #'
 #' @return A ggplot2 object.
@@ -731,7 +752,7 @@ style_warhol <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = 
                          show_background = TRUE, add_glow = FALSE,
                          coord_flip = FALSE, text_size = 16,
                          add_texture = NULL, canvas = NULL,
-                         add_filter = FALSE) {
+                         add_margins = TRUE, add_filter = FALSE) {
 
   style_artist_common(
     data = data,
@@ -751,6 +772,7 @@ style_warhol <- function(data, x = NULL, y = NULL, color_var = NULL, fill_var = 
     text_size = text_size,
     add_texture = add_texture,
     canvas = canvas,
+    add_margins = add_margins,
     add_filter = add_filter
   )
 }

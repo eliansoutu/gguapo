@@ -106,6 +106,8 @@ Para aquellos artistas valientes que quieran retocar aún más el gráfico y des
 
 - `add_glow` agrega brillo a las geom principales.
 
+- `add_margins` agrega márgenes al gráfico en general (bordes y textos) para generar una salida más limpia y espaciada. 
+
 - `add_filter` es aún muy experimental, puede demorar unos segundos en cargar. Aplica un filtro estilo pintura al gráfico entero, generando márgenes indeseados. Se sugiere aumentar el `text_size` para mejorar la visual de los textos.
 
 

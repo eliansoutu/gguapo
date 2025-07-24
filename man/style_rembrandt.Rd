@@ -24,6 +24,7 @@ style_rembrandt(
   text_size = 16,
   add_texture = NULL,
   canvas = NULL,
+  add_margins = TRUE,
   add_filter = FALSE
 )
 }
@@ -65,6 +66,8 @@ style_rembrandt(
 \item{add_texture}{Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.}
 
 \item{canvas}{Integer (1–6). Adds canvas-style background image. Default: `NULL`.}
+
+\item{add_margins}{Logical. Applies margins to plot and labs. Default: `TRUE`.}
 
 \item{add_filter}{Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.}
 }

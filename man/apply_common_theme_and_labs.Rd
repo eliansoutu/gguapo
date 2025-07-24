@@ -20,7 +20,8 @@ apply_common_theme_and_labs(
   grid_linewidth,
   axis_line_linewidth,
   panel_background_map_specific = FALSE,
-  text_size = 12
+  text_size = 16,
+  add_margins
 )
 }
 \arguments{
@@ -53,6 +54,8 @@ apply_common_theme_and_labs(
 \item{axis_line_linewidth}{Ancho de línea para los ejes.}
 
 \item{panel_background_map_specific}{Lógico, si el tema del panel tiene lógica especial para mapas.}
+
+\item{add_margins}{Lógico, si agregar margenes al plot}
 }
 \value{
 Objeto ggplot2 con el tema y las etiquetas aplicadas.

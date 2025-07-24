@@ -411,12 +411,13 @@ get_artist_settings <- function(artist = c("da_vinci", "michelangelo", "rembrand
 #' @param grid_linewidth Ancho de línea para la cuadrícula principal.
 #' @param axis_line_linewidth Ancho de línea para los ejes.
 #' @param panel_background_map_specific Lógico, si el tema del panel tiene lógica especial para mapas.
+#' @param add_margins Lógico, si agregar margenes al plot
 #' @return Objeto ggplot2 con el tema y las etiquetas aplicadas.
 apply_common_theme_and_labs <- function(p, settings, plot_type, add_grid_lines, show_background,
                                         title, subtitle, caption, x_label, y_label,
                                         base_theme_fun, grid_linetype, grid_linewidth,
                                         axis_line_linewidth, panel_background_map_specific = FALSE,
-                                        text_size = 12) {
+                                        text_size = 16, add_margins) {
 
   # Escalado proporcional según text_size base
   size_title <- text_size * 2.2
@@ -431,20 +432,20 @@ apply_common_theme_and_labs <- function(p, settings, plot_type, add_grid_lines, 
     ggplot2::theme(
       plot.title = ggtext::element_markdown(size = size_title, face = "bold", hjust = 0.5,
                                             family = settings$font_title, color = settings$text_color,
-                                            margin = ggplot2::margin(b = text_size * 1.2)),
+                                            margin = if (add_margins) ggplot2::margin(b = text_size * 1.2) else ggplot2::margin(b = text_size * .5)),
       plot.subtitle = ggtext::element_markdown(size = size_subtitle, hjust = 0.5,
                                                family = settings$font_body, color = settings$text_color,
-                                               margin = ggplot2::margin(b = text_size * 1.8)),
+                                               margin = if (add_margins) ggplot2::margin(b = text_size * 1.8) else ggplot2::margin(b = text_size * .8)),
       plot.caption = ggtext::element_markdown(size = size_caption, hjust = 1,
                                               family = settings$font_body, color = settings$text_color,
-                                              margin = ggplot2::margin(t = text_size * 1.2)),
+                                              margin = if (add_margins) ggplot2::margin(t = text_size * 1.2) else ggplot2::margin(t = text_size * .5)),
       legend.position = "bottom",
       legend.title = ggtext::element_markdown(size = size_legend_title,
                                               family = settings$font_body, color = settings$text_color),
       legend.text = ggplot2::element_text(size = size_legend_text,
                                           family = settings$font_body, color = settings$text_color),
       legend.background = ggplot2::element_rect(fill = "transparent", colour = NA),
-      plot.margin = ggplot2::unit(rep(1.5, 4), "cm"),
+      plot.margin = if (add_margins) ggplot2::unit(rep(1, 4), "cm") else ggplot2::unit(rep(.3, 4), "cm") ,
       plot.background = ggplot2::element_rect(fill = settings$background_fill, colour = NA),
 
       panel.background = if (panel_background_map_specific && plot_type == "map") {
@@ -521,6 +522,7 @@ apply_common_theme_and_labs <- function(p, settings, plot_type, add_grid_lines, 
 #' @param add_texture Integer (1–3). Applies visual texture effects to geoms. Default: `NULL`.
 #' @param canvas Integer (1–6). Adds canvas-style background image. Default: `NULL`.
 #' @param add_filter Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.
+#' @param add_margins Logical. Applies margins to plot and labs. Default: `TRUE`.
 #'
 #' @return A `ggplot` object styled with artistic aesthetics.
 #'
@@ -555,7 +557,8 @@ style_artist_common <- function(data, artist, obra_inspiracion,
                                 text_size = 12,
                                 add_texture = NULL,
                                 canvas = NULL,
-                                add_filter = FALSE) {
+                                add_filter = FALSE,
+                                add_margins = TRUE) {
   plot_type <- match.arg(plot_type)
   settings <- get_artist_settings(artist, obra_inspiracion)
 
@@ -780,7 +783,8 @@ style_artist_common <- function(data, artist, obra_inspiracion,
     grid_linewidth = grid_linewidth,
     axis_line_linewidth = axis_line_linewidth,
     panel_background_map_specific = panel_background_map_specific,
-    text_size = text_size
+    text_size = text_size,
+    add_margins = add_margins
   )
 
   # Opciones de textura/difuminacion

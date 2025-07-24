@@ -30,7 +30,8 @@ style_artist_common(
   text_size = 12,
   add_texture = NULL,
   canvas = NULL,
-  add_filter = FALSE
+  add_filter = FALSE,
+  add_margins = TRUE
 )
 }
 \arguments{
@@ -79,6 +80,8 @@ style_artist_common(
 \item{canvas}{Integer (1–6). Adds canvas-style background image. Default: `NULL`.}
 
 \item{add_filter}{Experimental. Logical. Applies oil effect to the full graph. Default: `FALSE`.}
+
+\item{add_margins}{Logical. Applies margins to plot and labs. Default: `TRUE`.}
 }
 \value{
 A `ggplot` object styled with artistic aesthetics.

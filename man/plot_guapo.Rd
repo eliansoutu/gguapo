@@ -20,7 +20,7 @@ plot_guapo(
   font_body_name = "Poppins",
   show_labels = FALSE,
   coord_flip = FALSE,
-  show_baseline = TRUE,
+  show_baseline = FALSE,
   highlight_values = NULL,
   highlight_color = "#FFD700",
   facet_var = NULL,
