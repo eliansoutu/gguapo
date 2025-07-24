@@ -18,7 +18,7 @@
 #' @param font_body_name Font for the body and labels (default: `"Poppins"`).
 #' @param show_labels Logical. If `TRUE`, displays text labels on bars or points.
 #' @param coord_flip Logical. If `TRUE`, flips x and y axes (useful for bar plots).
-#' @param show_baseline Logical. If `TRUE`, draws a baseline at y = 0 for column and line plots.
+#' @param show_baseline Logical. If `TRUE`, draws a baseline at y = 0 for column, scatter and line plots.
 #' @param highlight_values A vector of values to highlight (based on `color_var` or `fill_var`).
 #' @param highlight_color Color used for highlighting specific values.
 #' @param facet_var Variable used for faceting (unquoted).
@@ -195,7 +195,7 @@ plot_guapo <- function(data, x = NULL, y = NULL,
   }
 
   # Línea base
-  if (show_baseline && plot_type %in% c("column", "line")) {
+  if (show_baseline && plot_type %in% c("column", "line","scatter")) {
     p <- p + ggplot2::geom_hline(yintercept = 0, linetype = "dashed",
                                  color = current_settings$grid_color, linewidth = 0.4)
   }
@@ -252,22 +252,23 @@ plot_guapo <- function(data, x = NULL, y = NULL,
           mapping = label_aes,
           vjust = if (coord_flip) 0.5 else -0.5,
           hjust = if (coord_flip) -0.2 else 0.5,
-          size = 3.5, color = current_settings$text_color,
+          size = text_size * 0.3, color = current_settings$text_color,
           family = font_body_name
         )
       } else if (plot_type %in% c("scatter", "line")) {
         p <- p + ggrepel::geom_text_repel(
           mapping = label_aes, max.overlaps = 50,
-          size = 3.5, box.padding = 0.5, direction = "y",
+          size = text_size * 0.3, box.padding = 0.5, direction = "y",
           segment.color = current_settings$grid_color, segment.size = 0.3,
           family = font_body_name, color = current_settings$text_color
         )
       } else if (plot_type == "map") {
         p <- p + ggplot2::geom_sf_text(mapping = label_aes,
-                                       size = 3.5, color = current_settings$text_color,
+                                       size = text_size * 0.3, color = current_settings$text_color,
                                        family = font_body_name, check_overlap = TRUE)
       }
     }
+
   }
 
   if (!is.null(facet_var_sym)) {
@@ -276,6 +277,30 @@ plot_guapo <- function(data, x = NULL, y = NULL,
 
   if (coord_flip && plot_type != "map") {
     p <- p + ggplot2::coord_flip()
+  }
+
+  # Expansión automática del eje numérico (solo límite superior)
+  expand_axis_var <- if (coord_flip) as_label(x_sym) else as_label(y_sym)
+
+  if (!is.null(expand_axis_var) && is.numeric(data[[expand_axis_var]])) {
+    axis_range <- range(data[[expand_axis_var]], na.rm = TRUE)
+    if (diff(axis_range) > 0) {
+      # Solo expandir en el extremo superior
+      if (coord_flip) {
+        p <- p + scale_x_continuous(expand = expansion(mult = c(0.05, 0.15)))
+      } else {
+        p <- p + scale_y_continuous(expand = expansion(mult = c(0.05, 0.15)))
+      }
+    } else {
+      # Todos los valores son iguales, agregar pequeño buffer
+      buffer <- ifelse(axis_range[1] == 0, 0.5, abs(axis_range[1]) * 0.05)
+      lim <- c(axis_range[1], axis_range[2] + buffer)
+      if (coord_flip) {
+        p <- p + scale_x_continuous(limits = lim)
+      } else {
+        p <- p + scale_y_continuous(limits = lim)
+      }
+    }
   }
 
   # Tema y labs

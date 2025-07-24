@@ -66,7 +66,7 @@ plot_guapo(
 
 \item{coord_flip}{Logical. If `TRUE`, flips x and y axes (useful for bar plots).}
 
-\item{show_baseline}{Logical. If `TRUE`, draws a baseline at y = 0 for column and line plots.}
+\item{show_baseline}{Logical. If `TRUE`, draws a baseline at y = 0 for column, scatter and line plots.}
 
 \item{highlight_values}{A vector of values to highlight (based on `color_var` or `fill_var`).}
 
